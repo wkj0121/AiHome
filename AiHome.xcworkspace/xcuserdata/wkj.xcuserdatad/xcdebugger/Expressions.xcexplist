@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[iCocosSettingCell setItem:]:iCocosSettingCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_imageView">
+            </PersistentString>
+            <PersistentString
+               value = "self.accessoryView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LCGridElement setupFrame]:LCGridElement.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.hasLabel">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeViewController setupHomeView]:HomeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "energyBtn.frame.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LCGridElement setupUI]:LCGridElement.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_data.labelName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

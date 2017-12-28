@@ -1,0 +1,203 @@
+//
+//  MySettingViewController.m
+//  AiHome
+//
+//  Created by wkj on 2017/12/23.
+//  Copyright © 2017年 华通晟云. All rights reserved.
+//
+
+#import "MySettingViewController.h"
+
+@interface MySettingViewController ()
+
+@end
+
+@implementation MySettingViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationItem.title = @"我的设置";
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor]}];
+    
+    [self add0SectionItems];//个人信息组
+    
+    [self add1SectionItems];//快捷操作组
+    
+    [self add2SectionItems];//家庭及成员设置组
+    
+    [self add3SectionItems];//积分商城组
+    
+    [self add4SectionItems];//系统设置组
+    
+}
+
+#pragma mark 添加第0组的模型数据
+- (void)add0SectionItems
+{
+    /**
+     *  个人信息
+     */
+    iCocosSettingItem *headItem = [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"head"] title:@"小当当" style:UITableViewCellStyleSubtitle type:iCocosSettingItemTypeImageWithArrow image:[UIImage imageNamed:@"QRCode"] desc:@"手机号:13370088888" detailLabelColor:[UIColor grayColor]];
+    headItem.operation = ^{
+    };
+    
+    //分组
+    iCocosSettingGroup *group = [[iCocosSettingGroup alloc] init];
+    group.items = @[headItem];
+    [_allGroups addObject:group];
+}
+
+#pragma mark 添加第1组的模型数据
+- (void)add1SectionItems
+{
+    /**
+     *  设备品牌
+     */
+    iCocosSettingItem *deviceBandItem = [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"brand"] title:@"设备品牌" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:@"设置后便与维修和保养" detailLabelColor:[UIColor grayColor]];
+    
+    /** 点击对应的行调整（其他可能只是在内部做一些事情，请自行操作） */
+    deviceBandItem.operation = ^{
+        UIViewController *view = [[UIViewController alloc] init];
+        [self.navigationController pushViewController:view animated:YES];
+    };
+    
+    /**
+     *  一键关闭
+     */
+    iCocosSettingItem *oneCloseItem = [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"oneclose"] title:@"一键关闭" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeSwitch desc:nil];
+    oneCloseItem.operation = ^{
+    };
+    
+    /**
+     *  离家设置
+     */
+    iCocosSettingItem *outDoorItem = [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"outdoor"] title:@"离家设置" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeSwitch desc:nil];
+    outDoorItem.operation = ^{
+    };
+    
+    /**
+     *  睡眠设置
+     */
+    iCocosSettingItem *sleepModeItem = [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"sleepmode"] title:@"睡眠设置" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeSwitch desc:nil];
+    sleepModeItem.operation = ^{
+    };
+    
+    //分组
+    iCocosSettingGroup *group = [[iCocosSettingGroup alloc] init];
+    group.items = @[deviceBandItem, oneCloseItem, outDoorItem, sleepModeItem];
+    [_allGroups addObject:group];
+}
+
+/**-------------------------------------------------*/
+/**----------------------------*/
+/**文字和左边的图片根据是否存在设置对应的值，没有则设置nil，有责直接设置*/
+/**----------------------------*/
+/**-------------------------------------------------*/
+
+
+#pragma mark 添加第2组的模型数据
+- (void)add2SectionItems
+{
+    /**
+     *  家庭设置
+     */
+    iCocosSettingItem *locationItem= [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"location"] title:@"家庭设置" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
+    locationItem.operation = ^{
+    };
+    
+    /**
+     *  成员管理
+     */
+    iCocosSettingItem *memberItem= [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"member"] title:@"成员管理" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
+    memberItem.operation = ^{
+    };
+    
+    //分组
+    iCocosSettingGroup *group = [[iCocosSettingGroup alloc] init];
+    group.items = @[locationItem, memberItem];
+    [_allGroups addObject:group];
+}
+
+
+
+#pragma mark 添加第3组的模型数据
+- (void)add3SectionItems
+{
+    /**
+     *  当前积分
+     */
+    iCocosSettingItem *csmpointItem= [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"csmpoint"] title:@"当前积分" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
+    csmpointItem.operation = ^{
+    };
+    
+    /**
+     *  我的商城
+     */
+    iCocosSettingItem *mallItem= [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"mall"] title:@"我的商城" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
+    mallItem.operation = ^{
+    };
+    
+    //分组
+    iCocosSettingGroup *group = [[iCocosSettingGroup alloc] init];
+    group.items = @[csmpointItem, mallItem];
+    [_allGroups addObject:group];
+}
+
+
+
+#pragma mark 添加第4组的模型数据
+- (void)add4SectionItems
+{
+    /**
+     *  设置
+     */
+    iCocosSettingItem *settingItem = [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"setting"] title:@"设置" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
+    settingItem.operation = ^{
+    };
+    
+    //分组
+    iCocosSettingGroup *group = [[iCocosSettingGroup alloc] init];
+    group.items = @[settingItem];
+    [_allGroups addObject:group];
+}
+
+
+- (double)rowHeight
+{
+    return TabViewRowHeight;
+}
+
+- (BOOL)hasCustomHead
+{
+    return YES;
+}
+
+
+/**
+ *  多余行数据
+ */
+
+- (void)add5SectionItems
+{
+    
+    /**
+     *  我的订单
+     */
+    
+    iCocosSettingItem *dd0 = [iCocosSettingItem itemWithImage:nil title:nil style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeTextField desc:nil];
+    iCocosSettingItem *dd1 = [iCocosSettingItem itemWithImage:nil title:nil style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeTextField desc:nil];
+    iCocosSettingItem *dd2 = [iCocosSettingItem itemWithImage:nil title:nil style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeTextField desc:nil];
+    iCocosSettingItem *dd3 = [iCocosSettingItem itemWithImage:nil title:nil style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeTextField desc:nil];
+    iCocosSettingItem *dd4 = [iCocosSettingItem itemWithImage:nil title:nil style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeTextField desc:nil];
+    iCocosSettingItem *dd5 = [iCocosSettingItem itemWithImage:nil title:nil style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeTextField desc:nil];
+    iCocosSettingItem *dd6 = [iCocosSettingItem itemWithImage:nil title:nil style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeTextField desc:nil];
+
+    
+    //分组
+    iCocosSettingGroup *group = [[iCocosSettingGroup alloc] init];
+    group.items = @[dd0, dd1, dd2, dd3, dd4, dd5, dd6];
+    [_allGroups addObject:group];
+}
+
+
+@end
