@@ -36,8 +36,6 @@ static NSString *const kLastPromotionPageFile = @"LastPromotionPageFile.data";
 //            NSDictionary *dict = responseObj;
             // 开始下载图片
             NSString *urlString = @"http://img.zcool.cn/community/01316b5854df84a8012060c8033d89.gif";
-    
-//    NSString *urlString = @"http://c.hiphotos.baidu.com/image/pic/item/4d086e061d950a7b78c4e5d703d162d9f2d3c934.jpg";
             NSURL *url = [NSURL URLWithString:urlString];
             // 开始下载图片
             [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:url options:SDWebImageDownloaderUseNSURLCache progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {

@@ -6,7 +6,7 @@
 //  Copyright © 2017年 华通晟云. All rights reserved.
 //
 
-
+#import "AppDelegate.h"
 
 #import "NViewController.h"
 
@@ -17,6 +17,7 @@
 @interface NViewController ()<UIScrollViewDelegate> //实现滚动视图协议
     @property (strong,nonatomic)UIScrollView *scrollView; //滚动视图控件对象
     @property (strong,nonatomic)UIPageControl *pageControl;//分页控制控件对象
+    @property (nonatomic, strong) NSTimer *timer;//定时器
 @end
 
 
@@ -95,7 +96,52 @@
     [self.view addSubview:self.pageControl];
     //添加分页控制事件用来分页
 //    [self.pageControl addTarget:self action:@selector(pageControlChanged:) forControlEvents:UIControlEventValueChanged];
+     [self addTimer];
+}
 
+/**
+ * 定时翻动next
+ **/
+- (void)addTimer {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
+    // 这个方法的作用是什么呢？
+    // 假设在self.view中还有一个UITextView控件，UITextView控件可以拖拽显示多行文本内容，
+    // 如果没有下面这句代码，在拖拽UITextView的时候，UIScrollView将不会有任何变化
+    // 也就是默认情况下只能执行一个操作，有了下面这句代码，在拖拽UITextView的时候，不会影响到UIScrollView的自动轮播
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+}
+
+/**
+ *  移除定时器
+ */
+- (void)removeTimer
+{
+    [self.timer invalidate];
+    self.timer = nil;
+}
+/**
+ *  跳转下一页事件函数
+ */
+- (void)nextImage
+{
+//    // 1.增加pageControl的页码
+//    int page = 0;
+//    if (self.pageControl.currentPage == FBNewfeatureImageCount - 1) {//最后一页
+//        page = 0;
+//    } else {
+//        page = self.pageControl.currentPage + 1;
+//    }
+    
+    // 2.计算scrollView滚动的位置
+    if(self.pageControl.currentPage != FBNewfeatureImageCount-1){
+        CGPoint offset = CGPointMake(self.scrollView.contentOffset.x + CGRectGetWidth(self.scrollView.frame), self.scrollView.contentOffset.y);
+        [self.scrollView setContentOffset:offset animated:YES];
+        self.pageControl.currentPage++;
+    }else{
+        //调用方法，使滑动图消失
+        [self scrollViewDisappear];
+        [self removeTimer];
+    }
 }
 
 // 隐藏状态栏
@@ -119,6 +165,7 @@
         
         //调用方法，使滑动图消失
         [self scrollViewDisappear];
+        [self removeTimer];
     }
 }
 
@@ -127,16 +174,18 @@
     //拿到 view 中的 UIScrollView 和 UIPageControl
     UIScrollView *scrollView = (UIScrollView *)[self.view viewWithTag:101];
     UIPageControl *page = (UIPageControl *)[self.view viewWithTag:201];
-    //设置滑动图消失的动画效果图
-    [UIView animateWithDuration:1.0f animations:^{
-        scrollView.alpha = 0.0;
-        page.alpha = 0.0;
-        self.scrollView.center = CGPointMake(self.view.frame.size.width/2, 1.5 * self.view.frame.size.height);
-       
-    } completion:^(BOOL finished) {
-        [scrollView removeFromSuperview];
-        [page removeFromSuperview];
-    }];
+//    //设置滑动图消失的动画效果图
+//    [UIView animateWithDuration:1.0f animations:^{
+////        scrollView.alpha = 0.0;
+////        page.alpha = 0.0;
+////        self.scrollView.center = CGPointMake(self.view.frame.size.width/2, 1.5 * self.view.frame.size.height);
+//        self.view.transform = CGAffineTransformTranslate(self.view.transform, -200, 0);
+//    } completion:^(BOOL finished) {
+//        [scrollView removeFromSuperview];
+//        [page removeFromSuperview];
+//    }];
+    [scrollView removeFromSuperview];
+    [page removeFromSuperview];
     [self returnHome];//返回主页
     
 //    //将滑动图启动过的信息保存到 NSUserDefaults 中，使得第二次不运行滑动图
@@ -145,13 +194,15 @@
 }
 
 -(void)returnHome{
-    ViewController *homeVC = [[ViewController alloc] init];
-    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:homeVC];
-    [UIApplication sharedApplication].keyWindow.rootViewController = navi;
-    CATransition *anim = [CATransition animation];
-    anim.duration = 1.0f;
-    anim.type = @"fade";
-    [[UIApplication sharedApplication].keyWindow.layer addAnimation:anim forKey:nil];
+//    ViewController *homeVC = [[ViewController alloc] init];
+//    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:homeVC];
+//    [UIApplication sharedApplication].keyWindow.rootViewController = navi;
+//    CATransition *anim = [CATransition animation];
+//    anim.duration = 1.0f;
+//    anim.type = @"fade";
+//    [[UIApplication sharedApplication].keyWindow.layer addAnimation:anim forKey:nil];
+    // 发送一次登录状态变化通知设置根视图
+    [[NSNotificationCenter defaultCenter] postNotificationName:FKLoginStateChangedNotificationKey object:nil];
 }
 
 /**

@@ -2,13 +2,22 @@
 //  HomeViewController.m
 //  AiHome
 //
-//  Created by wkj on 2017/12/22.
+//  Created by wkj on 2017/12/31.
 //  Copyright © 2017年 华通晟云. All rights reserved.
 //
 
 #import "HomeViewController.h"
+#import "MainViewController.h"
+#import "FXPageControl.h"
+#import "AiViewController.h"
+#import "UIScrollView+UITouch.h"
+#import "XScrollView.h"
 
-@interface HomeViewController()
+@interface HomeViewController()<UIScrollViewDelegate> //实现滚动视图协议
+
+    @property (nonatomic,strong) NSArray *subViewArr;
+    @property (strong,nonatomic) XScrollView *scrollView; //滚动视图控件对象
+    @property (strong,nonatomic) FXPageControl *pageControl;//分页控制控件对象
 
 @end
 
@@ -16,183 +25,147 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //初始化视图数据
+    [self initViewData];
+    //设置导航
     [self customNavItem];
-    [self setupHomeView];
+    // 1.添加UIScrollView
+    [self setupScrollView];
 }
-#pragma mark - 定制主页内容
--(void)setupHomeView{
-    //设置顶部三个水平排列按钮
-    NSMutableArray *array = [NSMutableArray new];
-    UIButton *lockBtn = [[UIButton alloc] init];
-    [lockBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"lock"]] forState:UIControlStateNormal];
-    UIButton *cameraBtn = [[UIButton alloc] init];
-    [cameraBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"camera"]] forState:UIControlStateNormal];
-    UIButton *gasBtn = [[UIButton alloc] init];
-    [gasBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"gas"]] forState:UIControlStateNormal];
-    [self.view addSubview:lockBtn];
-    [self.view addSubview:cameraBtn];
-    [self.view addSubview:gasBtn];
-    [array addObjectsFromArray:@[lockBtn,cameraBtn,gasBtn]];
-    //水平方向宽度固定等间隔
-    [array mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:(self.view.frame.size.width-40) / 3 leadSpacing:10 tailSpacing:10];
-    [array mas_makeConstraints:^(MASConstraintMaker *make) { //数组额你不必须都是view
-        make.top.equalTo(self.mas_topLayoutGuide).offset(10);
-        make.height.equalTo(self.view.mas_height).multipliedBy(0.2);//设置高度为self.view高度的1/5
-//        make.size.mas_equalTo(CGSizeMake(80, 80));
-    }];
+
+/**
+ *  初始化数据
+ */
+- (void)initViewData {
+    AiViewController *leftView = [[AiViewController alloc] init];
+    MainViewController *rightView = [[MainViewController alloc] init];
+    MainViewController *mainView = [[MainViewController alloc] init];
     
-    //设置中部主图片视图
-    UIImageView *homeImgView = [[UIImageView alloc] init];
-    homeImgView.backgroundColor = [UIColor whiteColor];
-    // 设置图片
-    homeImgView.image = [UIImage imageNamed:@"home"];
-    //  不规则图片显示
-    homeImgView.contentMode =  UIViewContentModeScaleAspectFill;
-    homeImgView.autoresizesSubviews = YES;
-    homeImgView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    //  图片大于或小于显示区域
-    homeImgView.clipsToBounds  = NO;
-    [self.view addSubview:homeImgView];
-    [homeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(lockBtn.mas_bottom).offset(20);
-            make.centerX.equalTo(self.view.mas_centerX);
-            make.height.equalTo(self.view.mas_height).multipliedBy(0.2);//设置高度为self.view高度的2/5
-    }];
-    
-    //设置环绕主homeimage视图底部三个按钮
-    NSMutableArray *array2 = [NSMutableArray new];
-    UIEdgeInsets imgPadding = UIEdgeInsetsMake(2, 2, 2, 2);
-    UIButton *leaveBtn = [[UIButton alloc] init];
-    [leaveBtn setImage:[[UIImage imageNamed:@"leave"] resizableImageWithCapInsets:imgPadding resizingMode:UIImageResizingModeStretch] forState:UIControlStateNormal];
-    UIButton *closeBtn = [[UIButton alloc] init];
-    [closeBtn setImage:[[UIImage imageNamed:@"close_selected"] resizableImageWithCapInsets:imgPadding resizingMode:UIImageResizingModeStretch] forState:UIControlStateNormal];
-    UIButton *sleepBtn = [[UIButton alloc] init];
-    [sleepBtn setImage:[[UIImage imageNamed:@"sleep"] resizableImageWithCapInsets:imgPadding resizingMode:UIImageResizingModeStretch] forState:UIControlStateNormal];
-    [self.view addSubview:leaveBtn];
-    [self.view addSubview:closeBtn];
-    [self.view addSubview:sleepBtn];
-//    closeBtn.backgroundColor = [UIColor grayColor];
-//    leaveBtn.backgroundColor = [UIColor grayColor];
-//    sleepBtn.backgroundColor = [UIColor grayColor];
-    [array2 addObjectsFromArray:@[leaveBtn,sleepBtn]];
-    //水平方向宽度固定等间隔
-    [array2 mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:(self.view.frame.size.width-40) / 4 leadSpacing:50 tailSpacing:50];
-    [array2 mas_makeConstraints:^(MASConstraintMaker *make) { //数组额你不必须都是view
-        make.top.equalTo(homeImgView.mas_bottom).offset(10);
-        make.height.equalTo(self.view.mas_height).multipliedBy(0.1);//设置高度为self.view高度的0.1
-//        make.size.mas_equalTo(CGSizeMake(60, 60));
-    }];
-    [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(@[homeImgView.mas_bottom,leaveBtn.mas_centerY]).offset(2);
-        make.top.equalTo(leaveBtn.mas_centerY).offset(5);
-        make.centerX.equalTo(homeImgView.mas_centerX);
-        make.height.equalTo(self.view.mas_height).multipliedBy(0.1);//设置高度为self.view高度的0.1
-    }];
-    
-    //设置底部按钮和左右文字
-    NSMutableArray *array3 = [NSMutableArray new];
-    UIButton *energyBtn = [[UIButton alloc] init];
-    [energyBtn setBackgroundImage:[UIImage imageNamed:@"energy"] forState:UIControlStateNormal];
-    UILabel *leftlabel = [[UILabel alloc]init];
-    UILabel *leftlabel2 = [[UILabel alloc]init];
-    UILabel *rightlabel = [[UILabel alloc]init];
-    UILabel *rightlabel2 = [[UILabel alloc]init];
-    [leftlabel setFont:[UIFont fontWithName:@"Arial" size:21]];
-    [leftlabel2 setFont:[UIFont fontWithName:@"Arial" size:16]];
-    [leftlabel2 setTextColor: [UIColor colorWithRed:139.0/255.0 green:139.0/255.0 blue:139.0/255.0 alpha:1]];
-    [leftlabel setTextAlignment:NSTextAlignmentCenter];
-    [leftlabel2 setTextAlignment:NSTextAlignmentCenter];
-    [leftlabel setText:@"Solar Power"];
-    [leftlabel2 setText:@"3050Kwh"];
-    [rightlabel setFont:[UIFont fontWithName:@"Arial" size:21]];
-    [rightlabel2 setFont:[UIFont fontWithName:@"Arial" size:16]];
-    [rightlabel2 setTextColor: [UIColor colorWithRed:139.0/255.0 green:139.0/255.0 blue:139.0/255.0 alpha:1]];
-    [rightlabel setTextAlignment:NSTextAlignmentCenter];
-    [rightlabel2 setTextAlignment:NSTextAlignmentCenter];
-    [rightlabel setText:@"Solar Water"];
-    [rightlabel2 setText:@"1688h"];
-    [self.view addSubview:energyBtn];
-    [self.view addSubview:leftlabel];
-    [self.view addSubview:rightlabel];
-    [self.view addSubview:leftlabel2];
-    [self.view addSubview:rightlabel2];
-//    energyBtn.backgroundColor = [UIColor grayColor];
-//    leftlabel.backgroundColor = [UIColor blueColor];
-//    rightlabel.backgroundColor = [UIColor blueColor];
-    [array3 addObjectsFromArray:@[leftlabel,energyBtn,rightlabel]];
-    //水平方向宽度固定等间隔
-    [array3 mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:self.view.frame.size.width/3  leadSpacing:0 tailSpacing:0];
-//    NSLog(@"with::%f",self.view.frame.size.width/3);
-    [energyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(closeBtn.mas_bottom).offset(20);
-    }];
-    [leftlabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(energyBtn.mas_top).offset(30);
-    }];
-    [rightlabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(energyBtn.mas_top).offset(30);
-    }];
-    [leftlabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(leftlabel.mas_top).offset(25);
-        make.centerX.equalTo(leftlabel.mas_centerX);
-    }];
-    [rightlabel2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(rightlabel.mas_top).offset(25);
-        make.centerX.equalTo(rightlabel.mas_centerX);
-    }];
-    
+    self.subViewArr = @[leftView, mainView,rightView];
 }
+
 #pragma mark - 定制导航条内容
 - (void)customNavItem {
     self.navigationItem.title = @"Wellcome";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor]}];
-//    self.navigationController.navigationBar.tintColor = [UIColor grayColor];
-//    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    //    self.navigationController.navigationBar.tintColor = [UIColor grayColor];
+    //    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *leftBtn = [[UIButton alloc] init];
-//    [leftBtn setTitle:@"添加好友" forState:UIControlStateNormal];
+    //    [leftBtn setTitle:@"添加好友" forState:UIControlStateNormal];
     [leftBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"zoom"]] forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
     self.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     
     UIButton *rightBtn = [[UIButton alloc] init];
-//    [rightBtn setTitle:@"aa" forState:UIControlStateNormal];
+    //    [rightBtn setTitle:@"aa" forState:UIControlStateNormal];
     [rightBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"shopcar"]] forState:UIControlStateNormal];
-//    [rightBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//    [rightBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
+    //    [rightBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    //    [rightBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
     [rightBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
 }
 
-#pragma mark - 按钮点击事件
-- (void)leftAction:(UIButton *)button{
-    [button setSelected:!button.isSelected];
-    if (button.isSelected) {
-        //selected
-        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"zoom_selected"]] forState:UIControlStateSelected];
-    }else{
-        //normal
-        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"zoom"]] forState:UIControlStateNormal];
+/**
+ *  添加UIScrollView
+ */
+- (void)setupScrollView {
+    // 1.添加scrollView
+    self.scrollView = [[XScrollView alloc] init];
+    self.scrollView.frame = self.view.bounds;
+    //将滚动视图添加到视图控制器控制的视图View容器中
+    [self.view addSubview:self.scrollView];
+    
+    // 2.添加viewArr
+    CGFloat viewW = self.scrollView.frame.size.width;
+    CGFloat viewH = self.scrollView.frame.size.height;
+    for (int i = 0; i < self.subViewArr.count; i++) {
+        UIViewController *viewControl = [self.subViewArr objectAtIndex:i];
+        // 设置frame
+        CGFloat viewX = i * viewW;
+        viewControl.view.frame = CGRectMake(viewX, 0, viewW, viewH);
+        [self.scrollView addSubview:viewControl.view];
     }
-//    PGGTestViewController *test = [[PGGTestViewController alloc] init];
-//    [self.navigationController pushViewController:test animated:YES];
+    //3.设置scrollView
+    //有多少图片,那么滚动视图的滚动宽度就等于图片数量乘以你所设置的单个滚动视图矩形区域的宽度,高度设置为0 配合alwaysBounceVertical，禁止上下拖动
+    self.scrollView.contentSize = CGSizeMake(self.subViewArr.count*self.view.frame.size.width, 0);
+//    self.scrollView.contentSize = CGSizeMake(imageW * FBNewfeatureImageCount, imageH);
+    self.scrollView.contentOffset = CGPointMake(self.view.frame.size.width,0);//默认滚动视图的初始原点位置都为Main
+    self.scrollView.tag = 101;
+    self.scrollView.showsHorizontalScrollIndicator = NO;//是否显示水平滚动条
+    self.scrollView.pagingEnabled = YES;//设置滚动视图可以进行分页
+    self.scrollView.alwaysBounceVertical = NO;//禁止scrollview上下拖动
+    self.scrollView.bounces = NO;//取消回弹效果
+    self.scrollView.delegate = self;//设置滚动视图的代理
+    //NO - 设置scrollView不能取消传递touch事件，此时就算手指若在subView上滑动，scrollView不滚动; YES - 设置scrollView可取消传递touch事件
+    [self.scrollView setCanCancelContentTouches:NO];
+    //NO - 立即通知touchesShouldBegin:withEvent:inContentView
+    [self.scrollView setDelaysContentTouches:NO];
+    
+    //4.创建初始化并设置CustomPageControl
+    self.pageControl = [[FXPageControl alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 320)/2, self.view.frame.size.height-110, 320, 60)];
+    self.pageControl.backgroundColor = [UIColor clearColor];  //设置背景颜色 不设置默认是黑色
+//    self.pageControl.center = self.view.center;
+//    [self.pageControl.layer setCornerRadius:8];//设置圆角
+    //设置颜色
+    self.pageControl.dotColor = [UIColor whiteColor];    //设置非选中页的圆点颜色
+    self.pageControl.selectedDotColor = [UIColor colorWithRed:37/255.0f green:132/255.0f blue:130/255.0f alpha:1.0f];  //设置选中页的圆点颜色
+    //设着边框
+    UIColor *boderColor = [UIColor colorWithRed:96/255.0f green:88/255.0f blue:86/255.0f alpha:1.0f];
+    self.pageControl.dotBorderWidth = 0.5;
+    self.pageControl.dotBorderColor = boderColor;
+    self.pageControl.selectedDotBorderWidth = 0.5;
+    self.pageControl.selectedDotBorderColor = boderColor;
+    self.pageControl.dotSize = 16;  //点的大小
+    self.pageControl.dotSpacing = 30;  //点的间距
+    self.pageControl.selectedDotShape = FXPageControlDotShapeCircle;//设置形状
+    self.pageControl.wrapEnabled = YES;
+    
+//        self.pageControl.backgroundColor=[UIColor blueColor];//背景
+    
+    self.pageControl.numberOfPages = self.subViewArr.count; //因为有4张图片，所以设置分页数为4
+    self.pageControl.currentPage  = 1; //默认第一页页数为0
+    self.pageControl.defersCurrentPageDisplay = YES;
+    self.pageControl.tag = 201;
+    
+    //    //设置分页控制点颜色
+    //    self.pageControl.pageIndicatorTintColor = [UIColor grayColor];//未选中的颜色
+    //    self.pageControl.currentPageIndicatorTintColor = [UIColor blackColor];//选中时的颜色
+    //将分页控制视图添加到视图控制器视图中
+    [self.view addSubview:self.pageControl];
+    //添加分页控制事件用来分页
+    //    [self.pageControl addTarget:self action:@selector(pageControlChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
-#pragma mark - 按钮点击事件
-- (void)rightAction:(UIButton *)button{
-    [button setSelected:!button.isSelected];
-    if (button.isSelected) {
-        //selected
-        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"shopcar_selected"]] forState:UIControlStateSelected];
-    }else{
-        //normal
-        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"shopcar"]] forState:UIControlStateNormal];
-    }
+// 隐藏状态栏
+- (BOOL)prefersStatusBarHidden {
+    return NO;//YES则隐藏状态栏
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    // 记录scrollView 的当前位置，因为已经设置了分页效果，所以：位置/屏幕大小 = 第几页
+    int current = self.scrollView.contentOffset.x/[UIScreen mainScreen].bounds.size.width;
+    
+    //根据scrollView 的位置对page 的当前页赋值
+    UIPageControl *page = (UIPageControl *)[self.view viewWithTag:201];
+    page.currentPage = current;
+    
+//    //当显示到最后一页时，让滑动图消失
+//    if (page.currentPage == FBNewfeatureImageCount-1) {
+//        
+//        //调用方法，使滑动图消失
+//        [self scrollViewDisappear];
+//        [self removeTimer];
+//    }
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
 @end

@@ -5,7 +5,7 @@
 //  Created by wkj on 2017/12/13.
 //  Copyright © 2017年 华通晟云. All rights reserved.
 //
-
+#import "AppDelegate.h"
 #import "PromotionPageViewController.h"
 #import "SDImageCache.h"
 #import "SDWebImageManager.h"
@@ -59,14 +59,12 @@
     // 移除定时器
     [self removeTimer];
 
-    ViewController *homeVC = [[ViewController alloc] init];
-    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:homeVC];
-    [UIApplication sharedApplication].keyWindow.rootViewController = navi;
+//    ViewController *homeVC = [[ViewController alloc] init];
+//    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:homeVC];
+//    [UIApplication sharedApplication].keyWindow.rootViewController = navi;
     
-    CATransition *anim = [CATransition animation];
-    anim.duration = 0.5;
-    anim.type = @"fade";
-    [[UIApplication sharedApplication].keyWindow.layer addAnimation:anim forKey:nil];
+    // 发送一次登录状态变化通知设置根视图
+    [[NSNotificationCenter defaultCenter] postNotificationName:FKLoginStateChangedNotificationKey object:nil];
 }
 
 /**
@@ -105,7 +103,7 @@
  */
 - (NSData *)imageDataFromDiskCacheWithKey:(NSString *)key {
     NSString *path = [[[SDWebImageManager sharedManager] imageCache] defaultCachePathForKey:key];
-    NSLog(@"%@", path);
+//    NSLog(@"Promotion imageDateFromDiskCache加载缓存数据%@", path);
     return [NSData dataWithContentsOfFile:path];
 }
 

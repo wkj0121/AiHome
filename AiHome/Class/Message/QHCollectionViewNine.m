@@ -9,9 +9,12 @@
 #import "QHCollectionViewNine.h"
 
 @interface QHCollectionViewNine ()<UICollectionViewDelegate, UICollectionViewDataSource>
-@property (nonatomic, strong) NSArray *viewArr;
-@property (nonatomic, strong) UICollectionViewFlowLayout *Layout;
+
+    @property (nonatomic, strong) NSArray *viewArr;
+    @property (nonatomic, strong) UICollectionViewFlowLayout *Layout;
+
 @end
+
 @implementation QHCollectionViewNine
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout withView:(NSArray *)viewArray {

@@ -9,15 +9,14 @@
 #ifndef __IPHONE_5_0
 #warning "This project uses features only available in iOS SDK 5.0 and later."
 #endif
-// TabView行高
-#define TabViewRowHeight 44.0f
-#define TabViewCustomHeadRowHeight 88.0f
+
 // 自动布局框架
+// 全局定义
+#import "GlobalDefine.h"
+#import "FunctionDefine.h"
+#import "IFLYDefine.h"//讯飞配置
 // 提示组件
 #import "SVProgressHUD+Helper.h"
-// 全局定义
-#import "FKFunctionDefine.h"
-#import "FKGlobalDefine.h"
 // 响应式框架
 #import "ReactiveObjC/ReactiveObjC.h"
 // 自动布局框架
