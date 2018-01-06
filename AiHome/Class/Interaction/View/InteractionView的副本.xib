@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InteractionViewController">
+            <connections>
+                <outlet property="view" destination="iN0-l3-epB" id="RIW-Gb-pmB"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="InteractionView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Rqm-SJ-K89">
+                    <rect key="frame" x="62.5" y="50" width="100" height="120"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="IMI-ck-hBl"/>
+                        <constraint firstAttribute="width" constant="100" id="rts-Ge-Dug"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch2.png" translatesAutoresizingMaskIntoConstraints="NO" id="XDj-nx-vrU">
+                    <rect key="frame" x="212.5" y="50" width="100" height="120"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="Mdt-vz-4fB"/>
+                        <constraint firstAttribute="height" constant="120" id="NL2-As-9q1"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Fg-ng-YlH" customClass="BEMCheckBox">
+                    <rect key="frame" x="97.5" y="195" width="30" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="n54-ej-Mnb"/>
+                        <constraint firstAttribute="width" constant="30" id="wOj-E9-uxm"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="on" value="YES"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
+                            <color key="value" red="0.1450980392" green="0.51764705879999995" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="onCheckColor">
+                            <color key="value" red="0.1450980392" green="0.51764705879999995" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHt-pp-j7B" customClass="BEMCheckBox">
+                    <rect key="frame" x="247.5" y="195" width="30" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="DDw-s3-ooh"/>
+                        <constraint firstAttribute="width" constant="30" id="Uqu-Qa-rKZ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="on" value="YES"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
+                            <color key="value" red="0.14509803921568626" green="0.51764705882352935" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="onCheckColor">
+                            <color key="value" red="0.1450980392" green="0.51764705879999995" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mSc-41-JtQ" userLabel="TipTextView">
+                    <rect key="frame" x="40" y="285" width="295" height="80"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="8Fd-OF-885"/>
+                    </constraints>
+                    <attributedString key="attributedText">
+                        <fragment content=" 今天是您家人">
+                            <attributes>
+                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="15" name=".PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="XXX">
+                            <attributes>
+                                <color key="NSColor" red="0.20339825749397278" green="0.53047984838485718" blue="0.51955705881118774" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="15" name=".PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment>
+                            <string key="content">的生日
+您可以把想说的话发送到家里的</string>
+                            <attributes>
+                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="15" name=".PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="XX">
+                            <attributes>
+                                <color key="NSColor" red="0.2034" green="0.53047999999999995" blue="0.51956000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="15" name=".PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="屏幕上！">
+                            <attributes>
+                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="15" name=".PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKz-Ev-79f" userLabel="ContentTopView">
+                    <rect key="frame" x="40" y="395" width="295" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S95-jv-nbV">
+                            <rect key="frame" x="5" y="7" width="30" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="26" id="NPB-Vg-08e"/>
+                                <constraint firstAttribute="width" constant="30" id="fsX-YP-l5L"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="photo.png"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hN-KH-Knx">
+                            <rect key="frame" x="40" y="7" width="30" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="V5s-Uu-bmT"/>
+                                <constraint firstAttribute="height" constant="26" id="Wwu-p3-lxd"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="emotion.png"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWx-nh-vUs">
+                            <rect key="frame" x="110" y="7" width="30" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="Do4-zx-ny9"/>
+                                <constraint firstAttribute="height" constant="26" id="prM-4z-DMM"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="居中对齐.png"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOO-3f-ENm">
+                            <rect key="frame" x="145" y="7" width="30" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="26" id="3Ft-Eg-ZbJ"/>
+                                <constraint firstAttribute="width" constant="30" id="txM-ir-WG4"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="右对齐.png"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ixr-3V-lfK">
+                            <rect key="frame" x="75" y="7" width="30" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="26" id="FgY-1E-cwR"/>
+                                <constraint firstAttribute="width" constant="30" id="yFu-6k-Uo4"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="左对齐.png"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="LOO-3f-ENm" firstAttribute="leading" secondItem="iWx-nh-vUs" secondAttribute="trailing" constant="5" id="1Wh-fr-ugP"/>
+                        <constraint firstAttribute="height" constant="40" id="H6C-53-YhH"/>
+                        <constraint firstItem="Ixr-3V-lfK" firstAttribute="centerY" secondItem="aKz-Ev-79f" secondAttribute="centerY" id="H9P-uZ-Fhb"/>
+                        <constraint firstItem="iWx-nh-vUs" firstAttribute="leading" secondItem="Ixr-3V-lfK" secondAttribute="trailing" constant="5" id="J7K-ei-XfP"/>
+                        <constraint firstItem="iWx-nh-vUs" firstAttribute="centerY" secondItem="aKz-Ev-79f" secondAttribute="centerY" id="bzY-KY-4nd"/>
+                        <constraint firstItem="Ixr-3V-lfK" firstAttribute="leading" secondItem="2hN-KH-Knx" secondAttribute="trailing" constant="5" id="eII-Yu-ZCA"/>
+                        <constraint firstItem="2hN-KH-Knx" firstAttribute="leading" secondItem="S95-jv-nbV" secondAttribute="trailing" constant="5" id="elm-PB-Cm8"/>
+                        <constraint firstItem="S95-jv-nbV" firstAttribute="leading" secondItem="aKz-Ev-79f" secondAttribute="leading" constant="5" id="kHJ-ow-q1C"/>
+                        <constraint firstItem="S95-jv-nbV" firstAttribute="centerY" secondItem="aKz-Ev-79f" secondAttribute="centerY" id="tYP-Nc-lTA"/>
+                        <constraint firstItem="2hN-KH-Knx" firstAttribute="centerY" secondItem="aKz-Ev-79f" secondAttribute="centerY" id="vcp-jh-2Mg"/>
+                        <constraint firstItem="LOO-3f-ENm" firstAttribute="centerY" secondItem="aKz-Ev-79f" secondAttribute="centerY" id="xzk-af-rlp"/>
+                    </constraints>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EhN-eX-QEd" userLabel="ContentTextView">
+                    <rect key="frame" x="40" y="435" width="295" height="100"/>
+                    <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" image="YES" selected="YES" keyboardKey="YES" staticText="YES"/>
+                    </accessibility>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="Nu7-Ys-MtF"/>
+                    </constraints>
+                    <attributedString key="attributedText">
+                        <fragment content="生日快乐！ ">
+                            <attributes>
+                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="15" name=".PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="○">
+                            <attributes>
+                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="15" name=".SFNSText"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="(∩">
+                            <attributes>
+                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="15" name=".PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="₋">
+                            <attributes>
+                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="15" name=".SFNSText"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="∩">
+                            <attributes>
+                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="15" name=".PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content=")">
+                            <attributes>
+                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="15" name="AppleSymbols"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="○">
+                            <attributes>
+                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="15" name=".SFNSText"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SIT-rc-BST">
+                    <rect key="frame" x="167" y="555" width="40" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="pYS-IZ-j8w"/>
+                        <constraint firstAttribute="width" constant="40" id="xMq-zX-Kdh"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="send.png"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <accessibility key="accessibilityConfiguration">
+                <accessibilityTraits key="traits" keyboardKey="YES"/>
+                <bool key="isElement" value="YES"/>
+            </accessibility>
+            <constraints>
+                <constraint firstItem="XDj-nx-vrU" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="0g5-dI-cXV"/>
+                <constraint firstItem="7Fg-ng-YlH" firstAttribute="centerX" secondItem="Rqm-SJ-K89" secondAttribute="centerX" id="5W2-qw-R8s"/>
+                <constraint firstItem="mSc-41-JtQ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6Ow-s3-jzm"/>
+                <constraint firstItem="SIT-rc-BST" firstAttribute="top" secondItem="EhN-eX-QEd" secondAttribute="bottom" constant="20" id="Edf-ru-YOt"/>
+                <constraint firstItem="aKz-Ev-79f" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="EtA-6Y-jbY"/>
+                <constraint firstItem="EhN-eX-QEd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="HB4-kn-ZWu"/>
+                <constraint firstItem="IHt-pp-j7B" firstAttribute="top" secondItem="XDj-nx-vrU" secondAttribute="bottom" constant="25" id="JyE-pF-t8Y"/>
+                <constraint firstItem="Rqm-SJ-K89" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="Kmi-7D-oAy"/>
+                <constraint firstItem="aKz-Ev-79f" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="N4r-iX-UCg"/>
+                <constraint firstItem="EhN-eX-QEd" firstAttribute="top" secondItem="aKz-Ev-79f" secondAttribute="bottom" id="NIG-NZ-gyy"/>
+                <constraint firstItem="XDj-nx-vrU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="1.4" id="PDs-Gb-4Ps"/>
+                <constraint firstItem="7Fg-ng-YlH" firstAttribute="top" secondItem="Rqm-SJ-K89" secondAttribute="bottom" constant="25" id="aV1-bF-BX7"/>
+                <constraint firstItem="EhN-eX-QEd" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="biU-jT-Gig"/>
+                <constraint firstItem="SIT-rc-BST" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="c7a-6M-ur5"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mSc-41-JtQ" secondAttribute="trailing" constant="40" id="htd-0j-M3L"/>
+                <constraint firstItem="aKz-Ev-79f" firstAttribute="top" secondItem="mSc-41-JtQ" secondAttribute="bottom" constant="30" id="lth-Iq-DGQ"/>
+                <constraint firstItem="Rqm-SJ-K89" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="0.6" id="m2g-HE-eda"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="EhN-eX-QEd" secondAttribute="trailing" constant="40" id="mNg-N8-MaS"/>
+                <constraint firstItem="mSc-41-JtQ" firstAttribute="top" secondItem="7Fg-ng-YlH" secondAttribute="bottom" constant="60" id="qOA-5d-JKQ"/>
+                <constraint firstItem="aKz-Ev-79f" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" constant="-40" id="s6o-LR-C0g"/>
+                <constraint firstItem="IHt-pp-j7B" firstAttribute="centerX" secondItem="XDj-nx-vrU" secondAttribute="centerX" id="vNJ-Rt-OCx"/>
+                <constraint firstItem="mSc-41-JtQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="xD8-EP-FB3"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="centerAlignBtn" destination="iWx-nh-vUs" id="dSc-nL-USp"/>
+                <outlet property="contentTextView" destination="EhN-eX-QEd" id="y7w-9Y-fpe"/>
+                <outlet property="emotionBtn" destination="2hN-KH-Knx" id="8MQ-Oa-GbI"/>
+                <outlet property="leftAlignBtn" destination="Ixr-3V-lfK" id="TxT-LZ-GZn"/>
+                <outlet property="leftCheckbox" destination="7Fg-ng-YlH" id="eDF-xQ-XKq"/>
+                <outlet property="photoBtn" destination="S95-jv-nbV" id="G4z-PE-QfL"/>
+                <outlet property="rightAlignBtn" destination="LOO-3f-ENm" id="NlV-wY-bWx"/>
+                <outlet property="rightCheckbox" destination="IHt-pp-j7B" id="hCN-G7-h50"/>
+                <outlet property="sendBtn" destination="SIT-rc-BST" id="dAe-3b-ELH"/>
+                <outlet property="tipTextView" destination="mSc-41-JtQ" id="zdT-zi-waB"/>
+                <outlet property="topContentView" destination="aKz-Ev-79f" id="TME-Ao-zZK"/>
+            </connections>
+            <point key="canvasLocation" x="34.5" y="66.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="emotion.png" width="118" height="96"/>
+        <image name="photo.png" width="118" height="96"/>
+        <image name="send.png" width="128" height="85"/>
+        <image name="switch1.png" width="394" height="394"/>
+        <image name="switch2.png" width="394" height="394"/>
+        <image name="右对齐.png" width="118" height="96"/>
+        <image name="居中对齐.png" width="118" height="96"/>
+        <image name="左对齐.png" width="118" height="96"/>
+    </resources>
+</document>
