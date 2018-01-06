@@ -16,6 +16,8 @@
 // check button array
 @property (nonatomic, strong) NSMutableArray *checkBtnsArray;
 
+@property (nonatomic, weak) UITableView *tableView;
+
 @end
 
 @implementation RegionTableViewController
@@ -28,10 +30,29 @@
     return _allRegionsArray;
 }
 
+- (void)loadView
+{
+    /**
+     添加TableView
+     
+     - returns: return value description
+     */
+    UITableView *tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    self.view = tableView;
+    tableView.sectionFooterHeight = 10;
+    tableView.sectionHeaderHeight = 0;
+    tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//    tableView.rowHeight = self.rowHeight;
+    //设置头部高度
+    tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"区域选择";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor]}];
+//    self.view.backgroundColor = COLOR_RED;
+    [self customNavItem];
     [self handleData];
     
 }
@@ -57,11 +78,34 @@
         [self.allRegionsArray addObject:region];
     }
     
+    self.checkBtnsArray = [NSMutableArray array];//初始化check Button
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
+}
+
+#pragma mark - 定制导航条内容
+- (void)customNavItem {
+    self.navigationItem.title = @"区域选择";
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor]}];
+    UIButton *leftBtn = [[UIButton alloc] init];
+    [leftBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"regionSwtich_selected"]] forState:UIControlStateSelected];
+    leftBtn.selected = YES;
+    [[leftBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+    self.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
+    
+    UIButton *rightBtn = [[UIButton alloc] init];
+    [rightBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"add"]] forState:UIControlStateNormal];
+    [[rightBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        NSLog(@" rightBtn add clicked :)");
+    }];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    self.navigationItem.rightBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
 }
 
 #pragma mark - Table view data source
@@ -100,7 +144,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120;
+    return 60;
     
 }
 

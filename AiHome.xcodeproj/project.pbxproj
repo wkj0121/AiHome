@@ -189,6 +189,9 @@
 		73CC2FA91FFFF4AB00C4D5C8 /* radioButton-checked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73CC2FA31FFFF4AB00C4D5C8 /* radioButton-checked@3x.png */; };
 		73CC2FAC1FFFF63200C4D5C8 /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CC2FAB1FFFF63200C4D5C8 /* Region.m */; };
 		73CC2FAF1FFFF77C00C4D5C8 /* RegionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CC2FAE1FFFF77C00C4D5C8 /* RegionTableViewController.m */; };
+		73D896F720018D6F000F6303 /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73D896F420018D6F000F6303 /* add@2x.png */; };
+		73D896F820018D6F000F6303 /* add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73D896F520018D6F000F6303 /* add@3x.png */; };
+		73D896F920018D6F000F6303 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 73D896F620018D6F000F6303 /* add.png */; };
 		73DC4E551FE99AC5008952F1 /* TouchIDAuthenticate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC4E541FE99AC5008952F1 /* TouchIDAuthenticate.m */; };
 		73EB1D461FF94589002E47EA /* AiViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EB1D451FF94589002E47EA /* AiViewController2.m */; };
 		73EB1D4A1FF9474E002E47EA /* seekcoAi.png in Resources */ = {isa = PBXBuildFile; fileRef = 73EB1D481FF9474E002E47EA /* seekcoAi.png */; };
@@ -524,6 +527,9 @@
 		73CC2FAB1FFFF63200C4D5C8 /* Region.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
 		73CC2FAD1FFFF76A00C4D5C8 /* RegionTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegionTableViewController.h; sourceTree = "<group>"; };
 		73CC2FAE1FFFF77C00C4D5C8 /* RegionTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegionTableViewController.m; sourceTree = "<group>"; };
+		73D896F420018D6F000F6303 /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
+		73D896F520018D6F000F6303 /* add@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@3x.png"; sourceTree = "<group>"; };
+		73D896F620018D6F000F6303 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		73DC4E531FE99AAA008952F1 /* TouchIDAuthenticate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TouchIDAuthenticate.h; sourceTree = "<group>"; };
 		73DC4E541FE99AC5008952F1 /* TouchIDAuthenticate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TouchIDAuthenticate.m; sourceTree = "<group>"; };
 		73EB1D441FF9457A002E47EA /* AiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AiViewController.h; sourceTree = "<group>"; };
@@ -1089,6 +1095,9 @@
 				738E28331FEC54FE00BA096F /* regionSwtich.png */,
 				738E28371FEC54FE00BA096F /* regionSwtich@2x.png */,
 				738E28321FEC54FD00BA096F /* regionSwtich@3x.png */,
+				73D896F620018D6F000F6303 /* add.png */,
+				73D896F420018D6F000F6303 /* add@2x.png */,
+				73D896F520018D6F000F6303 /* add@3x.png */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1717,6 +1726,7 @@
 				731A06C51FEEC36D002E84D8 /* home@2x.png in Resources */,
 				731A06C61FEEC36D002E84D8 /* home@3x.png in Resources */,
 				736AFB711FFD1BCC00B5D003 /* send.png in Resources */,
+				73D896F820018D6F000F6303 /* add@3x.png in Resources */,
 				73EB1D4A1FF9474E002E47EA /* seekcoAi.png in Resources */,
 				73EB1D5B1FF9940D002E47EA /* microphone_Highlighted@3x.png in Resources */,
 				731A06C71FEEC36D002E84D8 /* gas.png in Resources */,
@@ -1736,8 +1746,10 @@
 				73A5662F1FF038110004395A /* alarm.png in Resources */,
 				73EB1D551FF98208002E47EA /* microphone@3x.png in Resources */,
 				73EB1D4B1FF9474E002E47EA /* seekcoAi@2x.png in Resources */,
+				73D896F720018D6F000F6303 /* add@2x.png in Resources */,
 				73EB1D991FF9A144002E47EA /* fill.png in Resources */,
 				731A06CF1FEEC36D002E84D8 /* shopcar_selected@3x.png in Resources */,
+				73D896F920018D6F000F6303 /* add.png in Resources */,
 				736AFB721FFD1BCC00B5D003 /* 右对齐.png in Resources */,
 				731A06D01FEEC36D002E84D8 /* shopcar.png in Resources */,
 				731A06D11FEEC36D002E84D8 /* shopcar@2x.png in Resources */,

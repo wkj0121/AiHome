@@ -6,13 +6,13 @@
          contextName = "-[FKLoginViewController tableFooterView]:FKLoginViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "SCREEN_WIDTH">
+               value = "self.view.frame.size.height">
             </PersistentString>
             <PersistentString
                value = "_loginInputTableView.frame.size.height">
             </PersistentString>
             <PersistentString
-               value = "self.view.frame.size.height">
+               value = "SCREEN_WIDTH">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -32,6 +32,28 @@
             </PersistentString>
             <PersistentString
                value = "_interactionView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[RegionTableViewCell initLayout]:RegionTableViewCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "CGRectGetMinY(self.regionLabel.frame)">
+            </PersistentString>
+            <PersistentString
+               value = "CGRectGetHeight(self.contentView.frame)">
+            </PersistentString>
+            <PersistentString
+               value = "self.contentView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[RegionTableViewController tableView:cellForRowAtIndexPath:]:RegionTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.checkBtnsArray">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

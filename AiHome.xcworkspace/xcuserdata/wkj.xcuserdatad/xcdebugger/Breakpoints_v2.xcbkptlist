@@ -473,7 +473,7 @@
                   moduleName = "AiHome"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/wkj/xcode/AiHome/AiHome/AiHome/Class/Login/ViewModel/FKLoginViewModel.m"
-                  timestampString = "536884225.393122"
+                  timestampString = "536972675.773705"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "63"
@@ -488,7 +488,7 @@
                   moduleName = "AiHome"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/wkj/xcode/AiHome/AiHome/AiHome/Class/Login/ViewModel/FKLoginViewModel.m"
-                  timestampString = "536884225.3969769"
+                  timestampString = "536972675.7760741"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "67"
@@ -762,6 +762,22 @@
                   offsetFromSymbolStart = "14">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AiHome/Class/Region/RegionTableViewCell.m"
+            timestampString = "536972675.560753"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "-initLayout"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
