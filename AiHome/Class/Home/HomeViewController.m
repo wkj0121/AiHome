@@ -5,13 +5,14 @@
 //  Created by wkj on 2017/12/31.
 //  Copyright © 2017年 华通晟云. All rights reserved.
 //
-
 #import "HomeViewController.h"
 #import "MainViewController.h"
 #import "FXPageControl.h"
 #import "AiViewController.h"
 #import "UIScrollView+UITouch.h"
 #import "XScrollView.h"
+#import "InteractionViewController.h"
+#import "RegionTableViewController.h"
 
 @interface HomeViewController()<UIScrollViewDelegate> //实现滚动视图协议
 
@@ -38,8 +39,8 @@
  */
 - (void)initViewData {
     AiViewController *leftView = [[AiViewController alloc] init];
-    MainViewController *rightView = [[MainViewController alloc] init];
     MainViewController *mainView = [[MainViewController alloc] init];
+    InteractionViewController *rightView = [[InteractionViewController alloc] init];
     
     self.subViewArr = @[leftView, mainView,rightView];
 }
@@ -52,8 +53,14 @@
     //    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *leftBtn = [[UIButton alloc] init];
     //    [leftBtn setTitle:@"添加好友" forState:UIControlStateNormal];
-    [leftBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"zoom"]] forState:UIControlStateNormal];
-    [leftBtn addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchUpInside];
+    [leftBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"regionSwtich"]] forState:UIControlStateNormal];
+    [leftBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"regionSwtich_selected"]] forState:UIControlStateSelected];
+//    [leftBtn addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchUpInside];
+    [[leftBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        //        NSLog(@" leftBtn clicked :)");
+//        RegionTableViewController *regionVC = [[RegionTableViewController alloc] init];
+        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"RegionTableViewController"]] options:nil completionHandler:nil];
+    }];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
     self.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     
@@ -62,7 +69,10 @@
     [rightBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"shopcar"]] forState:UIControlStateNormal];
     //    [rightBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     //    [rightBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
-    [rightBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [rightBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
+    [[rightBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+                NSLog(@" rightBtn shopcar clicked :)");
+    }];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
 }

@@ -8,6 +8,8 @@
 
 #import "XScrollView.h"
 #import "DVoiceTouchView.h"
+#import "BEMCheckBox.h"
+#import "InteractionView.h"
 
 @implementation XScrollView
 
@@ -15,7 +17,7 @@
 {
 //    NSLog(@"用户点击了scroll上的视图%@,是否开始滚动scroll",view);
     //返回yes 是不滚动 scroll 返回no 是滚动scroll
-    if ([view isKindOfClass:[UIButton class]] || [view isKindOfClass:[DVoiceTouchView class]])  {
+    if ([view isKindOfClass:[UIButton class]] || [view isKindOfClass:[BEMCheckBox class]] || [view isKindOfClass:[UITextView class]] || [view isKindOfClass:[DVoiceTouchView class]] || [view isKindOfClass:[InteractionView class]])  {
         return YES;
     }else{
         return NO;
@@ -25,8 +27,8 @@
 - (BOOL)touchesShouldCancelInContentView:(UIView *)view
 {
 //    NSLog(@"用户点击的视图 %@",view);
-    //NO scroll不可以滚动 YES scroll可以滚动
-    if ([view isKindOfClass:[UIButton class]] || [view isKindOfClass:[DVoiceTouchView class]])  {
+//    NO scroll不可以滚动 YES scroll可以滚动
+    if ([view isKindOfClass:[UIButton class]] || [view isKindOfClass:[BEMCheckBox class]] || [view isKindOfClass:[UITextView class]] || [view isKindOfClass:[DVoiceTouchView class]] || [view isKindOfClass:[InteractionView class]])  {
         return YES;
     }else{
         return NO;

@@ -3,43 +3,43 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[HomeViewController setupScrollView]:HomeViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.viewArr[i]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[LCGridElement setupUI]:LCGridElement.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_data.labelName">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[PoemData copyDB]:PoemData.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[LCGridElement setupFrame]:LCGridElement.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.hasLabel">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[FKLoginViewController tableFooterView]:FKLoginViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.view.frame.size.height">
+               value = "SCREEN_WIDTH">
             </PersistentString>
             <PersistentString
                value = "_loginInputTableView.frame.size.height">
             </PersistentString>
             <PersistentString
-               value = "SCREEN_WIDTH">
+               value = "self.view.frame.size.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[InteractionView contentSizeToFit:]:InteractionView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "textView.frame.size">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[InteractionViewController keyboardDidShow:]:InteractionViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.interactionView">
+            </PersistentString>
+            <PersistentString
+               value = "_interactionView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[YSCVoiceWaveView changeVolume:]:YSCVoiceWaveView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.volumeQueue">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -55,7 +55,37 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[PoemData copyDB]:PoemData.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[LCGridElement setupUI]:LCGridElement.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_data.labelName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeViewController setupScrollView]:HomeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.viewArr[i]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[RACSignal(Operations) firstOrDefault:success:error:]:RACSignal+Operations.m">
+      </ContextState>
+      <ContextState
+         contextName = "__39-[FKBaseRequest(Rac) rac_requestSignal]_block_invoke_2:FKBaseRequest+Rac.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeViewController setupHomeView]:HomeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "energyBtn.frame.size.width">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[iCocosSettingCell setItem:]:iCocosSettingCell.m">
@@ -69,21 +99,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__39-[FKBaseRequest(Rac) rac_requestSignal]_block_invoke_2:FKBaseRequest+Rac.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[YSCVoiceWaveView changeVolume:]:YSCVoiceWaveView.m">
+         contextName = "-[InteractionViewController viewDidLoad]:InteractionViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.volumeQueue">
+               value = "self.view">
+            </PersistentString>
+            <PersistentString
+               value = "_interacionView.contentView">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[HomeViewController setupHomeView]:HomeViewController.m">
+         contextName = "-[LCGridElement setupFrame]:LCGridElement.m">
          <PersistentStrings>
             <PersistentString
-               value = "energyBtn.frame.size.width">
+               value = "self.hasLabel">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

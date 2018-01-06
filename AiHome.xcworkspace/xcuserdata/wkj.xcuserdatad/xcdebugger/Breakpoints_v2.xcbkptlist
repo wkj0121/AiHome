@@ -405,54 +405,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AiHome/AppDelegate.m"
-            timestampString = "536576290.295613"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "-application:openURL:options:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_"
-                  moduleName = "AiHome"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/wkj/xcode/AIHome/AIHome/AiHome/AppDelegate.m"
-                  timestampString = "536182176.427532"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "145"
-                  endingLineNumber = "145"
-                  offsetFromSymbolStart = "51">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_"
-                  moduleName = "AiHome"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/wkj/xcode/AIHome/AIHome/AiHome/AppDelegate.m"
-                  timestampString = "536182176.431292"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "145"
-                  endingLineNumber = "145"
-                  offsetFromSymbolStart = "29">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -521,12 +473,12 @@
                   moduleName = "AiHome"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/wkj/xcode/AiHome/AiHome/AiHome/Class/Login/ViewModel/FKLoginViewModel.m"
-                  timestampString = "536576290.353713"
+                  timestampString = "536884225.393122"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "63"
                   endingLineNumber = "63"
-                  offsetFromSymbolStart = "216">
+                  offsetFromSymbolStart = "229">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -536,12 +488,12 @@
                   moduleName = "AiHome"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/wkj/xcode/AiHome/AiHome/AiHome/Class/Login/ViewModel/FKLoginViewModel.m"
-                  timestampString = "536576290.355302"
+                  timestampString = "536884225.3969769"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "67"
                   endingLineNumber = "67"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "44">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -607,7 +559,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AiHome/Comm/iflyMSC/DisrIdentifyObject.m"
@@ -626,13 +578,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AiHome/Comm/XScrollView/XScrollView.m"
-            timestampString = "536576290.29584"
+            filePath = "AiHome/Comm/STTextView/STTextView.m"
+            timestampString = "536857036.976997"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "-touchesShouldCancelInContentView:"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "-textViewDidChange:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -642,14 +594,174 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AiHome/Comm/XScrollView/XScrollView.m"
-            timestampString = "536576290.295888"
+            filePath = "AiHome/Comm/STTextView/STTextView.m"
+            timestampString = "536857036.977065"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "-touchesShouldBegin:withEvent:inContentView:"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "-st_setAttributedString"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AiHome/Comm/STTextView/STTextView.m"
+            timestampString = "536857036.977114"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "-st_autoHeight"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AiHome/Class/Interaction/ViewController/InteractionViewController.m"
+            timestampString = "536798936.171566"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AiHome/Class/Interaction/InteractionViewController.m"
+            timestampString = "536859019.825829"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
+            landmarkName = "-keyboardDidShow:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[InteractionViewController keyboardDidShow:]"
+                  moduleName = "AiHome"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wkj/xcode/AiHome/AiHome/AiHome/Class/Interaction/InteractionViewController.m"
+                  timestampString = "536844306.635807"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "310"
+                  endingLineNumber = "310"
+                  offsetFromSymbolStart = "456">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__45-[InteractionViewController keyboardDidShow:]_block_invoke"
+                  moduleName = "AiHome"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wkj/xcode/AiHome/AiHome/AiHome/Class/Interaction/InteractionViewController.m"
+                  timestampString = "536844306.637797"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "310"
+                  endingLineNumber = "310"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../AIHome/AIHome/AiHome/Class/Region/Region.m"
+            timestampString = "536868577.918715"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "10"
+            endingLineNumber = "10"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AiHome/AppDelegate.m"
+            timestampString = "536884225.286867"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "389"
+            endingLineNumber = "389"
+            landmarkName = "-_handlerSceneWithPresent:parameters:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AiHome/AppDelegate.m"
+            timestampString = "536884225.287034"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
+            landmarkName = "-registerNavgationRouter"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__54-[AppDelegate(RouterRegister) registerNavgationRouter]_block_invoke"
+                  moduleName = "AiHome"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wkj/xcode/AiHome/AiHome/AiHome/AppDelegate.m"
+                  timestampString = "536882552.447271"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "335"
+                  endingLineNumber = "335"
+                  offsetFromSymbolStart = "62">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__54-[AppDelegate(RouterRegister) registerNavgationRouter]_block_invoke_2"
+                  moduleName = "AiHome"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wkj/xcode/AiHome/AiHome/AiHome/AppDelegate.m"
+                  timestampString = "536882552.449156"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "335"
+                  endingLineNumber = "335"
+                  offsetFromSymbolStart = "14">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

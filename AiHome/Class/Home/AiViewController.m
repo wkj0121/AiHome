@@ -276,8 +276,9 @@
     if (isLast && self.touchIsEnd) {
         if (!self.voiceIsCancel && [self.voiceString length] > 0) {
             _voiceSendLabel.text=self.voiceString;
+            [NSThread sleepForTimeInterval:1.0f];
             //启动合成会话
-            [_iFlySpeechSynthesizer startSpeaking: @"好的，小Ai已经帮您处理"];
+            [_iFlySpeechSynthesizer startSpeaking: @"好的主人，小Ai正在帮您处理"];
         }
     }
 }
@@ -302,9 +303,11 @@
 }
 //错误信息
 - (void) onErrorStringisrIdentifyDelegate:(IFlySpeechError *)error{
-    NSLog(@"errorCode:%i,errorType:%i,errorDesc:%@",error.errorCode,error.errorType,error.errorDesc);
-    _voiceSendLabel.text=error.errorDesc;
-//    _voiceSendLabel.text=self.voiceString;
+//    NSLog(@"errorCode:%i,errorType:%i,errorDesc:%@",error.errorCode,error.errorType,error.errorDesc);
+    if(error.errorCode!=0){//发生错误
+        _voiceSendLabel.text=error.errorDesc;
+        //    _voiceSendLabel.text=self.voiceString;
+    }
 }
 
 -(void)setSelectedImage:(UIImage *)selectedImage{

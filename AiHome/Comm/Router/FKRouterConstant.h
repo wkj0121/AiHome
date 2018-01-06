@@ -42,3 +42,9 @@ FOUNDATION_EXTERN NSString *const FKNavStoryBoardPushRoute;
 
 // 组件通信回调
 FOUNDATION_EXTERN NSString *const FKComponentsCallBackRoute;
+
+#pragma mark - 应用内路由表
+FOUNDATION_EXTERN NSString *const NavPushRouteURL;
+FOUNDATION_EXTERN NSString *const NavPresentRouteURL;
+FOUNDATION_EXTERN NSString *const NavStoryBoardPushRouteURL;
+FOUNDATION_EXTERN NSString *const ComponentsCallBackRouteURL;
