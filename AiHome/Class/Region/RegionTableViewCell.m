@@ -15,7 +15,7 @@
 
 @implementation RegionTableViewCell
 
-    CGFloat marginSize = 50;//缩进跨度
+    static CGFloat marginSize = 50;//缩进跨度
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

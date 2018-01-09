@@ -24,5 +24,7 @@ pod 'Masonry'
 pod 'BEMCheckBox'
 # RadioButton
 pod 'RadioButton'
+# XJYChart
+pod 'XJYChart'
 
 end

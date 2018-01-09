@@ -8,6 +8,8 @@
 
 #import "MsgViewController.h"
 #import "QHCollectionViewNine.h"
+#import "PM25View.h"
+#import "MessageView.h"
 
 @interface MsgViewController()
 
@@ -24,15 +26,23 @@
 //    UIImage *image1 = [UIImage imageNamed:@"lock"];
 //    UIImage *image2 = [UIImage imageNamed:@"camera"];
 //    UIImage *image3 = [UIImage imageNamed:@"gas"];
-    UIImageView *imageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-    UIImageView *imageView2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera"]];
+    
+//    UIImageView *imageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
+    MessageView *lockMsgView = [[MessageView alloc] initWithImgName:@"lock" msgNum:23];
+    MessageView *videoMsgView = [[MessageView alloc] initWithImgName:@"camera" msgNum:3];
     UIImageView *imageView3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"light"]];
     UIImageView *imageView4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alarm"]];
     UIImageView *imageView5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"system"]];
-    UIImageView *imageView6 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pm25"]];
-    NSArray *viewArray = @[imageView1, imageView2, imageView3, imageView4, imageView5, imageView6];
+//    UIImageView *imageView6 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pm25"]];
+//    PM25View1 *pm25View = [[PM25View1 alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    PM25View *pm25View = [PM25View viewFromNIB];
+    NSArray *viewArray = @[lockMsgView, videoMsgView, imageView3, imageView4, imageView5, pm25View];
     
     [self.view addSubview:[self setupBoxView:viewArray withRowNum:3 withColumnNum:2 withSpace:5.0]];
+    
+    [[videoMsgView.msgLabelBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"VideoEventTableViewController"]] options:nil completionHandler:nil];
+    }];
 }
 
 -(QHCollectionViewNine *)setupBoxView:(NSArray *)viewArray withRowNum:(NSInteger)rowNum withColumnNum:(NSInteger)columnNum withSpace:(CGFloat)space {

@@ -3,24 +3,71 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[VideoNavView photosBtn]:VideoNavView.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[VideoEventTableViewController videoNavView]:VideoEventTableViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[PM25View setupSubViewLayout]:PM25View.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.frame.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[YSCVoiceWaveView changeVolume:]:YSCVoiceWaveView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.volumeQueue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[BezierLineView initWithCoder:]:BezierLineView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "CGRectGetWidth(self.frame)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[VideoEventTableViewController viewDidLoad]:VideoEventTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tableView">
+            </PersistentString>
+            <PersistentString
+               value = "self.view">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NViewController nextImage]:NViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.pageControl.currentPage">
+            </PersistentString>
+            <PersistentString
+               value = "self.scrollView.frame.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[VideoNavView videoBtn]:VideoNavView.m">
+      </ContextState>
+      <ContextState
          contextName = "-[FKLoginViewController tableFooterView]:FKLoginViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.view.frame.size.height">
+               value = "SCREEN_WIDTH">
             </PersistentString>
             <PersistentString
                value = "_loginInputTableView.frame.size.height">
             </PersistentString>
             <PersistentString
-               value = "SCREEN_WIDTH">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[InteractionView contentSizeToFit:]:InteractionView.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "textView.frame.size">
+               value = "self.view.frame.size.height">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -32,6 +79,39 @@
             </PersistentString>
             <PersistentString
                value = "_interactionView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[RegionTableViewController tableView:cellForRowAtIndexPath:]:RegionTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.checkBtnsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[RACSignal(Operations) firstOrDefault:success:error:]:RACSignal+Operations.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[VideoEventTableViewController handleData]:VideoEventTableViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[VideoEventTableViewController tableView]:VideoEventTableViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[BezierLineView drawBezierPath2]:BezierLineView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.points">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[BezierLineView lineChart]:BezierLineView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.frame.size.width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -50,56 +130,37 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[RegionTableViewController tableView:cellForRowAtIndexPath:]:RegionTableViewController.m">
+         contextName = "-[VideoNavView historyBtn]:VideoNavView.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[BezierLineView initData]:BezierLineView.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.checkBtnsArray">
+               value = "self.frame.size.width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[YSCVoiceWaveView changeVolume:]:YSCVoiceWaveView.m">
+         contextName = "-[InteractionView contentSizeToFit:]:InteractionView.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.volumeQueue">
+               value = "textView.frame.size">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NViewController nextImage]:NViewController.m">
+         contextName = "-[XLineChart lineChartView]:XLineChart.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[XLineChart initWithFrame:dataItemArray:dataDiscribeArray:topNumber:bottomNumber:graphMode:chartConfiguration:]:XLineChart.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[PM25View initSubViews]:PM25View.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.pageControl.currentPage">
-            </PersistentString>
-            <PersistentString
-               value = "self.scrollView.frame.size.width">
+               value = "self.frame">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[PoemData copyDB]:PoemData.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[LCGridElement setupUI]:LCGridElement.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_data.labelName">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[HomeViewController setupScrollView]:HomeViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.viewArr[i]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[RACSignal(Operations) firstOrDefault:success:error:]:RACSignal+Operations.m">
-      </ContextState>
-      <ContextState
-         contextName = "__39-[FKBaseRequest(Rac) rac_requestSignal]_block_invoke_2:FKBaseRequest+Rac.m">
       </ContextState>
       <ContextState
          contextName = "-[HomeViewController setupHomeView]:HomeViewController.m">
@@ -110,13 +171,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[iCocosSettingCell setItem:]:iCocosSettingCell.m">
+         contextName = "-[PoemData copyDB]:PoemData.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[LCGridElement setupFrame]:LCGridElement.m">
          <PersistentStrings>
             <PersistentString
-               value = "_imageView">
+               value = "self.hasLabel">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeViewController setupScrollView]:HomeViewController.m">
+         <PersistentStrings>
             <PersistentString
-               value = "self.accessoryView">
+               value = "self.viewArr[i]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -132,10 +201,38 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[LCGridElement setupFrame]:LCGridElement.m">
+         contextName = "-[iCocosSettingCell setItem:]:iCocosSettingCell.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.hasLabel">
+               value = "_imageView">
+            </PersistentString>
+            <PersistentString
+               value = "self.accessoryView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LCGridElement setupUI]:LCGridElement.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_data.labelName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[BezierLineView drawRect:]:BezierLineView.m">
+      </ContextState>
+      <ContextState
+         contextName = "__39-[FKBaseRequest(Rac) rac_requestSignal]_block_invoke_2:FKBaseRequest+Rac.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[QHCollectionViewNine collectionView:cellForItemAtIndexPath:]:QHCollectionViewNine.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "uiV.frame">
+            </PersistentString>
+            <PersistentString
+               value = "cell.contentView.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
