@@ -48,14 +48,13 @@
 -(QHCollectionViewNine *)setupBoxView:(NSArray *)viewArray withRowNum:(NSInteger)rowNum withColumnNum:(NSInteger)columnNum withSpace:(CGFloat)space {
     CGFloat navBarHeight = self.navigationController.navigationBar.frame.size.height;
     CGFloat tabBarHeight = self.tabBarController.tabBar.frame.size.height;
-    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake((self.view.frame.size.width - space*(columnNum+1)) / columnNum, (self.view.frame.size.height - statusBarHeight -navBarHeight - tabBarHeight - space*(rowNum+1)) / rowNum);
+    layout.itemSize = CGSizeMake((self.view.frame.size.width - space*(columnNum+1)) / columnNum, (self.view.frame.size.height - STATUS_BAR_HEIGHT -navBarHeight - tabBarHeight - space*(rowNum+1)) / rowNum);
     layout.minimumLineSpacing = space; // 竖
     layout.minimumInteritemSpacing = 0.0; // 横
     layout.sectionInset = UIEdgeInsetsMake(space, space, space, space);
     
-    QHCollectionViewNine *nineView = [[QHCollectionViewNine alloc] initWithFrame:CGRectMake(0, statusBarHeight+navBarHeight, self.view.frame.size.width, self.view.frame.size.height - statusBarHeight-navBarHeight - tabBarHeight) collectionViewLayout:layout withView:viewArray];
+    QHCollectionViewNine *nineView = [[QHCollectionViewNine alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT+navBarHeight, self.view.frame.size.width, self.view.frame.size.height - STATUS_BAR_HEIGHT-navBarHeight - tabBarHeight) collectionViewLayout:layout withView:viewArray];
     return nineView;
 }
 

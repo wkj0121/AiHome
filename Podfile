@@ -14,6 +14,7 @@ pod 'JLRoutes', '~> 2.0.5'
 #pod 'SevenSwitch','1.4'
 # 提示组件框架
 pod 'SVProgressHUD', '~> 2.2.2'
+pod 'MBProgressHUD', '~> 1.1.0'
 # 网络请求框架
 pod 'YTKNetwork', '~> 2.0.3'
 # AOP面向切面

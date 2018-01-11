@@ -33,6 +33,9 @@
     [self.view addSubview:cameraBtn];
     [self.view addSubview:gasBtn];
     [array addObjectsFromArray:@[lockBtn,cameraBtn,gasBtn]];
+    [[cameraBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"VideoEventTableViewController"]] options:nil completionHandler:nil];
+    }];
     //水平方向宽度固定等间隔
     [array mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:(self.view.frame.size.width-40) / 3 leadSpacing:10 tailSpacing:10];
     [array mas_makeConstraints:^(MASConstraintMaker *make) { //数组额你不必须都是view

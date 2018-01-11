@@ -45,7 +45,8 @@ fprintf(stderr,"%s %s:%d %s\n",[str UTF8String], [[[NSString stringWithUTF8Strin
 #define TAB_BAR_WIDTH               SCREEN_WIDTH
 #define TAB_BAR_HEIGHT              (48)
 
-#define STATUS_BAR_HEIGHT           (20)
+//#define STATUS_BAR_HEIGHT           (20)
+#define STATUS_BAR_HEIGHT           [[UIApplication sharedApplication] statusBarFrame].size.height
 
 #define Margin  5
 #define Padding 10
@@ -54,6 +55,7 @@ fprintf(stderr,"%s %s:%d %s\n",[str UTF8String], [[[NSString stringWithUTF8Strin
 // TabView行高
 #define TabViewRowHeight 44.0f
 #define TabViewCustomHeadRowHeight 88.0f
+#define PI 3.14159265358979323846
 /*
  ====================================================================================================//颜色相关1
  */

@@ -5,68 +5,94 @@
 //  Created by wkj on 2018/1/6.
 //  Copyright © 2018年 华通晟云. All rights reserved.
 //
-
+#import "HCWSNetSDK.h"
 #import "VideoEventTableViewController.h"
 #import "VideoEventModel.h"
 #import "VideoEventTableViewCell.h"
 #import "VideoNavView.h"
 #import "PhotoCollectionView.h"
+#import "CameraShowView.h"
 
-@interface VideoEventTableViewController ()
+@interface VideoEventTableViewController ()<UIGestureRecognizerDelegate>
+
 // 声明一个大数组存放所有区域 视频历史事件数据TableView数据源
 @property (nonatomic, strong) NSMutableArray *allEventsArray;
 //视频历史事件TimeLine样式显示TableView
 @property (nonatomic, strong) UITableView *tableView;
 //视频功能导航视图，包含事件查询、视频相册查看、实时监控三个功能跳转按钮
-@property (nonatomic, strong) VideoNavView *videoNavView;
+@property (nonatomic, strong) VideoNavView *topNavView;
 //视频相册视图
 @property (nonatomic, strong) NSArray *photosArray;
 @property (nonatomic, strong) PhotoCollectionView *photoShowView;
+//实时视频监控显示视图
+@property (nonatomic, strong) CameraShowView *cameraShowView;
+//视频显示加载进度框
+@property (nonatomic, strong) MBProgressHUD *loadVideoHUD;
 
 @end
 
 @implementation VideoEventTableViewController
-    CGFloat navBarHeight;
-    CGFloat tabBarHeight;
-    CGFloat statusBarHeight;
-    CGFloat videoNavHeight;
-
-// 懒加载 （重写getter方法）
-- (NSMutableArray *)allEventsArray
-{
-    if (_allEventsArray == nil) {
-        _allEventsArray = [NSMutableArray array];
-        self.allEventsArray = _allEventsArray;
-    }
-    return _allEventsArray;
-}
+//视图size相关参数
+    static CGFloat navBarHeight;
+    static CGFloat videoTabBarHeight;
+    static CGFloat videoNavHeight;
+//视频SDK相关参数
+NSString    *ip         =   @"58.210.203.38";
+int         port        =   8000;
+NSString    *username  =    @"admin";
+NSString    *password  =    @"ht123456";
+int         channel    =    1;
+OC_NET_DVR_DEVICEINFO_V30 *deviceInfo;
+OC_NET_DVR_PREVIEWINFO *previewInfo;
+int hikUserID = -1;
+int hikRealPlayID = -1;
+bool hasInitVideoSDK = false;
+bool hasLockPTZ = true;//初始锁定状态
 
 //- (void)loadView
 //{
-//    /**
-//     添加TableView
-//     
-//     - returns: return value description
-//     */
 //}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     navBarHeight = self.navigationController.navigationBar.frame.size.height;
-    tabBarHeight = self.tabBarController.tabBar.frame.size.height;
-    statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+    videoTabBarHeight = self.tabBarController.tabBar.frame.size.height;
     videoNavHeight = 80;
     //定制导航栏
     [self customNavItem];
     //添加视频导航功能视图
-    [self.view addSubview:self.videoNavView];
-    [[self.videoNavView.historyBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+    [self.view addSubview:self.topNavView];
+    [[self.topNavView.historyBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         self.tableView.hidden = NO;
         self.photoShowView.hidden = YES;
+        self.cameraShowView.hidden = YES;
+        [self playVideo:NO];
     }];
-    [[self.videoNavView.photosBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+    [[self.topNavView.photosBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         self.tableView.hidden = YES;
         self.photoShowView.hidden = NO;
+        self.cameraShowView.hidden = YES;
+        [self playVideo:NO];
+    }];
+    [[self.topNavView.videoBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        self.tableView.hidden = YES;
+        self.photoShowView.hidden = YES;
+        self.cameraShowView.hidden = NO;
+        _loadVideoHUD = [MBProgressHUD  showHUDAddedTo:self.cameraShowView.realPlayView animated:YES];
+        _loadVideoHUD.mode = MBProgressHUDModeIndeterminate;
+        _loadVideoHUD.label.textColor = COLOR_WHITE;
+        _loadVideoHUD.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
+        _loadVideoHUD.label.textAlignment = NSTextAlignmentCenter;
+        _loadVideoHUD.label.text = @"加载视频中...";
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [self initVideoSDK];//根据hasInitVideoSDK标志初始化SDK，第一次点击实质触发，再次点击函数不做处理
+            [self playVideo:YES];
+            __weak typeof(self) weakSelf = self;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [NSThread sleepForTimeInterval:1.2f];//延时2秒关闭加载框
+                [MBProgressHUD hideHUDForView:weakSelf.cameraShowView.realPlayView animated:YES];
+            });
+        });
     }];
     //初始化视频历史事件数据并添加TabView
     [self loadVideoEventData];
@@ -76,16 +102,84 @@
     [self initPhotosData];
     [self.view addSubview:[self photoShowView:self.photosArray withColumnNum:3 withSpace:2.0]];
     self.photoShowView.hidden = YES;
+    //添加实时监控显示视图
+    [self.view addSubview:self.cameraShowView];
+    self.cameraShowView.hidden = YES;
+    //添加Ptz控制按钮事件
+    UILongPressGestureRecognizer *leftLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(leftLongPressAction:)];
+    leftLongPress.minimumPressDuration=0.8;//定义按的时间
+    [self.cameraShowView.leftBtn addGestureRecognizer:leftLongPress];
+    
+    UILongPressGestureRecognizer *rightLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(rightLongPressAction:)];
+    rightLongPress.minimumPressDuration=0.8;//定义按的时间
+    [self.cameraShowView.rightBtn addGestureRecognizer:rightLongPress];
+    
+    UILongPressGestureRecognizer *topLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(topLongPressAction:)];
+    topLongPress.minimumPressDuration=0.8;//定义按的时间
+    [self.cameraShowView.topBtn addGestureRecognizer:topLongPress];
+    
+    UILongPressGestureRecognizer *downLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(downLongPressAction:)];
+    downLongPress.minimumPressDuration=0.8;//定义按的时间
+    [self.cameraShowView.bottomBtn addGestureRecognizer:downLongPress];
+    
+    //关闭视频和技防暂时设置长按Zoom IN.OUT事件
+    UILongPressGestureRecognizer *closeVideoLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(closeVideoLongPressAction:)];
+    closeVideoLongPress.minimumPressDuration=0.8;//定义按的时间
+    [self.cameraShowView.closeVideoBtn addGestureRecognizer:closeVideoLongPress];
+
+    UILongPressGestureRecognizer *securityLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(securityLongPressAction:)];
+    securityLongPress.minimumPressDuration=0.8;//定义按的时间
+    [self.cameraShowView.securityBtn addGestureRecognizer:securityLongPress];
+
+    [[self.cameraShowView.leftBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        if(!hasLockPTZ){self.cameraShowView.leftBtn.selected = YES;}
+    }];
+    [[self.cameraShowView.rightBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        if(!hasLockPTZ){self.cameraShowView.rightBtn.selected = YES;}
+    }];
+    [[self.cameraShowView.topBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        if(!hasLockPTZ){self.cameraShowView.topBtn.selected = YES;}
+    }];
+    [[self.cameraShowView.bottomBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        if(!hasLockPTZ){self.cameraShowView.bottomBtn.selected = YES;}
+    }];
+    [[self.cameraShowView.closeVideoBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        if(!hasLockPTZ){self.cameraShowView.closeVideoBtn.selected = !self.cameraShowView.closeVideoBtn.selected;}
+    }];
+    [[self.cameraShowView.securityBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        if(!hasLockPTZ){self.cameraShowView.securityBtn.selected = !self.cameraShowView.securityBtn.selected ;}
+    }];
+    
+    //锁云台控制按钮事件
+    [[self.cameraShowView.lockBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        self.cameraShowView.lockBtn.selected = !self.cameraShowView.lockBtn.selected;
+        hasLockPTZ = self.cameraShowView.lockBtn.selected;
+        if(hasLockPTZ){
+            [self.cameraShowView.leftBtn setEnabled:NO];
+            [self.cameraShowView.rightBtn setEnabled:NO];
+            [self.cameraShowView.topBtn setEnabled:NO];
+            [self.cameraShowView.bottomBtn setEnabled:NO];
+            [self.cameraShowView.closeVideoBtn setEnabled:NO];
+            [self.cameraShowView.securityBtn setEnabled:NO];
+        }else{
+            [self.cameraShowView.leftBtn setEnabled:YES];
+            [self.cameraShowView.rightBtn setEnabled:YES];
+            [self.cameraShowView.topBtn setEnabled:YES];
+            [self.cameraShowView.bottomBtn setEnabled:YES];
+            [self.cameraShowView.closeVideoBtn setEnabled:YES];
+            [self.cameraShowView.securityBtn setEnabled:YES];
+        }
+    }];
 }
 
 #pragma mark - 初始化视频功能导航视图
--(VideoNavView *)videoNavView
+-(VideoNavView *)topNavView
 {
-    if (!_videoNavView) {
-        VideoNavView *tempVideoNavView = [[VideoNavView alloc] initWithFrame:CGRectMake(0, statusBarHeight+navBarHeight, self.view.frame.size.width, videoNavHeight)];
-        self.videoNavView = tempVideoNavView;
+    if (!_topNavView) {
+        VideoNavView *tempVideoNavView = [[VideoNavView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT+navBarHeight, self.view.frame.size.width, videoNavHeight)];
+        self.topNavView = tempVideoNavView;
     }
-    return _videoNavView;
+    return _topNavView;
 }
 
 #pragma mark - 初始化视频事件TimeLine的TableView
@@ -93,7 +187,7 @@
 {
     if (!_tableView) {
 //        _tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
-        UITableView *tempTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, statusBarHeight+navBarHeight+videoNavHeight, self.view.frame.size.width, self.view.frame.size.height-(statusBarHeight+navBarHeight+videoNavHeight)) style:UITableViewStyleGrouped];
+        UITableView *tempTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT+navBarHeight+videoNavHeight, self.view.frame.size.width, self.view.frame.size.height-(STATUS_BAR_HEIGHT+navBarHeight+videoNavHeight)) style:UITableViewStyleGrouped];
         tempTableView.delegate = self;
         tempTableView.dataSource = self;
 //        tempTableView.sectionFooterHeight = 10;
@@ -134,10 +228,31 @@
 //        layout.minimumInteritemSpacing = 0.0; // 横
 //        layout.sectionInset = UIEdgeInsetsMake(space, space, space, space);
         
-        PhotoCollectionView *nineView = [[PhotoCollectionView alloc] initWithFrame:CGRectMake(0, statusBarHeight+navBarHeight+videoNavHeight, self.view.frame.size.width, self.view.frame.size.height - statusBarHeight-navBarHeight - tabBarHeight-videoNavHeight) collectionViewLayout:layout withView:viewArray];
+        PhotoCollectionView *nineView = [[PhotoCollectionView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT+navBarHeight+videoNavHeight, self.view.frame.size.width, self.view.frame.size.height - STATUS_BAR_HEIGHT-navBarHeight - videoTabBarHeight-videoNavHeight) collectionViewLayout:layout withView:viewArray];
         self.photoShowView = nineView;
     }
     return _photoShowView;
+}
+
+#pragma mark - 初始化实时监控显示视图
+-(CameraShowView *)cameraShowView
+{
+    if (!_cameraShowView) {
+        CameraShowView *tempCameraShowView = [[CameraShowView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT+navBarHeight+self.topNavView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-STATUS_BAR_HEIGHT-navBarHeight-videoNavHeight-videoTabBarHeight)];
+        self.cameraShowView = tempCameraShowView;
+    }
+    return _cameraShowView;
+}
+
+#pragma mark ----------数据源相关----------
+#pragma mark 懒加载 allEventsArray（重写getter方法）
+- (NSMutableArray *)allEventsArray
+{
+    if (_allEventsArray == nil) {
+        _allEventsArray = [NSMutableArray array];
+        self.allEventsArray = _allEventsArray;
+    }
+    return _allEventsArray;
 }
 
 #pragma mark - 加载视频事件数据集
@@ -159,6 +274,7 @@
         [self.allEventsArray addObject:videoEvent];
     }
 }
+#pragma mark - 加载视频相册数据集
 -(void)initPhotosData
 {
     self.photosArray = @[
@@ -206,11 +322,6 @@
     return dateTime;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    
-}
-
 #pragma mark - 定制导航条内容
 - (void)customNavItem {
     self.navigationItem.title = @"摄像机";
@@ -224,7 +335,7 @@
     self.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
 }
 
-#pragma mark - 视频TimeLine历史事件Table view data source
+#pragma mark ----------视频TimeLine历史事件TableView相关代理函数实现
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
@@ -316,6 +427,192 @@
         label.text = [videoEvent.eventTime substringToIndex:10];
     }
     return headerView;
+}
+
+#pragma mark ----------视频监控SDK控制相关处理函数
+#pragma mark 视频SDK初始化
+-(void)initVideoSDK{
+    //初始化视频SDK
+    if(!hasInitVideoSDK){
+            deviceInfo = [[OC_NET_DVR_DEVICEINFO_V30 alloc] init];
+            previewInfo = [[OC_NET_DVR_PREVIEWINFO alloc] init];
+            [HCWSNetSDK NET_DVR_Init];
+            [HCWSNetSDK NET_DVR_SetExceptionCallBack];
+            hikUserID = [HCWSNetSDK NET_DVR_Login_V30:ip wDVRPort:port sUserName:username sPassword:password OC_LPNET_DVR_DEVICEINFO_V30:deviceInfo];
+//            hasInitVideoSDK = true;
+    }
+}
+
+#pragma mark --- 视频预览
+-(void)playVideo:(BOOL)shouldPlay{
+    if(shouldPlay) {
+        if(hikUserID == -1) {
+            NSLog(@"无法连接摄像头");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _loadVideoHUD.hidden = YES;//隐藏视频加载框
+                MBProgressHUD *hud = [MBProgressHUD  showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+                hud.mode = MBProgressHUDModeText;
+                //背景半透明的效果
+                hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+                hud.bezelView.backgroundColor = COLOR_RGB(245, 245, 245);
+                hud.label.textColor = COLOR_RGB(226, 21, 20);
+                hud.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
+                hud.label.textAlignment = NSTextAlignmentCenter;
+                hud.label.text = @"网络异常，无法连接摄像头！";
+    //            hud.backgroundColor = [UIColor clearColor];
+                hud.dimBackground = YES;// YES代表需要蒙版效果
+    //            hud.offset = CGPointMake(0.f, MBProgressMaxOffset);// Move to bottm center.
+                [hud hideAnimated:YES afterDelay:2.f];
+            });
+              //2.SVProgressHUD方式--------
+//            [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
+//            [SVProgressHUD setFont:[UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy]];
+//            [SVProgressHUD setForegroundColor:COLOR_RGB(226, 21, 20)];
+//            [SVProgressHUD setBackgroundColor:COLOR_RGB(245, 245, 245)];
+//            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
+//            [SVProgressHUD showErrorWithStatus:@"网络异常，无法连接摄像头！"];
+              //3.UIAlertController方式--------
+//            UIAlertController *alertController = [UIAlertController
+//                                                  alertControllerWithTitle:nil
+//                                                  message:nil
+//                                                  preferredStyle:UIAlertControllerStyleAlert];
+//            // 使用富文本来改变alert的message字体大小和颜色
+//            // NSMakeRange(0, 2) 代表:从0位置开始 两个字符
+//            NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+//            paragraph.alignment = NSTextAlignmentCenter;
+//            NSDictionary *ats = @{
+//                                  NSFontAttributeName : [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy],
+//                                  NSForegroundColorAttributeName : COLOR_RGB(226, 21, 20),
+//                                  NSParagraphStyleAttributeName : paragraph,
+//                                  };
+//            NSMutableAttributedString *messageText = [[NSMutableAttributedString alloc] initWithString:@"网络异常，无法连接摄像头！" attributes:ats];
+//            [alertController setValue:messageText forKey:@"attributedMessage"];
+//
+//            if ([self.navigationController.topViewController isMemberOfClass:[self class]]) {//判断导航控制器的栈顶控制器是否为当前控制器
+//                [self presentViewController:alertController animated:YES completion:^{
+//                    dispatch_time_t time=dispatch_time(DISPATCH_TIME_NOW, 2*NSEC_PER_SEC);
+//                    dispatch_after(time, dispatch_get_main_queue(), ^{
+//                        [alertController dismissViewControllerAnimated:YES completion:nil];
+//                    });
+//                }];
+//            };
+        }else{
+            if((deviceInfo.byChanNum > 0) || (deviceInfo.byIPChanNum > 0)){
+                previewInfo.lChannel = channel;
+                previewInfo.dwStreamType = 1;
+                previewInfo.bBlocked = 1;
+                previewInfo.hPlayWnd = self.cameraShowView.realPlayView;
+                hikRealPlayID = [HCWSNetSDK NET_DVR_RealPlay_V40:hikUserID lpPreviewInfo:previewInfo];
+            }
+        }
+    }else{
+        [HCWSNetSDK NET_DVR_StopRealPlay:hikRealPlayID];
+    }
+}
+#pragma mark --- 云台控制
+-(void) ptzCtroll:(int)ptzCommand ptzStop:(int)ptzStop
+{
+    if(hikRealPlayID != -1)
+    {
+        [HCWSNetSDK NET_DVR_PTZControl:hikRealPlayID dwPTZCommand: ptzCommand dwStop: ptzStop dwSpeed: 4];
+        //        [HCWSNetSDK NET_DVR_PTZControl:realPlayID dwPTZCommand: 23 dwStop: 1 dwSpeed: 3];
+    }
+}
+
+#pragma mark --按钮长按事件
+-(void)leftLongPressAction:(UILongPressGestureRecognizer*)gestureRecognizer{
+    if(!hasLockPTZ){
+        if([gestureRecognizer state] ==UIGestureRecognizerStateBegan){
+    //        NSLog(@"长按开始");
+            self.cameraShowView.leftBtn.selected = YES;
+            [self ptzCtroll:23 ptzStop:0];//云台左转
+        }else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    //        NSLog(@"长按结束");
+            self.cameraShowView.leftBtn.selected = NO;
+            [self ptzCtroll:23 ptzStop:1];
+        }
+    }
+}
+
+-(void)rightLongPressAction:(UILongPressGestureRecognizer*)gestureRecognizer{
+    if(!hasLockPTZ){
+        if([gestureRecognizer state] ==UIGestureRecognizerStateBegan){
+    //        NSLog(@"长按开始");
+            self.cameraShowView.rightBtn.selected = YES;
+            [self ptzCtroll:24 ptzStop:0];//云台右转
+        }else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    //        NSLog(@"长按结束");
+            self.cameraShowView.rightBtn.selected = NO;
+            [self ptzCtroll:24 ptzStop:1];
+        }
+    }
+}
+
+-(void)topLongPressAction:(UILongPressGestureRecognizer*)gestureRecognizer{
+    if(!hasLockPTZ){
+        if([gestureRecognizer state] ==UIGestureRecognizerStateBegan){
+    //        NSLog(@"长按开始");
+            self.cameraShowView.topBtn.selected = YES;
+            [self ptzCtroll:21 ptzStop:0];//云台上仰
+        }else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    //        NSLog(@"长按结束");
+            self.cameraShowView.topBtn.selected = NO;
+            [self ptzCtroll:21 ptzStop:1];
+        }
+    }
+}
+
+-(void)downLongPressAction:(UILongPressGestureRecognizer*)gestureRecognizer{
+    if(!hasLockPTZ){
+        if([gestureRecognizer state] ==UIGestureRecognizerStateBegan){
+//            NSLog(@"长按开始");
+            self.cameraShowView.bottomBtn.selected = YES;
+            [self ptzCtroll:22 ptzStop:0];//云台下俯
+        }else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+//            NSLog(@"长按结束");
+            self.cameraShowView.bottomBtn.selected = NO;
+            [self ptzCtroll:22 ptzStop:1];
+        }
+    }
+}
+-(void)closeVideoLongPressAction:(UILongPressGestureRecognizer*)gestureRecognizer{
+    if(!hasLockPTZ){
+        if([gestureRecognizer state] ==UIGestureRecognizerStateBegan){
+//            NSLog(@"长按开始");
+            [self ptzCtroll:11 ptzStop:0];//焦距变大(倍率变大) ZOOM_IN
+        }else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+//            NSLog(@"长按结束");
+            [self ptzCtroll:11 ptzStop:1];
+        }
+    }
+}
+-(void)securityLongPressAction:(UILongPressGestureRecognizer*)gestureRecognizer{
+    if(!hasLockPTZ){
+        if([gestureRecognizer state] ==UIGestureRecognizerStateBegan){
+//            NSLog(@"长按开始");
+            [self ptzCtroll:12 ptzStop:0];//焦距变小(倍率变小) ZOOM_OUT
+        }else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+//            NSLog(@"长按结束");
+            [self ptzCtroll:12 ptzStop:1];
+        }
+    }
+}
+
+- (void)viewDidDisappear{
+    [HCWSNetSDK NET_DVR_StopRealPlay:hikRealPlayID];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    [HCWSNetSDK NET_DVR_StopRealPlay:hikRealPlayID];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [super dealloc];
+    [HCWSNetSDK NET_DVR_StopRealPlay:hikRealPlayID];
+    [HCWSNetSDK NET_DVR_Logout:hikUserID];
+    [HCWSNetSDK NET_DVR_Cleanup];
 }
 
 @end
