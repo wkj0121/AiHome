@@ -21,6 +21,8 @@ pod 'YTKNetwork', '~> 2.0.3'
 pod 'Aspects', '~> 1.4.1'
 # 自动布局
 pod 'Masonry'
+# Margin for UINavigationItem
+pod 'UINavigationItem+Margin'
 # BEMCheckBox
 pod 'BEMCheckBox'
 # RadioButton

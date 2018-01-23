@@ -16,6 +16,6 @@
 
 - (id)initWithDict:(NSDictionary *)dict;
 
-+ (id)regionWithDict:(NSDictionary *)dict;
++ (id)videoEventModelWithDict:(NSDictionary *)dict;
 
 @end

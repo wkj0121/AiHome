@@ -75,6 +75,9 @@
     }];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
+    
+    self.navigationItem.leftMargin = 10;
+    self.navigationItem.rightMargin = 10;
 }
 
 /**

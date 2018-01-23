@@ -17,6 +17,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__43-[MySettingViewController add1SectionItems]_block_invoke:MySettingViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[NSString stringWithFormat:@&quot;%@%@&quot;, NavPushRouteURL,@&quot;WebViewController?urlString=http://58.210.203.38/apps/seekco/#/settings/deviceRegister&amp;viewTitle=&#x8bbe;&#x5907;&#x767b;&#x8bb0;&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[YSCVoiceWaveView changeVolume:]:YSCVoiceWaveView.m">
          <PersistentStrings>
             <PersistentString
@@ -33,6 +41,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__54-[AppDelegate(RouterRegister) registerNavgationRouter]_block_invoke_2:AppDelegate.m">
+      </ContextState>
+      <ContextState
          contextName = "-[VideoEventTableViewController viewDidLoad]:VideoEventTableViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -45,6 +56,9 @@
       </ContextState>
       <ContextState
          contextName = "-[VideoNavView videoBtn]:VideoNavView.m">
+      </ContextState>
+      <ContextState
+         contextName = "__44-[VideoEventTableViewController viewDidLoad]_block_invoke_2:VideoEventTableViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[NViewController nextImage]:NViewController.m">
@@ -61,13 +75,13 @@
          contextName = "-[FKLoginViewController tableFooterView]:FKLoginViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "SCREEN_WIDTH">
+               value = "self.view.frame.size.height">
             </PersistentString>
             <PersistentString
                value = "_loginInputTableView.frame.size.height">
             </PersistentString>
             <PersistentString
-               value = "self.view.frame.size.height">
+               value = "SCREEN_WIDTH">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -81,9 +95,6 @@
                value = "_interactionView.frame">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__44-[VideoEventTableViewController viewDidLoad]_block_invoke_2:VideoEventTableViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[RegionTableViewController tableView:cellForRowAtIndexPath:]:RegionTableViewController.m">
@@ -100,21 +111,35 @@
          contextName = "-[VideoEventTableViewController handleData]:VideoEventTableViewController.m">
       </ContextState>
       <ContextState
-         contextName = "-[VideoEventTableViewController tableView]:VideoEventTableViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[BezierLineView drawBezierPath2]:BezierLineView.m">
+         contextName = "-[RegDeviceTableViewController numberOfSectionsInTableView:]:RegDeviceTableViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.points">
+               value = "deviceList.brands.count">
+            </PersistentString>
+            <PersistentString
+               value = "self.allRegDevicesArray.count">
+            </PersistentString>
+            <PersistentString
+               value = "self.allDevicesArray">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[VideoEventTableViewController tableView]:VideoEventTableViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[BezierLineView lineChart]:BezierLineView.m">
          <PersistentStrings>
             <PersistentString
                value = "self.frame.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[BezierLineView drawBezierPath2]:BezierLineView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.points">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -136,12 +161,18 @@
          contextName = "-[VideoNavView historyBtn]:VideoNavView.m">
       </ContextState>
       <ContextState
+         contextName = "+[JLRoutes routesForScheme:]:JLRoutes.m">
+      </ContextState>
+      <ContextState
          contextName = "-[BezierLineView initData]:BezierLineView.m">
          <PersistentStrings>
             <PersistentString
                value = "self.frame.size.width">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[VideoEventTableViewController tableView:numberOfRowsInSection:]:VideoEventTableViewController.m">
       </ContextState>
       <ContextState
          contextName = "CameraViewController.viewDidLoad():CameraViewController.swift">
@@ -163,7 +194,12 @@
          contextName = "-[XLineChart lineChartView]:XLineChart.m">
       </ContextState>
       <ContextState
-         contextName = "-[XLineChart initWithFrame:dataItemArray:dataDiscribeArray:topNumber:bottomNumber:graphMode:chartConfiguration:]:XLineChart.m">
+         contextName = "-[RegDeviceTableViewController tableView:numberOfRowsInSection:]:RegDeviceTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.allRegDevicesArray[section]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[PM25View initSubViews]:PM25View.m">
@@ -204,6 +240,25 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[VideoEventTableViewController tableView:viewForHeaderInSection:]:VideoEventTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.allEventsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[XLineChart initWithFrame:dataItemArray:dataDiscribeArray:topNumber:bottomNumber:graphMode:chartConfiguration:]:XLineChart.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WebViewController viewDidLoad]:WebViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.params">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[HomeViewController setupScrollView]:HomeViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -234,6 +289,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[JLRRouteDefinition routeResponseForRequest:decodePlusSymbols:]:JLRRouteDefinition.m">
+      </ContextState>
+      <ContextState
          contextName = "-[LCGridElement setupUI]:LCGridElement.m">
          <PersistentStrings>
             <PersistentString
@@ -243,6 +301,17 @@
       </ContextState>
       <ContextState
          contextName = "-[BezierLineView drawRect:]:BezierLineView.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[VideoEventTableViewController allEventsArray]:VideoEventTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_allEventsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[JLRRouteRequest initWithURL:alwaysTreatsHostAsPathComponent:]:JLRRouteRequest.m">
       </ContextState>
       <ContextState
          contextName = "__39-[FKBaseRequest(Rac) rac_requestSignal]_block_invoke_2:FKBaseRequest+Rac.m">

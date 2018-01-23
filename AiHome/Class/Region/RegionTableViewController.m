@@ -16,7 +16,7 @@
 // check button array
 @property (nonatomic, strong) NSMutableArray *checkBtnsArray;
 
-@property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -25,7 +25,7 @@
 - (NSMutableArray *)allRegionsArray
 {
     if (_allRegionsArray == nil) {
-        _allRegionsArray = [NSMutableArray array];
+        self.allRegionsArray = [[NSMutableArray array]init];
     }
     return _allRegionsArray;
 }
@@ -106,6 +106,9 @@
     }];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
+    
+    self.navigationItem.leftMargin = 5;
+    self.navigationItem.rightMargin = 5;
 }
 
 #pragma mark - Table view data source

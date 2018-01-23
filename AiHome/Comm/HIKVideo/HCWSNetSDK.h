@@ -120,6 +120,7 @@
 
 //PTZ Control
 +(BOOL)NET_DVR_PTZControl:(int) lRealHandle dwPTZCommand:(UInt16)dwPTZCommand dwStop:(UInt16)dwStop dwSpeed:(UInt16)dwSpeed;
+//+(BOOL)NET_DVR_GetDVRWorkState_V30:(int) lUserID  lpWorkState:(LPNET_DVR_WORKSTATE_V30*)lpWorkState;
 
 @end
 

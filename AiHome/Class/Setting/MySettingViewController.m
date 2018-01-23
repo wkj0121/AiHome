@@ -57,8 +57,11 @@
     
     /** 点击对应的行调整（其他可能只是在内部做一些事情，请自行操作） */
     deviceBandItem.operation = ^{
-        UIViewController *view = [[UIViewController alloc] init];
-        [self.navigationController pushViewController:view animated:YES];
+//        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"RegDeviceTableViewController"]] options:nil completionHandler:nil];
+        NSString *urlString = [@"http://58.210.203.38/apps/seekco/#/settings/deviceRegister?4143324" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        NSString *url = [NSString stringWithFormat:@"%@%@?urlString=%@", NavPushRouteURL,@"WebViewController",urlString];
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:nil completionHandler:nil];
     };
     
     /**

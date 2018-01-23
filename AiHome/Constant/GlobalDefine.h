@@ -33,6 +33,7 @@ fprintf(stderr,"%s %s:%d %s\n",[str UTF8String], [[[NSString stringWithUTF8Strin
 /*
  ====================================================================================================//获取屏幕尺寸
  */
+#define IS_IOS_VERSION_11         (([[[UIDevice currentDevice]systemVersion]floatValue] >= 11.0)? (YES):(NO))
 #define SCREEN_FRAME                ([UIScreen mainScreen].bounds)
 #define SCREEN_WIDTH                ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT               ([UIScreen mainScreen].bounds.size.height)
@@ -48,8 +49,8 @@ fprintf(stderr,"%s %s:%d %s\n",[str UTF8String], [[[NSString stringWithUTF8Strin
 //#define STATUS_BAR_HEIGHT           (20)
 #define STATUS_BAR_HEIGHT           [[UIApplication sharedApplication] statusBarFrame].size.height
 
-#define Margin  5
-#define Padding 10
+//#define Margin  5
+//#define Padding 10
 #define iOS7TopMargin 64 //导航栏44，状态栏20
 #define ButtonHeight 44
 // TabView行高

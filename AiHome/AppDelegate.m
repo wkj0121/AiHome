@@ -393,8 +393,10 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
     if (currentVC && currentVC.navigationController) {
         if (isPresent) {
             [currentVC.navigationController presentViewController:toVC animated:YES completion:nil];
-        }else
-        {
+        }else{
+//            if([toVC isKindOfClass:NSClassFromString(@"WebViewController")]){
+//                [currentVC setHidesBottomBarWhenPushed:YES];//加上这句就可以把推出的ViewController隐藏Tabbar
+//            }
             [currentVC.navigationController pushViewController:toVC animated:YES];
         }
     }

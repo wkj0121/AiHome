@@ -249,8 +249,7 @@ bool hasLockPTZ = true;//初始锁定状态
 - (NSMutableArray *)allEventsArray
 {
     if (_allEventsArray == nil) {
-        _allEventsArray = [NSMutableArray array];
-        self.allEventsArray = _allEventsArray;
+        self.allEventsArray = [[NSMutableArray array]init];
     }
     return _allEventsArray;
 }
@@ -333,6 +332,7 @@ bool hasLockPTZ = true;//初始锁定状态
     }];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
     self.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
+    self.navigationItem.leftMargin = 5;
 }
 
 #pragma mark ----------视频TimeLine历史事件TableView相关代理函数实现
@@ -370,8 +370,7 @@ bool hasLockPTZ = true;//初始锁定状态
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 95;
-    
+    return 95;    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

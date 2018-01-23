@@ -30,6 +30,7 @@ PODS:
     - SDWebImage/Core (= 4.2.2)
   - SDWebImage/Core (4.2.2)
   - SVProgressHUD (2.2.2)
+  - UINavigationItem+Margin (2.1.1)
   - XJYChart (2.0.2):
     - Colours (= 5.13.0)
   - YTKNetwork (2.0.4):
@@ -47,6 +48,7 @@ DEPENDENCIES:
   - ReactiveObjC (~> 3.0.0)
   - SDWebImage
   - SVProgressHUD (~> 2.2.2)
+  - UINavigationItem+Margin
   - XJYChart
   - YTKNetwork (~> 2.0.3)
 
@@ -64,9 +66,10 @@ SPEC CHECKSUMS:
   ReactiveObjC: ce79989e8684b9086b5f8d0c74bc7b81a8729c9e
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
+  UINavigationItem+Margin: 7368d506fb2f7daa0c0489846cc8c2384ab1ab6d
   XJYChart: 2459e2829328cdcaa540cb7337f00ce68172534b
   YTKNetwork: df8a7a5597bda1664a4efaa7ef871a818a887fe0
 
-PODFILE CHECKSUM: b073d5e2ad3936ec15cadf92e5c14d49c4da46ac
+PODFILE CHECKSUM: 10327c938c7ee98624f8b42a7ab2c61ea2641840
 
 COCOAPODS: 1.3.1

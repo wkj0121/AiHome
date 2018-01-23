@@ -18,7 +18,7 @@
     return self;
 }
 
-+ (id)regionWithDict:(NSDictionary *)dict
++ (id)videoEventModelWithDict:(NSDictionary *)dict
 {
     return [[self alloc] initWithDict:dict];
 }
