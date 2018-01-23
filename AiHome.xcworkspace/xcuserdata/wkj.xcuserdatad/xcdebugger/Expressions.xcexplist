@@ -17,10 +17,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__43-[MySettingViewController add1SectionItems]_block_invoke:MySettingViewController.m">
+         contextName = "-[QHCollectionViewNine collectionView:cellForItemAtIndexPath:]:QHCollectionViewNine.m">
          <PersistentStrings>
             <PersistentString
-               value = "[NSString stringWithFormat:@&quot;%@%@&quot;, NavPushRouteURL,@&quot;WebViewController?urlString=http://58.210.203.38/apps/seekco/#/settings/deviceRegister&amp;viewTitle=&#x8bbe;&#x5907;&#x767b;&#x8bb0;&quot;]">
+               value = "uiV.frame">
+            </PersistentString>
+            <PersistentString
+               value = "cell.contentView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AppDelegate(RouterRegister) _currentViewController]:AppDelegate.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[Rootvc isKindOfClass:[UIViewController class]]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -75,13 +86,13 @@
          contextName = "-[FKLoginViewController tableFooterView]:FKLoginViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.view.frame.size.height">
+               value = "SCREEN_WIDTH">
             </PersistentString>
             <PersistentString
                value = "_loginInputTableView.frame.size.height">
             </PersistentString>
             <PersistentString
-               value = "SCREEN_WIDTH">
+               value = "self.view.frame.size.height">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -117,10 +128,10 @@
                value = "deviceList.brands.count">
             </PersistentString>
             <PersistentString
-               value = "self.allRegDevicesArray.count">
+               value = "self.allDevicesArray">
             </PersistentString>
             <PersistentString
-               value = "self.allDevicesArray">
+               value = "self.allRegDevicesArray.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -300,6 +311,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[AppDelegate(RouterRegister) _handlerSceneWithPresent:parameters:]:AppDelegate.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentVC.navigationController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[BezierLineView drawRect:]:BezierLineView.m">
       </ContextState>
       <ContextState
@@ -317,13 +336,10 @@
          contextName = "__39-[FKBaseRequest(Rac) rac_requestSignal]_block_invoke_2:FKBaseRequest+Rac.m">
       </ContextState>
       <ContextState
-         contextName = "-[QHCollectionViewNine collectionView:cellForItemAtIndexPath:]:QHCollectionViewNine.m">
+         contextName = "__43-[MySettingViewController add1SectionItems]_block_invoke:MySettingViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "uiV.frame">
-            </PersistentString>
-            <PersistentString
-               value = "cell.contentView.frame">
+               value = "[NSString stringWithFormat:@&quot;%@%@&quot;, NavPushRouteURL,@&quot;WebViewController?urlString=http://58.210.203.38/apps/seekco/#/settings/deviceRegister&amp;viewTitle=&#x8bbe;&#x5907;&#x767b;&#x8bb0;&quot;]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

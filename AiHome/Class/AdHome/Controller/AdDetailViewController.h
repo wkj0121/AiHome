@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AdDetailViewController : UIViewController
+@interface AdDetailViewController : UIViewController<FKViewControllerProtocol>
 
 /** urlString */
 @property (nonatomic, copy) NSString *urlString;

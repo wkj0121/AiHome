@@ -44,12 +44,16 @@
 - (void)adViewClick {
     // 移除定时器
     [self removeTimer];
-    ViewController *homeVC = [[ViewController alloc] init];
-    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:homeVC];
-    AdDetailViewController *webVc = [[AdDetailViewController alloc] init];
-    webVc.urlString = @"http://www.seekco.net";
-    [UIApplication sharedApplication].keyWindow.rootViewController = navi;
-    [homeVC.navigationController pushViewController:webVc animated:YES];
+//    ViewController *homeVC = [[ViewController alloc] init];
+//    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:homeVC];
+//    AdDetailViewController *webVc = [[AdDetailViewController alloc] init];
+//    webVc.urlString = @"http://www.seekco.net";
+//    [UIApplication sharedApplication].keyWindow.rootViewController = navi;
+//    [homeVC.navigationController pushViewController:webVc animated:YES];
+    NSString *urlString = [@"http://www.seekco.net" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSString *url = [NSString stringWithFormat:@"%@%@?urlString=%@", NavPushRouteURL,@"AdDetailViewController",urlString];
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:nil completionHandler:nil];
 }
 
 /**

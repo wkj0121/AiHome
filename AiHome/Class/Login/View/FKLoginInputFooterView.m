@@ -17,6 +17,9 @@
     [self addSubview:self.queryBtn];
     [self addSubview:self.regBtn];
     [self addSubview:self.forgetPwdBtn];
+    [[self.regBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"RegUserViewController"]] options:nil completionHandler:nil];
+    }];
 }
 
 #pragma mark - Layout

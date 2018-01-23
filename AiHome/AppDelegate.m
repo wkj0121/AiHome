@@ -194,6 +194,7 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
         if (number) {
             isLogin = number.boolValue;
         }
+        isLogin = NO;
         if (isLogin) {//已登录
             
             [self.window setRootViewController:self.tabbarController];
@@ -316,7 +317,7 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
     {
         config.debugLogEnabled = NO;
     }
-    config.baseUrl = @"http://www.baidu.com";
+    config.baseUrl = @"http://58.210.203.38:8086";
     config.cdnUrl = @"http://www.baidu.com";
     
 }
@@ -399,6 +400,9 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
 //            }
             [currentVC.navigationController pushViewController:toVC animated:YES];
         }
+    }else if (currentVC){
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:toVC];
+        [self.window setRootViewController:nav];
     }
 }
 /// 获取当前控制器
@@ -417,6 +421,11 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
             UITabBarController * tabVC = (UITabBarController *)Rootvc;
             currVC = tabVC;
             Rootvc = [tabVC.viewControllers objectAtIndex:tabVC.selectedIndex];
+            continue;
+        }else if([Rootvc isKindOfClass:[UIViewController class]]){
+            UIViewController * vc = (UIViewController *)Rootvc;
+            currVC = vc;
+            Rootvc = vc.presentedViewController;
             continue;
         }
     } while (Rootvc!=nil);

@@ -87,6 +87,10 @@
 		733FF24D1FF530D600451314 /* NSObject+NonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 733FF2451FF530D600451314 /* NSObject+NonBase.m */; };
 		733FF24E1FF530D600451314 /* FKViewModelIntercepter.m in Sources */ = {isa = PBXBuildFile; fileRef = 733FF2461FF530D600451314 /* FKViewModelIntercepter.m */; };
 		73459F93200219240084E199 /* PM25View.m in Sources */ = {isa = PBXBuildFile; fileRef = 73459F92200219240084E199 /* PM25View.m */; };
+		734620B02017C15E00655751 /* XTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 734620AF2017C15E00655751 /* XTextField.m */; };
+		734620B22017C92700655751 /* btn_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 734620B12017C92700655751 /* btn_x.png */; };
+		734620B42017C9B300655751 /* btn_x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 734620B32017C9B300655751 /* btn_x@2x.png */; };
+		734620B72017E30700655751 /* RegUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 734620B62017E30700655751 /* RegUserRequest.m */; };
 		735265501FE96E4F00B0DEB1 /* IndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7352654F1FE96E4F00B0DEB1 /* IndexViewController.m */; };
 		73621CE320120D8600F18BE9 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73621CE220120D8600F18BE9 /* WebViewController.m */; };
 		736733F91FE2ED9100BB3D24 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736733FA1FE2ED9100BB3D24 /* Masonry.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -259,6 +263,8 @@
 		73B3442D1FF57435001E68B4 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B344291FF57435001E68B4 /* phone.png */; };
 		73B3442E1FF57435001E68B4 /* pwd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B3442A1FF57435001E68B4 /* pwd@2x.png */; };
 		73B3442F1FF57435001E68B4 /* pwd.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B3442B1FF57435001E68B4 /* pwd.png */; };
+		73BAF1262017979600474624 /* RegUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BAF1252017979600474624 /* RegUserViewController.m */; };
+		73BAF129201798CC00474624 /* RegUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BAF128201798CC00474624 /* RegUserView.m */; };
 		73BCDBA6200654B400C9596A /* libPlayCtrl_sim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7369954F200648F80013E2EF /* libPlayCtrl_sim.a */; };
 		73BCDBB22006667E00C9596A /* libtinyxml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73BCDBB12006667E00C9596A /* libtinyxml.a */; };
 		73BCDBB82006B6AC00C9596A /* CameraShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BCDBB72006B6AC00C9596A /* CameraShowView.m */; };
@@ -401,6 +407,12 @@
 		733FFD5C1FE5C21500F9EEB5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		73459F91200219170084E199 /* PM25View.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PM25View.h; sourceTree = "<group>"; };
 		73459F92200219240084E199 /* PM25View.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PM25View.m; sourceTree = "<group>"; };
+		734620AE2017C15E00655751 /* XTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTextField.h; sourceTree = "<group>"; };
+		734620AF2017C15E00655751 /* XTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XTextField.m; sourceTree = "<group>"; };
+		734620B12017C92700655751 /* btn_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_x.png; sourceTree = "<group>"; };
+		734620B32017C9B300655751 /* btn_x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_x@2x.png"; sourceTree = "<group>"; };
+		734620B52017E30700655751 /* RegUserRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegUserRequest.h; sourceTree = "<group>"; };
+		734620B62017E30700655751 /* RegUserRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegUserRequest.m; sourceTree = "<group>"; };
 		734F1F561FEEBF95001862E2 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera@2x.png"; path = "../../../../../../AiHome/AiHome/AiHome/Resources/images/Home/camera@2x.png"; sourceTree = "<group>"; };
 		7352654E1FE96E2400B0DEB1 /* IndexViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndexViewController.h; sourceTree = "<group>"; };
 		7352654F1FE96E4F00B0DEB1 /* IndexViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndexViewController.m; sourceTree = "<group>"; };
@@ -697,6 +709,10 @@
 		73B344291FF57435001E68B4 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = phone.png; path = ../../../../../../AiHome/AiHome/AiHome/Resources/images/Login/phone.png; sourceTree = "<group>"; };
 		73B3442A1FF57435001E68B4 /* pwd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pwd@2x.png"; path = "../../../../../../AiHome/AiHome/AiHome/Resources/images/Login/pwd@2x.png"; sourceTree = "<group>"; };
 		73B3442B1FF57435001E68B4 /* pwd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pwd.png; path = ../../../../../../AiHome/AiHome/AiHome/Resources/images/Login/pwd.png; sourceTree = "<group>"; };
+		73BAF1242017979600474624 /* RegUserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RegUserViewController.h; path = ../../../../../../AiHome/AiHome/AiHome/Class/Login/RegUser/RegUserViewController.h; sourceTree = "<group>"; };
+		73BAF1252017979600474624 /* RegUserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RegUserViewController.m; path = ../../../../../../AiHome/AiHome/AiHome/Class/Login/RegUser/RegUserViewController.m; sourceTree = "<group>"; };
+		73BAF127201798CC00474624 /* RegUserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegUserView.h; sourceTree = "<group>"; };
+		73BAF128201798CC00474624 /* RegUserView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegUserView.m; sourceTree = "<group>"; };
 		73BCDBB12006667E00C9596A /* libtinyxml.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxml.a; path = "lib/HIK/Release-iphoneos/libtinyxml.a"; sourceTree = "<group>"; };
 		73BCDBB62006B6AC00C9596A /* CameraShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraShowView.h; path = AiHome/Class/Video/CameraShowView.h; sourceTree = SOURCE_ROOT; };
 		73BCDBB72006B6AC00C9596A /* CameraShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraShowView.m; path = AiHome/Class/Video/CameraShowView.m; sourceTree = SOURCE_ROOT; };
@@ -1022,6 +1038,15 @@
 			path = IndexHome;
 			sourceTree = "<group>";
 		};
+		734620AD2017C0FF00655751 /* XTextField */ = {
+			isa = PBXGroup;
+			children = (
+				734620AE2017C15E00655751 /* XTextField.h */,
+				734620AF2017C15E00655751 /* XTextField.m */,
+			);
+			path = XTextField;
+			sourceTree = "<group>";
+		};
 		734F1F551FEEB6E4001862E2 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -1033,6 +1058,8 @@
 		7357B1C11FEAE39C002A034E /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				734620B32017C9B300655751 /* btn_x@2x.png */,
+				734620B12017C92700655751 /* btn_x.png */,
 				73B344291FF57435001E68B4 /* phone.png */,
 				73B344281FF57435001E68B4 /* phone@2x.png */,
 				73B3442B1FF57435001E68B4 /* pwd.png */,
@@ -1077,6 +1104,7 @@
 		736733FD1FE3FD0D00BB3D24 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				73BAF1232017978600474624 /* RegUser */,
 				73B344091FF54A87001E68B4 /* Controller */,
 				73B343FB1FF54A87001E68B4 /* View */,
 				73B344061FF54A87001E68B4 /* ViewModel */,
@@ -1098,26 +1126,20 @@
 		736734521FE42D0100BB3D24 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7367344D1FE42AC100BB3D24 /* PromotionPageViewController.h */,
+				7367344C1FE42AC100BB3D24 /* PromotionPageViewController.m */,
+				7367344F1FE42B3900BB3D24 /* AdDetailViewController.h */,
+				736734501FE42B3900BB3D24 /* AdDetailViewController.m */,
 				736734091FE4245700BB3D24 /* NViewController.h */,
 				7367340A1FE4245700BB3D24 /* NViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		736734531FE42D1000BB3D24 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				7367344D1FE42AC100BB3D24 /* PromotionPageViewController.h */,
-				7367344C1FE42AC100BB3D24 /* PromotionPageViewController.m */,
-				7367344F1FE42B3900BB3D24 /* AdDetailViewController.h */,
-				736734501FE42B3900BB3D24 /* AdDetailViewController.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		736734541FE42FF600BB3D24 /* Comm */ = {
 			isa = PBXGroup;
 			children = (
+				734620AD2017C0FF00655751 /* XTextField */,
 				73621CE020120C5A00F18BE9 /* WebView */,
 				7376B20A20075CD200914146 /* HIKVideo */,
 				737EC0291FFE65FF007746B8 /* STTextView */,
@@ -1538,7 +1560,6 @@
 		73AE44781FE1569A00867CEB /* AdHome */ = {
 			isa = PBXGroup;
 			children = (
-				736734531FE42D1000BB3D24 /* View */,
 				736734521FE42D0100BB3D24 /* Controller */,
 				736734051FE4243000BB3D24 /* Model */,
 				73AE447B1FE1581F00867CEB /* PushImageManager.h */,
@@ -1675,8 +1696,21 @@
 			children = (
 				73B344251FF557C9001E68B4 /* FKLoginRequest.h */,
 				73B344261FF557C9001E68B4 /* FKLoginRequest.m */,
+				734620B52017E30700655751 /* RegUserRequest.h */,
+				734620B62017E30700655751 /* RegUserRequest.m */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		73BAF1232017978600474624 /* RegUser */ = {
+			isa = PBXGroup;
+			children = (
+				73BAF1242017979600474624 /* RegUserViewController.h */,
+				73BAF1252017979600474624 /* RegUserViewController.m */,
+				73BAF127201798CC00474624 /* RegUserView.h */,
+				73BAF128201798CC00474624 /* RegUserView.m */,
+			);
+			path = RegUser;
 			sourceTree = "<group>";
 		};
 		73CC2F991FFFD94100C4D5C8 /* Region */ = {
@@ -2113,8 +2147,10 @@
 				7376B20720074BB300914146 /* security_selected@2x.png in Resources */,
 				739A21151FF3EB91009C5CCC /* Screen_3.png in Resources */,
 				73D8970420021159000F6303 /* PM25View.xib in Resources */,
+				734620B42017C9B300655751 /* btn_x@2x.png in Resources */,
 				731A06BD1FEEC36D002E84D8 /* leave@2x.png in Resources */,
 				7376B20920074BB300914146 /* closeVideo_normal.png in Resources */,
+				734620B22017C92700655751 /* btn_x.png in Resources */,
 				738F7994200468C400628C13 /* back@2x.png in Resources */,
 				73989C571FF188E6002D1233 /* system@2x.png in Resources */,
 				73989C4A1FF1880D002D1233 /* brand.png in Resources */,
@@ -2325,6 +2361,7 @@
 				73BCDBB82006B6AC00C9596A /* CameraShowView.m in Sources */,
 				73EB1DAD1FFA8BDF002E47EA /* DISRDataHelper.m in Sources */,
 				738C10451FE01E830053C731 /* ViewController.m in Sources */,
+				73BAF1262017979600474624 /* RegUserViewController.m in Sources */,
 				73EB1DE51FFAFEA4002E47EA /* DVoiceView.m in Sources */,
 				738C10501FE01E830053C731 /* main.m in Sources */,
 				7367340B1FE4245700BB3D24 /* NViewController.m in Sources */,
@@ -2335,6 +2372,7 @@
 				73EB1DE41FFAFEA4002E47EA /* DVoiceTouchView.m in Sources */,
 				733FF2311FF5309A00451314 /* FKBaseRequest.m in Sources */,
 				731A06E81FEEEFD0002E84D8 /* LCGridView.m in Sources */,
+				73BAF129201798CC00474624 /* RegUserView.m in Sources */,
 				73B344111FF54A87001E68B4 /* FKLoginAccountInputTableViewCell.m in Sources */,
 				73B21EC31FE5AD0B0089CC70 /* TQGestureLockView.m in Sources */,
 				73EB1DAB1FFA8BDF002E47EA /* DIATConfig.m in Sources */,
@@ -2383,6 +2421,7 @@
 				73EB1D881FF9A020002E47EA /* YSCVolumeQueue.m in Sources */,
 				73EE01C42009F74700B12C01 /* DeviceListTableViewCell.m in Sources */,
 				73EB1D891FF9A020002E47EA /* VoiceView.m in Sources */,
+				734620B02017C15E00655751 /* XTextField.m in Sources */,
 				736734781FE470AF00BB3D24 /* TouchIDViewController.m in Sources */,
 				73B344271FF557C9001E68B4 /* FKLoginRequest.m in Sources */,
 				737EC02C1FFE6783007746B8 /* STTextView.m in Sources */,
@@ -2407,6 +2446,7 @@
 				73B344101FF54A87001E68B4 /* FKLoginInputFooterView.m in Sources */,
 				738E28221FEC4C1B00BA096F /* MainViewController.m in Sources */,
 				73EB1D851FF9A020002E47EA /* JMCircleAnimationView.m in Sources */,
+				734620B72017E30700655751 /* RegUserRequest.m in Sources */,
 				73989C341FF16B11002D1233 /* iCocosSettingGroup.m in Sources */,
 				731A06E71FEEEFD0002E84D8 /* LCGridElement.m in Sources */,
 				733FF24A1FF530D600451314 /* UIView+NonBase.m in Sources */,
