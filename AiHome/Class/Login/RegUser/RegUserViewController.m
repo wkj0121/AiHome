@@ -8,10 +8,13 @@
 #import "AppDelegate.h"
 #import "RegUserViewController.h"
 #import "RegUserView.h"
+#import "RegGetCodeRequest.h"
+#import "RegUserRequest.h"
 
 @interface RegUserViewController ()
 
     @property (nonatomic, strong) RegUserView *regUserView;
+//    @property (nonatomic, strong) TextFieldLimitManager *manager;
 
 @end
 
@@ -30,14 +33,62 @@
         make.width.mas_equalTo(self.view.mas_width);
         make.height.mas_equalTo(@350);
     }];
+    // 是否可以获取验证码
+    RAC(self.regUserView.getCodeBtn, enabled) = [ [RACObserve(self.regUserView.telPhone, text)  merge:self.regUserView.telPhone.rac_textSignal ] map:^id(NSString *value) {
+        return @(value.length==11);
+    }];
+//    [self.regUserView.telPhone.rac_textSignal map:^id(NSString *value){
+//        return @(value.length==11);
+//    }];
+    //是否可以注册
+    RAC(self.regUserView.regBtn, enabled) =  [[RACSignal combineLatest:@[
+                                                            RACObserve(self.regUserView.telPhone, text),
+                                                            RACObserve(self.regUserView.regcode,text),
+                                                            RACObserve(self.regUserView.regPwd,text)]
+                                  ]
+                                 map:^id _Nullable(RACTuple * _Nullable value) {
+                                     RACTupleUnpack(NSString *telNum, NSString *code, NSString *pwd) = value;
+                                     return @(telNum && code && pwd && telNum.length && code.length && pwd.length && self.regUserView.getCodeBtn.enabled);
+                                 }];
     [[self.regUserView.getCodeBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         [self openCountdown];
+        RegGetCodeRequest *api = [[RegGetCodeRequest alloc] initWithTelNum:self.regUserView.telPhone.text];
+        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+//            NSDictionary *responseDictionary = [request responseJSONObject];
+            NSInteger status = request.responseStatusCode;
+            if (200 == status) {
+                NSLog(@"请求成功,返回数据:%@",request.responseString);
+            } else {
+                // 返回的status非法
+               NSLog(@"请求出错,返回内容:%@",request.responseString);
+            }
+        } failure:^(YTKBaseRequest *request) {
+            NSLog(@"请求失败");
+        }];
 //        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(openCountdown) userInfo:nil repeats:YES];
 //        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     }];
     [[self.regUserView.regBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         NSLog(@"点击了注册");
-        [self.navigationController popViewControllerAnimated:YES];
+        RegUserRequest *api = [[RegUserRequest alloc] initWithTelNum:self.regUserView.telPhone.text password:self.regUserView.regPwd.text code:self.regUserView.regcode.text];
+        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+            //            NSDictionary *responseDictionary = [request responseJSONObject];
+            NSInteger status = request.responseStatusCode;
+            if (200 == status) {
+                NSLog(@"请求成功,返回数据:%@",request.responseString);
+//                //本地存储账户密码
+//                NSUserDefaults *defaut=[NSUserDefaults standardUserDefaults];
+//                [defaut setObject:self.regUserView.telPhone.text forKey:@"account"];
+//                [defaut setObject:self.regUserView.regPwd.text forKey:@"password"];
+//                [defaut synchronize];
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                // 返回的status非法
+                NSLog(@"请求出错,返回内容:%@",request.responseString);
+            }
+        } failure:^(YTKBaseRequest *request) {
+            NSLog(@"请求失败");
+        }];
     }];
 }
 

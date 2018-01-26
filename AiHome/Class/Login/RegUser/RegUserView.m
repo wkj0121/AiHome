@@ -136,6 +136,7 @@
         XTextField *regcode = [[XTextField alloc]init];
         regcode.placeholder = @"请输入验证码";
         regcode.font = [UIFont systemFontOfSize:16.0f];
+        regcode.keyboardType = UIKeyboardTypeNumberPad;
         UIImageView *image=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pwd"]];
         regcode.leftView=image;
         regcode.leftViewMode = UITextFieldViewModeAlways;

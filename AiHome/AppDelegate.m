@@ -318,7 +318,7 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
         config.debugLogEnabled = NO;
     }
     config.baseUrl = @"http://58.210.203.38:8086";
-    config.cdnUrl = @"http://www.baidu.com";
+    config.cdnUrl = @"http://58.210.203.38:8086";
     
 }
 @end

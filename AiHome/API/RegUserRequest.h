@@ -10,6 +10,6 @@
 
 @interface RegUserRequest : FKBaseRequest
 
-- (id)initWithTelNum:(NSString *)telNum code:(NSString *)code;
+- (id)initWithTelNum:(NSString *)telNum password:(NSString *)password code:(NSString *)code;
 
 @end
