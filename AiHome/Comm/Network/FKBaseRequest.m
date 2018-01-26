@@ -91,7 +91,9 @@ NSString *const FK_BaseRequest_DataKey = @"data";;
     NSDictionary *dict = [super responseJSONObject];
     
     id data = [dict objectForKey:@"data"];
-    
+    if(!data){
+        data = dict;
+    }
     // 有代理则走代理方法
     if (self.reformDelegate && [self.reformDelegate respondsToSelector:@selector(request:reformJSONResponse:)]) {
         

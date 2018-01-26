@@ -66,12 +66,15 @@
     
     UIButton *rightBtn = [[UIButton alloc] init];
     //    [rightBtn setTitle:@"aa" forState:UIControlStateNormal];
-    [rightBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"shopcar"]] forState:UIControlStateNormal];
+    [rightBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"deviceSetting"]] forState:UIControlStateNormal];
     //    [rightBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     //    [rightBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
 //    [rightBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
     [[rightBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-                NSLog(@" rightBtn shopcar clicked :)");
+        NSString *urlString = [@"http://58.210.203.38/apps/seekco/#/aiHome" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        NSString *url = [NSString stringWithFormat:@"%@%@?urlString=%@", NavPushRouteURL,@"WebViewController",urlString];
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:nil completionHandler:nil];
     }];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);

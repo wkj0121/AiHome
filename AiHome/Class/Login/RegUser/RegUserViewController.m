@@ -40,6 +40,36 @@
 //    [self.regUserView.telPhone.rac_textSignal map:^id(NSString *value){
 //        return @(value.length==11);
 //    }];
+    [[self.regUserView.regPwd rac_signalForControlEvents:UIControlEventEditingDidEnd]
+        subscribeNext:^(id x){
+            if ([self.regUserView.regPwd isFirstResponder]) {
+                [self.regUserView.regPwd resignFirstResponder];
+                [self.regUserView.regConfirmPwd becomeFirstResponder];
+            }
+    }];
+    //验证两次密码是否一致
+    [[self.regUserView.regConfirmPwd rac_signalForControlEvents:UIControlEventEditingDidEnd] subscribeNext:^(id x){
+            //x是textField对象
+            if(self.regUserView.regPwd.text!=self.regUserView.regConfirmPwd.text){
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.mode = MBProgressHUDModeText;
+                //背景半透明的效果
+                hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+                hud.bezelView.backgroundColor = COLOR_RGB(245, 245, 245);
+                hud.label.textColor = COLOR_RGB(226, 21, 20);
+                hud.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
+                hud.label.textAlignment = NSTextAlignmentCenter;
+                hud.label.text = @"两次密码输入不一致，请重新输入！";
+                hud.dimBackground = YES;// YES代表需要蒙版效果
+                [hud hideAnimated:YES afterDelay:1.f];
+                [self.regUserView.regConfirmPwd becomeFirstResponder];
+                [self shake:self.regUserView.regConfirmPwd];//左右震动效果
+            }
+    }];
+    
+//    [self.regUserView.regConfirmPwd.rac_textSignal map:^id(NSString *value){
+//        return @(value.length==11);
+//    }];
     //是否可以注册
     RAC(self.regUserView.regBtn, enabled) =  [[RACSignal combineLatest:@[
                                                             RACObserve(self.regUserView.telPhone, text),
@@ -51,45 +81,115 @@
                                      return @(telNum && code && pwd && telNum.length && code.length && pwd.length && self.regUserView.getCodeBtn.enabled);
                                  }];
     [[self.regUserView.getCodeBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        [self openCountdown];
         RegGetCodeRequest *api = [[RegGetCodeRequest alloc] initWithTelNum:self.regUserView.telPhone.text];
         [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
-//            NSDictionary *responseDictionary = [request responseJSONObject];
+            NSDictionary *responseDictionary = [request responseJSONObject];
             NSInteger status = request.responseStatusCode;
-            if (200 == status) {
+            if (200 == status && [responseDictionary[@"message"] isEqualToString:@"success"]) {
                 NSLog(@"请求成功,返回数据:%@",request.responseString);
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.mode = MBProgressHUDModeText;
+                //背景半透明的效果
+                hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+                hud.bezelView.backgroundColor = COLOR_RGB(245, 245, 245);
+                hud.label.textColor = COLOR_BLACK;
+                hud.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
+                hud.label.textAlignment = NSTextAlignmentCenter;
+                hud.label.text = @"成功获取验证码，请查收短信填写！";
+                hud.dimBackground = YES;// YES代表需要蒙版效果
+                [hud hideAnimated:YES afterDelay:1.5f];
+                [self openCountdown];
             } else {
                 // 返回的status非法
                NSLog(@"请求出错,返回内容:%@",request.responseString);
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.mode = MBProgressHUDModeText;
+                //背景半透明的效果
+                hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+                hud.bezelView.backgroundColor = COLOR_RGB(245, 245, 245);
+                hud.label.textColor = COLOR_RGB(226, 21, 20);
+                hud.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
+                hud.label.textAlignment = NSTextAlignmentCenter;
+                hud.label.text = responseDictionary[@"message"];
+                hud.dimBackground = YES;// YES代表需要蒙版效果
+                [hud hideAnimated:YES afterDelay:1.5f];
             }
         } failure:^(YTKBaseRequest *request) {
             NSLog(@"请求失败");
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            //背景半透明的效果
+            hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+            hud.bezelView.backgroundColor = COLOR_RGB(245, 245, 245);
+            hud.label.textColor = COLOR_RGB(226, 21, 20);
+            hud.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
+            hud.label.textAlignment = NSTextAlignmentCenter;
+            hud.label.text = @"获取验证码失败，请检查网络重新发送！";
+            hud.dimBackground = YES;// YES代表需要蒙版效果
+            [hud hideAnimated:YES afterDelay:1.5f];
         }];
 //        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(openCountdown) userInfo:nil repeats:YES];
 //        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     }];
     [[self.regUserView.regBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         NSLog(@"点击了注册");
-        RegUserRequest *api = [[RegUserRequest alloc] initWithTelNum:self.regUserView.telPhone.text password:self.regUserView.regPwd.text code:self.regUserView.regcode.text];
-        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
-            //            NSDictionary *responseDictionary = [request responseJSONObject];
-            NSInteger status = request.responseStatusCode;
-            if (200 == status) {
-                NSLog(@"请求成功,返回数据:%@",request.responseString);
-//                //本地存储账户密码
-//                NSUserDefaults *defaut=[NSUserDefaults standardUserDefaults];
-//                [defaut setObject:self.regUserView.telPhone.text forKey:@"account"];
-//                [defaut setObject:self.regUserView.regPwd.text forKey:@"password"];
-//                [defaut synchronize];
-                [self.navigationController popViewControllerAnimated:YES];
-            } else {
-                // 返回的status非法
-                NSLog(@"请求出错,返回内容:%@",request.responseString);
-            }
-        } failure:^(YTKBaseRequest *request) {
-            NSLog(@"请求失败");
-        }];
-    }];
+        if(self.regUserView.regPwd.text!=self.regUserView.regConfirmPwd.text){
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            //背景半透明的效果
+            hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+            hud.bezelView.backgroundColor = COLOR_RGB(245, 245, 245);
+            hud.label.textColor = COLOR_RGB(226, 21, 20);
+            hud.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
+            hud.label.textAlignment = NSTextAlignmentCenter;
+            hud.label.text = @"两次密码输入不一致，请重新输入！";
+            hud.dimBackground = YES;// YES代表需要蒙版效果
+            [hud hideAnimated:YES afterDelay:1.f];
+            [self.regUserView.regConfirmPwd becomeFirstResponder];
+            [self shake:self.regUserView.regConfirmPwd];//左右震动效果
+        }else{
+            RegUserRequest *api = [[RegUserRequest alloc] initWithTelNum:self.regUserView.telPhone.text password:self.regUserView.regPwd.text code:self.regUserView.regcode.text];
+            [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+                NSDictionary *responseDictionary = [request responseJSONObject];
+                NSInteger status = request.responseStatusCode;
+                if (200 == status && responseDictionary[@"id"]) {
+                    NSLog(@"请求成功,返回数据:%@",request.responseString);
+    //                //本地存储账户密码
+    //                NSUserDefaults *defaut=[NSUserDefaults standardUserDefaults];
+    //                [defaut setObject:self.regUserView.telPhone.text forKey:@"account"];
+    //                [defaut setObject:self.regUserView.regPwd.text forKey:@"password"];
+    //                [defaut synchronize];
+                    [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    // 返回的status非法
+                    NSLog(@"请求出错,返回内容:%@",request.responseString);
+                    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    hud.mode = MBProgressHUDModeText;
+                    //背景半透明的效果
+                    hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+                    hud.bezelView.backgroundColor = COLOR_RGB(245, 245, 245);
+                    hud.label.textColor = COLOR_RGB(226, 21, 20);
+                    hud.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
+                    hud.label.textAlignment = NSTextAlignmentCenter;
+                    hud.label.text = responseDictionary[@"message"];
+                    hud.dimBackground = YES;// YES代表需要蒙版效果
+                    [hud hideAnimated:YES afterDelay:1.5f];
+                }
+            } failure:^(YTKBaseRequest *request) {
+                NSLog(@"请求失败");
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.mode = MBProgressHUDModeText;
+                //背景半透明的效果
+                hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+                hud.bezelView.backgroundColor = COLOR_RGB(245, 245, 245);
+                hud.label.textColor = COLOR_RGB(226, 21, 20);
+                hud.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
+                hud.label.textAlignment = NSTextAlignmentCenter;
+                hud.label.text = @"注册失败，请检查网络重新注册！";
+                hud.dimBackground = YES;// YES代表需要蒙版效果
+                [hud hideAnimated:YES afterDelay:1.5f];
+            }];
+        }}];
 }
 
 -(void)setupIcon{
@@ -173,6 +273,28 @@
         }
     });
     dispatch_resume(_timer);
+}
+
+//左右震动效果
+- (void)shake:(UIView *)view {
+    CGRect frame = view.frame;
+    CAKeyframeAnimation *shakeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    
+    CGMutablePathRef shakePath = CGPathCreateMutable();
+    CGPathMoveToPoint(shakePath, NULL, frame.origin.x+frame.size.width/2, frame.origin.y+frame.size.height/2);
+    int index;
+    for (index = 3; index >=0; --index) {
+        CGPathAddLineToPoint(shakePath, NULL, frame.origin.x+frame.size.width/2 - frame.size.width * 0.02f * index, frame.origin.y+frame.size.height/2);
+        CGPathAddLineToPoint(shakePath, NULL, frame.origin.x+frame.size.width/2 + frame.size.width * 0.02f * index, frame.origin.y+frame.size.height/2);
+    }
+    CGPathCloseSubpath(shakePath);
+    
+    shakeAnimation.path = shakePath;
+    shakeAnimation.duration = 0.5f;
+    shakeAnimation.removedOnCompletion = YES;
+    
+    [view.layer addAnimation:shakeAnimation forKey:nil];
+    CFRelease(shakePath);
 }
 
 @end

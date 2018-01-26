@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		46302D415A45E3DCC21CF3E0 /* Pods_AiHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF262DDACD6FAB09D92D48E /* Pods_AiHome.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		7309C557201B6F640068B508 /* deviceSetting@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7309C554201B6F640068B508 /* deviceSetting@3x.png */; };
+		7309C558201B6F640068B508 /* deviceSetting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7309C555201B6F640068B508 /* deviceSetting@2x.png */; };
+		7309C559201B6F640068B508 /* deviceSetting.png in Resources */ = {isa = PBXBuildFile; fileRef = 7309C556201B6F640068B508 /* deviceSetting.png */; };
 		730E1B102018EB9400E8FC66 /* TYLimitedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 730E1B0F2018EB9400E8FC66 /* TYLimitedTextField.m */; };
 		731A06A11FEEC36D002E84D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 738C10461FE01E830053C731 /* Main.storyboard */; };
 		731A06A21FEEC36D002E84D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 738C104B1FE01E830053C731 /* LaunchScreen.storyboard */; };
@@ -362,6 +365,9 @@
 /* Begin PBXFileReference section */
 		11C4CD69758475FE4236EB0A /* Pods-AiHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AiHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-AiHome/Pods-AiHome.release.xcconfig"; sourceTree = "<group>"; };
 		528E0382986F76E3D8651854 /* Pods-AiHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AiHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AiHome/Pods-AiHome.debug.xcconfig"; sourceTree = "<group>"; };
+		7309C554201B6F640068B508 /* deviceSetting@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "deviceSetting@3x.png"; path = "../../../../../../AiHome/AiHome/AiHome/Resources/images/Home/deviceSetting@3x.png"; sourceTree = "<group>"; };
+		7309C555201B6F640068B508 /* deviceSetting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "deviceSetting@2x.png"; path = "../../../../../../AiHome/AiHome/AiHome/Resources/images/Home/deviceSetting@2x.png"; sourceTree = "<group>"; };
+		7309C556201B6F640068B508 /* deviceSetting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = deviceSetting.png; path = ../../../../../../AiHome/AiHome/AiHome/Resources/images/Home/deviceSetting.png; sourceTree = "<group>"; };
 		730E1B0E2018EB9400E8FC66 /* TYLimitedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYLimitedTextField.h; path = ../../../../../AiHome/AiHome/AiHome/Comm/XTextField/TYLimitedTextField.h; sourceTree = "<group>"; };
 		730E1B0F2018EB9400E8FC66 /* TYLimitedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYLimitedTextField.m; path = ../../../../../AiHome/AiHome/AiHome/Comm/XTextField/TYLimitedTextField.m; sourceTree = "<group>"; };
 		731A06E01FEEEFD0002E84D8 /* LCGridElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCGridElement.h; sourceTree = "<group>"; };
@@ -1341,6 +1347,9 @@
 		738E28231FEC526500BA096F /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				7309C556201B6F640068B508 /* deviceSetting.png */,
+				7309C555201B6F640068B508 /* deviceSetting@2x.png */,
+				7309C554201B6F640068B508 /* deviceSetting@3x.png */,
 				73A0B9831FEDDAB600235869 /* energy.png */,
 				73A0B9851FEDE01C00235869 /* energy@2x.png */,
 				73EB1D4C1FF9629D002E47EA /* energy@3x.png */,
@@ -2126,6 +2135,7 @@
 				73A5662A1FF038110004395A /* light@2x.png in Resources */,
 				73EB1D4F1FF9808F002E47EA /* seekcoAi@3x.png in Resources */,
 				73CC2FA71FFFF4AB00C4D5C8 /* radioButton-unchecked@2x.png in Resources */,
+				7309C557201B6F640068B508 /* deviceSetting@3x.png in Resources */,
 				73989C531FF1880D002D1233 /* sleepmode.png in Resources */,
 				736AFB731FFD1BCC00B5D003 /* 左对齐.png in Resources */,
 				73CC2FA61FFFF4AB00C4D5C8 /* radioButton-checked.png in Resources */,
@@ -2173,6 +2183,7 @@
 				73989C491FF1880D002D1233 /* mall.png in Resources */,
 				731A06BF1FEEC36D002E84D8 /* leave_selected@2x.png in Resources */,
 				73B3442C1FF57435001E68B4 /* phone@2x.png in Resources */,
+				7309C559201B6F640068B508 /* deviceSetting.png in Resources */,
 				738F79A9200519C900628C13 /* photoAlbum@2x.png in Resources */,
 				73989C521FF1880D002D1233 /* setting.png in Resources */,
 				739A21131FF3EB91009C5CCC /* Screen_4.png in Resources */,
@@ -2236,6 +2247,7 @@
 				73B344151FF54A87001E68B4 /* FKLoginViewController.xib in Resources */,
 				731A06D41FEEC36D002E84D8 /* regionSwtich_selected@2x.png in Resources */,
 				736AFB741FFD1BCC00B5D003 /* 居中对齐.png in Resources */,
+				7309C558201B6F640068B508 /* deviceSetting@2x.png in Resources */,
 				7376B1EB2007388000914146 /* arrow-left_selected.png in Resources */,
 				731A06D51FEEC36D002E84D8 /* regionSwtich_selected@3x.png in Resources */,
 				7376B1E72007387F00914146 /* arrow-left_locked@2x.png in Resources */,

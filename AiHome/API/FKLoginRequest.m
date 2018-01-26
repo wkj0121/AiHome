@@ -35,7 +35,8 @@ NSString *FKLoginAccessTokenKey = @"accessToken";
 
 - (YTKResponseSerializerType)responseSerializerType
 {
-    return YTKResponseSerializerTypeHTTP;
+//    return YTKResponseSerializerTypeHTTP;
+    return YTKResponseSerializerTypeJSON;
 }
 
 - (BOOL)statusCodeValidator

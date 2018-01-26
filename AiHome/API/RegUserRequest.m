@@ -32,7 +32,7 @@
 
 - (YTKResponseSerializerType)responseSerializerType
 {
-    return YTKResponseSerializerTypeHTTP;
+    return YTKResponseSerializerTypeJSON;
 }
 
 - (BOOL)statusCodeValidator
