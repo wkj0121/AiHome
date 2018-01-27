@@ -61,13 +61,13 @@
          contextName = "-[FKLoginViewController tableFooterView]:FKLoginViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "SCREEN_WIDTH">
+               value = "self.view.frame.size.height">
             </PersistentString>
             <PersistentString
                value = "_loginInputTableView.frame.size.height">
             </PersistentString>
             <PersistentString
-               value = "self.view.frame.size.height">
+               value = "SCREEN_WIDTH">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -177,6 +177,9 @@
          contextName = "-[JLRRouteDefinition routeResponseForRequest:decodePlusSymbols:]:JLRRouteDefinition.m">
       </ContextState>
       <ContextState
+         contextName = "-[WebViewController fk_initialDefaultsForController]:WebViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "-[iCocosSettingCell setItem:]:iCocosSettingCell.m">
          <PersistentStrings>
             <PersistentString
@@ -196,18 +199,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[YTKNetworkAgent handleRequestResult:responseObject:error:]:YTKNetworkAgent.m">
+      </ContextState>
+      <ContextState
          contextName = "-[BezierLineView lineChart]:BezierLineView.m">
          <PersistentStrings>
             <PersistentString
                value = "self.frame.size.width">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__36-[RegUserViewController viewDidLoad]_block_invoke_2.126:RegUserViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.regUserView.telPhone.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -226,13 +224,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[YTKNetworkAgent handleRequestResult:responseObject:error:]:YTKNetworkAgent.m">
+         contextName = "__36-[RegUserViewController viewDidLoad]_block_invoke_2.126:RegUserViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.regUserView.telPhone.text">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "__32-[FKLoginViewModel loginCommand]_block_invoke_2:FKLoginViewModel.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[VideoNavView historyBtn]:VideoNavView.m">
       </ContextState>
       <ContextState
          contextName = "__36-[RegUserViewController viewDidLoad]_block_invoke_2.148:RegUserViewController.m">
@@ -241,6 +241,9 @@
                value = "responseDictionary[@&quot;message&quot;]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[VideoNavView historyBtn]:VideoNavView.m">
       </ContextState>
       <ContextState
          contextName = "-[XLineChart initWithFrame:dataItemArray:dataDiscribeArray:topNumber:bottomNumber:graphMode:chartConfiguration:]:XLineChart.m">
@@ -260,10 +263,10 @@
                value = "deviceList.brands.count">
             </PersistentString>
             <PersistentString
-               value = "self.allDevicesArray">
+               value = "self.allRegDevicesArray.count">
             </PersistentString>
             <PersistentString
-               value = "self.allRegDevicesArray.count">
+               value = "self.allDevicesArray">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

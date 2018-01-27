@@ -27,7 +27,9 @@
     
     [self add3SectionItems];//积分商城组
     
-    [self add4SectionItems];//系统设置组
+    [self add4SectionItems];//服务组
+    
+    [self add5SectionItems];//系统设置组
     
 }
 
@@ -53,12 +55,12 @@
     /**
      *  设备品牌
      */
-    iCocosSettingItem *deviceBandItem = [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"brand"] title:@"设备品牌" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:@"设置后便与维修和保养" detailLabelColor:[UIColor grayColor]];
+    iCocosSettingItem *deviceBandItem = [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"brand"] title:@"设备登记" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:@"设置后便与维修和保养" detailLabelColor:[UIColor grayColor]];
     
     /** 点击对应的行调整（其他可能只是在内部做一些事情，请自行操作） */
     deviceBandItem.operation = ^{
 //        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"RegDeviceTableViewController"]] options:nil completionHandler:nil];
-        NSString *urlString = [@"http://58.210.203.38/apps/seekco/#/settings/deviceRegister?4143324" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        NSString *urlString = [WEBSettings_DeviceRegisterURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         NSString *url = [NSString stringWithFormat:@"%@%@?urlString=%@", NavPushRouteURL,@"WebViewController",urlString];
         
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:nil completionHandler:nil];
@@ -102,9 +104,9 @@
 - (void)add2SectionItems
 {
     /**
-     *  家庭设置
+     *  住宅登记
      */
-    iCocosSettingItem *locationItem= [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"location"] title:@"家庭设置" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
+    iCocosSettingItem *locationItem= [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"location"] title:@"住宅登记" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
     locationItem.operation = ^{
     };
     
@@ -127,16 +129,16 @@
 - (void)add3SectionItems
 {
     /**
-     *  当前积分
+     *  绿色积分
      */
-    iCocosSettingItem *csmpointItem= [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"csmpoint"] title:@"当前积分" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
+    iCocosSettingItem *csmpointItem= [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"csmpoint"] title:@"绿色积分" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
     csmpointItem.operation = ^{
     };
     
     /**
-     *  我的商城
+     *  我的购买
      */
-    iCocosSettingItem *mallItem= [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"mall"] title:@"我的商城" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
+    iCocosSettingItem *mallItem= [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"mall"] title:@"我的购买" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
     mallItem.operation = ^{
     };
     
@@ -146,10 +148,24 @@
     [_allGroups addObject:group];
 }
 
-
-
 #pragma mark 添加第4组的模型数据
 - (void)add4SectionItems
+{
+    /**
+     *  设置
+     */
+    iCocosSettingItem *serviceItem = [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"service"] title:@"服务" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
+    serviceItem.operation = ^{
+    };
+    
+    //分组
+    iCocosSettingGroup *group = [[iCocosSettingGroup alloc] init];
+    group.items = @[serviceItem];
+    [_allGroups addObject:group];
+}
+
+#pragma mark 添加第5组的模型数据
+- (void)add5SectionItems
 {
     /**
      *  设置
@@ -180,7 +196,7 @@
  *  多余行数据
  */
 
-- (void)add5SectionItems
+- (void)add6SectionItems
 {
     
     /**

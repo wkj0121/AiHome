@@ -154,6 +154,7 @@
                 NSInteger status = request.responseStatusCode;
                 if (200 == status && responseDictionary[@"id"]) {
                     NSLog(@"请求成功,返回数据:%@",request.responseString);
+                    [UserInfoManager configInfo:responseDictionary];
     //                //本地存储账户密码
     //                NSUserDefaults *defaut=[NSUserDefaults standardUserDefaults];
     //                [defaut setObject:self.regUserView.telPhone.text forKey:@"account"];

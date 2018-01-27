@@ -194,7 +194,7 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
         if (number) {
             isLogin = number.boolValue;
         }
-        isLogin = NO;
+//        isLogin = NO;
         if (isLogin) {//已登录
             
             [self.window setRootViewController:self.tabbarController];
@@ -317,8 +317,8 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
     {
         config.debugLogEnabled = NO;
     }
-    config.baseUrl = @"http://58.210.203.38:8086";
-    config.cdnUrl = @"http://58.210.203.38:8086";
+    config.baseUrl = @"http://58.210.203.38";
+    config.cdnUrl = @"http://58.210.203.38";
     
 }
 @end

@@ -54,7 +54,7 @@ fprintf(stderr,"%s %s:%d %s\n",[str UTF8String], [[[NSString stringWithUTF8Strin
 #define iOS7TopMargin 64 //导航栏44，状态栏20
 #define ButtonHeight 44
 // TabView行高
-#define TabViewRowHeight 44.0f
+#define TabViewRowHeight 42.0f
 #define TabViewCustomHeadRowHeight 88.0f
 #define PI 3.14159265358979323846
 /*

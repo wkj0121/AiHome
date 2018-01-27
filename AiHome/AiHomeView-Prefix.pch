@@ -14,7 +14,10 @@
 // 全局定义
 #import "GlobalDefine.h"
 #import "FunctionDefine.h"
+#import "UserInfoManager.h"
 #import "IFLYDefine.h"//讯飞配置
+//web路由常量
+#import "WebRouterConstant.h"
 // 提示组件
 #import "SVProgressHUD+Helper.h"
 #import "MBProgressHUD.h"

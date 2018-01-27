@@ -172,7 +172,9 @@
 
 - (void)fk_initialDefaultsForController
 {
-    self.urlString = [self.params objectForKey:@"urlString"];
+    if(!self.urlString){
+        self.urlString = [self.params objectForKey:@"urlString"];
+    }
 }
 
 -(void)fk_bindViewModelForController

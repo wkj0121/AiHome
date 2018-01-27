@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "MsgViewController.h"
 #import "MySettingViewController.h"
+#import "WebViewController.h"
 
 @interface IndexViewController ()
 
@@ -30,7 +31,13 @@
 //    window.rootViewController=tb;
     
     //b.创建子控制器
-    MsgViewController *msgvc=[[MsgViewController alloc]init];
+//    MsgViewController *msgvc=[[MsgViewController alloc]init];
+//    [self setTabBarItem:msgvc.tabBarItem
+//          selectedImage:@"message_selected"
+//            normalImage:@"message_normal"
+//    ];
+    WebViewController *msgvc = [[WebViewController alloc]init];
+    msgvc.urlString = WEBMessageURL;
     [self setTabBarItem:msgvc.tabBarItem
           selectedImage:@"message_selected"
             normalImage:@"message_normal"

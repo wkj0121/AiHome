@@ -201,6 +201,9 @@
 		738F79B1200519C900628C13 /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = 738F79A5200519C900628C13 /* history.png */; };
 		738F79B2200519C900628C13 /* history@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 738F79A6200519C900628C13 /* history@2x.png */; };
 		738F79B520054C8A00628C13 /* PhotoCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 738F79B420054C8A00628C13 /* PhotoCollectionView.m */; };
+		73979E72201CBD230019C5DF /* UserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 73979E71201CBD230019C5DF /* UserInfoManager.m */; };
+		73979E74201CC2E50019C5DF /* service.png in Resources */ = {isa = PBXBuildFile; fileRef = 73979E73201CC2E50019C5DF /* service.png */; };
+		73979E77201CC5710019C5DF /* WebRouterConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 73979E76201CC5710019C5DF /* WebRouterConstant.m */; };
 		73989C281FF16A6F002D1233 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 73989C261FF16A6E002D1233 /* UIView+Extension.m */; };
 		73989C2D1FF16AEC002D1233 /* iCocosBaseSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73989C2C1FF16AEC002D1233 /* iCocosBaseSettingViewController.m */; };
 		73989C331FF16B11002D1233 /* iCocosSettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 73989C2F1FF16B10002D1233 /* iCocosSettingItem.m */; };
@@ -605,6 +608,11 @@
 		738F79A6200519C900628C13 /* history@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "history@2x.png"; sourceTree = "<group>"; };
 		738F79B320054C8A00628C13 /* PhotoCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionView.h; sourceTree = "<group>"; };
 		738F79B420054C8A00628C13 /* PhotoCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionView.m; sourceTree = "<group>"; };
+		73979E70201CBD230019C5DF /* UserInfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UserInfoManager.h; path = ../../../../../AiHome/AiHome/AiHome/Class/User/UserInfoManager.h; sourceTree = "<group>"; };
+		73979E71201CBD230019C5DF /* UserInfoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UserInfoManager.m; path = ../../../../../AiHome/AiHome/AiHome/Class/User/UserInfoManager.m; sourceTree = "<group>"; };
+		73979E73201CC2E50019C5DF /* service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = service.png; path = ../../../../../../AiHome/AiHome/AiHome/Resources/images/Setting/service.png; sourceTree = "<group>"; };
+		73979E75201CC5710019C5DF /* WebRouterConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WebRouterConstant.h; path = ../../../../../AiHome/AiHome/AiHome/Comm/WebView/WebRouterConstant.h; sourceTree = "<group>"; };
+		73979E76201CC5710019C5DF /* WebRouterConstant.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WebRouterConstant.m; path = ../../../../../AiHome/AiHome/AiHome/Comm/WebView/WebRouterConstant.m; sourceTree = "<group>"; };
 		73989C261FF16A6E002D1233 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		73989C271FF16A6E002D1233 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		73989C2B1FF16AE6002D1233 /* iCocosBaseSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iCocosBaseSettingViewController.h; sourceTree = "<group>"; };
@@ -1111,6 +1119,8 @@
 				73621CE220120D8600F18BE9 /* WebViewController.m */,
 				736E388920163D2100A91650 /* WKProcessPool+SharedProcessPool.h */,
 				736E388A20163D2100A91650 /* WKProcessPool+SharedProcessPool.m */,
+				73979E75201CC5710019C5DF /* WebRouterConstant.h */,
+				73979E76201CC5710019C5DF /* WebRouterConstant.m */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -1462,6 +1472,15 @@
 			path = Video;
 			sourceTree = "<group>";
 		};
+		73979E6F201CBD060019C5DF /* User */ = {
+			isa = PBXGroup;
+			children = (
+				73979E70201CBD230019C5DF /* UserInfoManager.h */,
+				73979E71201CBD230019C5DF /* UserInfoManager.m */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		73989C251FF16A4B002D1233 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1523,6 +1542,7 @@
 				73989C431FF1880D002D1233 /* oneclose.png */,
 				73989C451FF1880D002D1233 /* outdoor.png */,
 				73989C471FF1880D002D1233 /* setting.png */,
+				73979E73201CC2E50019C5DF /* service.png */,
 				73989C481FF1880D002D1233 /* sleepmode.png */,
 			);
 			path = Setting;
@@ -1588,6 +1608,7 @@
 		73AE44791FE1572C00867CEB /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				73979E6F201CBD060019C5DF /* User */,
 				73EE01BA2009EFCA00B12C01 /* Device */,
 				738F79782003B45D00628C13 /* Video */,
 				73CC2F991FFFD94100C4D5C8 /* Region */,
@@ -2182,6 +2203,7 @@
 				7376B1E62007387F00914146 /* arrow-left_selected@2x.png in Resources */,
 				73989C491FF1880D002D1233 /* mall.png in Resources */,
 				731A06BF1FEEC36D002E84D8 /* leave_selected@2x.png in Resources */,
+				73979E74201CC2E50019C5DF /* service.png in Resources */,
 				73B3442C1FF57435001E68B4 /* phone@2x.png in Resources */,
 				7309C559201B6F640068B508 /* deviceSetting.png in Resources */,
 				738F79A9200519C900628C13 /* photoAlbum@2x.png in Resources */,
@@ -2369,6 +2391,7 @@
 				73989C331FF16B11002D1233 /* iCocosSettingItem.m in Sources */,
 				73EB1D801FF9A020002E47EA /* FMDatabasePool.m in Sources */,
 				73CC2FAF1FFFF77C00C4D5C8 /* RegionTableViewController.m in Sources */,
+				73979E77201CC5710019C5DF /* WebRouterConstant.m in Sources */,
 				73EB1DE91FFB1772002E47EA /* UIScrollView+UITouch.m in Sources */,
 				73B21EB41FE5AB200089CC70 /* TQViewController1.m in Sources */,
 				73EE01CD200BACFB00B12C01 /* DeviceListModel.m in Sources */,
@@ -2473,6 +2496,7 @@
 				736C27572018B0680080A059 /* RegUserRequest.m in Sources */,
 				73989C341FF16B11002D1233 /* iCocosSettingGroup.m in Sources */,
 				731A06E71FEEEFD0002E84D8 /* LCGridElement.m in Sources */,
+				73979E72201CBD230019C5DF /* UserInfoManager.m in Sources */,
 				733FF24A1FF530D600451314 /* UIView+NonBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
