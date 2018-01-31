@@ -54,18 +54,10 @@
         @weakify(self);
         _loginCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
             @strongify(self);
-            
             FKLoginRequest *loginRequest = [[FKLoginRequest alloc] initWithUsr:self.userAccount pwd:self.password];
-            // 数据返回值reformat代理
-            // loginRequest.reformDelegate = self;
-            // 数据请求响应代理 通过代理回调
-            // loginRequest.delegate = self;
-            return [[[loginRequest rac_requestSignal] doNext:^(id  _Nullable x) {
-                
-                
-                // 解析数据
-                [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"isLogin"];
-                
+            return [[[loginRequest rac_requestSignal] doNext:^(id _Nullable x) {
+                NSDictionary* result = (NSDictionary*)x;
+                [[NSUserDefaults standardUserDefaults] setBool:([result objectForKey:@"code"] ? NO : YES) forKey:@"isLogin"];
             }] materialize];
         }];
     }
@@ -88,8 +80,6 @@
 #pragma mark - YTKRequestDelegate
 - (void)requestFinished:(__kindof YTKBaseRequest *)request
 {
-    // 解析数据
-    [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"isLogin"];
 }
 
 - (void)requestFailed:(__kindof YTKBaseRequest *)request

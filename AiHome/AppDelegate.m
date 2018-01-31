@@ -188,19 +188,10 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
 {
     //注册登录状态通知，根据登录状态设置根视图进入登录页还是直接进主页
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:FKLoginStateChangedNotificationKey object:nil] subscribeNext:^(NSNotification * _Nullable noti) {
-        
-        NSNumber * number = [[NSUserDefaults standardUserDefaults] objectForKey:@"isLogin"];
-        BOOL isLogin = NO;
-        if (number) {
-            isLogin = number.boolValue;
-        }
-//        isLogin = NO;
+        BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
         if (isLogin) {//已登录
-            
             [self.window setRootViewController:self.tabbarController];
-            
-        }else//未登录
-        {
+        } else {//未登录
             [self.window setRootViewController:self.loginController];
         }
         CATransition *anim = [CATransition animation];
@@ -319,7 +310,8 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
     }
     config.baseUrl = @"http://58.210.203.38";
     config.cdnUrl = @"http://58.210.203.38";
-    
+    YTKNetworkAgent *agent = [YTKNetworkAgent sharedAgent];
+    [agent setValue:[NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json",@"text/html", nil] forKeyPath:@"jsonResponseSerializer.acceptableContentTypes"];
 }
 @end
 

@@ -133,6 +133,13 @@
     }];
     [[self.regUserView.regBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         NSLog(@"点击了注册");
+        
+//        NSDictionary *responseDictionary = @{@"id": @13, @"userName": @"18550468125"};
+//        [UserInfoManager configInfo:responseDictionary];
+//        NSLog(@"%@,%@",[UserInfoManager shareUser].uuid,[UserInfoManager shareUser].userName);
+//        return;
+        
+        
         if(self.regUserView.regPwd.text!=self.regUserView.regConfirmPwd.text){
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.mode = MBProgressHUDModeText;
@@ -154,7 +161,7 @@
                 NSInteger status = request.responseStatusCode;
                 if (200 == status && responseDictionary[@"id"]) {
                     NSLog(@"请求成功,返回数据:%@",request.responseString);
-                    [UserInfoManager configInfo:responseDictionary];
+//                    [UserInfoManager configInfo:responseDictionary];
     //                //本地存储账户密码
     //                NSUserDefaults *defaut=[NSUserDefaults standardUserDefaults];
     //                [defaut setObject:self.regUserView.telPhone.text forKey:@"account"];

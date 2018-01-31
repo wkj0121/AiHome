@@ -98,27 +98,36 @@ static UserInfoManager *userInfo;
 + (void)configInfo:(NSDictionary *)infoDic{
     
     NSArray *allKeys = [infoDic allKeys];
+    UserInfoManager *manager = [UserInfoManager shareUser];
+    [manager setValuesForKeysWithDictionary:infoDic];
     
-    for (NSString *key in allKeys) {
-        
-        //首字母大写
-        NSString *firstKey = [key substringToIndex:1];
-        firstKey = [firstKey uppercaseString];
-        NSString *lastKey = [key substringFromIndex:1];
-        
-        //构造setter方法
-        NSString *selectorStr = [NSString stringWithFormat:@"set%@%@:",firstKey,lastKey];
-        
-        SEL setSeletor = NSSelectorFromString(selectorStr);
-        
-        //调用setter方法
-        NSString *value = [infoDic objectForKey:key];
-        
+//    for (NSString *key in allKeys) {
+//
+//        //首字母大写
+//        NSString *firstKey = [key substringToIndex:1];
+//        firstKey = [firstKey uppercaseString];
+//        NSString *lastKey = [key substringFromIndex:1];
+//
+//        //构造setter方法
+//        NSString *selectorStr = [NSString stringWithFormat:@"set%@%@:",firstKey,lastKey];
+//
+//        SEL setSeletor = NSSelectorFromString(selectorStr);
+//
+//        //调用setter方法
+//        NSString *value = [infoDic objectForKey:key];
+//
+//        UserInfoManager *manager = [UserInfoManager shareUser];
+//        [manager performSelector:setSeletor withObject:value];
+//    }
+    
+}
+
++ (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    if([key isEqualToString:@"id"])
+    {
         UserInfoManager *manager = [UserInfoManager shareUser];
-        [manager performSelector:setSeletor withObject:value];
-        
+        manager.uuid = value;
     }
-    
 }
 
 #pragma mark-用户登出操作

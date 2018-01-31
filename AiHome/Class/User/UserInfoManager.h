@@ -11,7 +11,7 @@
 @interface UserInfoManager : NSObject
 
 //用户的基本信息....
-@property (nonatomic, assign) NSInteger id;
+@property (nonatomic, assign) NSInteger uuid;
 
 @property(nonatomic,copy)NSString *userName,*userPassword,*nickName,*headImage,*telNum,*qqNum,*sex,*height,*address;
 
@@ -41,5 +41,7 @@
  *
  */
 + (void)loginOut;
+
++ (void)setValue:(id)value forUndefinedKey:(NSString *)key;
 
 @end

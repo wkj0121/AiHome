@@ -30,7 +30,7 @@ NSString *FKLoginAccessTokenKey = @"accessToken";
 
 - (YTKRequestMethod)requestMethod
 {
-    return YTKRequestMethodGET;
+    return YTKRequestMethodPOST;
 }
 
 - (YTKResponseSerializerType)responseSerializerType
@@ -51,17 +51,23 @@ NSString *FKLoginAccessTokenKey = @"accessToken";
 //}
 
 - (NSString *)requestUrl {
-    
-    return @"";
+    return @"/xk/user/login";
 }
 
 
 - (id)requestArgument {
     
-    return  @{
-              @"username":_usr,
-              @"password":_pwd,
-              };
+    NSDictionary *dic = @{
+                            @"userName":_usr,
+                            @"userPassword":_pwd
+                        };
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
+    if (!jsonData) {
+        return @{@"userInfo": @""};
+    } else {
+        return @{@"userInfo": [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]};
+    }
 }
 
 @end
