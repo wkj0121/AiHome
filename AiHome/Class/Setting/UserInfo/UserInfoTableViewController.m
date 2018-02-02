@@ -156,8 +156,89 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"%ld,%ld",indexPath.section,indexPath.item);
+    if(indexPath.section == 0 && indexPath.item == 0){
+        [self changeIcon];
+    }else if(indexPath.section == 0 && indexPath.item == 1){
+        NSMutableArray *infos = self.allCellsArray[0];
+        NormalInfo *info = infos[1];
+        [self changeText:info.value];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
+
+- (void)changeIcon
+{
+    UIAlertController *alertController;
+    __block NSUInteger blockSourceType = 0;
+    // 判断是否支持相机
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        //支持访问相机与相册情况
+        alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"从相册中选取" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"点击从相册中选取");
+            blockSourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.delegate = self;
+            imagePickerController.allowsEditing = YES;
+            imagePickerController.sourceType = blockSourceType;
+            [self presentViewController:imagePickerController animated:YES completion:nil];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"点击拍照");
+            blockSourceType = UIImagePickerControllerSourceTypeCamera;
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.delegate = self;
+            imagePickerController.allowsEditing = YES;
+            imagePickerController.sourceType = blockSourceType;
+            [self presentViewController:imagePickerController animated:YES completion:nil];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"点击取消");
+            return;
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }else{
+        //只支持访问相册情况
+        alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"从相册中选取" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"点击从相册中选取");
+            blockSourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.delegate = self;
+            imagePickerController.allowsEditing = YES;
+            imagePickerController.sourceType = blockSourceType;
+            [self presentViewController:imagePickerController animated:YES completion:^{
+                
+            }];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"点击取消");
+            return;
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+}
+
+- (void)changeText:(NSString *)text
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"修改" message:@"请输入内容" preferredStyle:UIAlertControllerStyleAlert];
+    //添加的输入框
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.text = text;
+    }];
+    UIAlertAction *Action = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    UIAlertAction *twoAc = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        //添加的带输入框的提示框
+        UITextField *senceText = (UITextField *)alert.textFields.firstObject;
+        NSLog(@"%@",senceText.text);
+    }];
+    [alert addAction:Action];
+    [alert addAction:twoAc];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 @end
