@@ -58,6 +58,8 @@
             return [[[loginRequest rac_requestSignal] doNext:^(id _Nullable x) {
                 NSDictionary* result = (NSDictionary*)x;
                 [[NSUserDefaults standardUserDefaults] setBool:([result objectForKey:@"code"] ? NO : YES) forKey:@"isLogin"];
+                //保存用户信息
+                [UserInfoManager configInfo:result];
             }] materialize];
         }];
     }

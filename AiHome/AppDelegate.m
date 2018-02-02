@@ -191,6 +191,9 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
         BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
         if (isLogin) {//已登录
             [self.window setRootViewController:self.tabbarController];
+            //加载用户数据
+            NSDictionary *data1 = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserInfo"];
+            [UserInfoManager configInfo:data1];
         } else {//未登录
             [self.window setRootViewController:self.loginController];
         }

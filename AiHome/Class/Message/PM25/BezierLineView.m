@@ -87,9 +87,9 @@
     configuration.lineMode = CurveLine;
     configuration.isShowShadow = YES;
     configuration.isShowCoordinate = NO;
-    configuration.lineWidth = 1.0;
-    configuration.pointDiameter = 5.0;
-    configuration.hasOrdinateView = NO;
+//    configuration.lineWidth = 1.0;
+//    configuration.pointDiameter = 5.0;
+//    configuration.hasOrdinateView = NO;
     
     if (!_lineChart) {
         _lineChart =

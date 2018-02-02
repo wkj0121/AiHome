@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface UserInfoManager : NSObject
 
@@ -20,6 +21,8 @@
 @property(nonatomic,strong)NSDate *createTime;
 
 @property(nonatomic,strong)NSDate *updateTime;
+
+@property(nonatomic,strong)NSData *headImageData;
 
 /**
  *

@@ -350,6 +350,8 @@
 		73EE01CA200B560500B12C01 /* RegedDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EE01C9200B560500B12C01 /* RegedDevice.m */; };
 		73EE01CD200BACFB00B12C01 /* DeviceListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EE01CC200BACFB00B12C01 /* DeviceListModel.m */; };
 		73EE01D5200BB19A00B12C01 /* Brand.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EE01D4200BB19A00B12C01 /* Brand.m */; };
+		FAABC3A720243BD300A38F20 /* ImageStreamRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FAABC3A620243BD300A38F20 /* ImageStreamRequest.m */; };
+		FAABC3AA2024587100A38F20 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAABC3A92024587100A38F20 /* UserInfoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -848,6 +850,10 @@
 		73EE01D3200BB19A00B12C01 /* Brand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Brand.h; sourceTree = "<group>"; };
 		73EE01D4200BB19A00B12C01 /* Brand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Brand.m; sourceTree = "<group>"; };
 		CEF262DDACD6FAB09D92D48E /* Pods_AiHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AiHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAABC3A520243BD200A38F20 /* ImageStreamRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageStreamRequest.h; sourceTree = "<group>"; };
+		FAABC3A620243BD300A38F20 /* ImageStreamRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageStreamRequest.m; sourceTree = "<group>"; };
+		FAABC3A82024587100A38F20 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		FAABC3A92024587100A38F20 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1551,6 +1557,8 @@
 		73989C3A1FF16C1D002D1233 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				FAABC3A82024587100A38F20 /* UserInfoViewController.h */,
+				FAABC3A92024587100A38F20 /* UserInfoViewController.m */,
 				73989C3B1FF16C75002D1233 /* MySettingViewController.h */,
 				73989C3C1FF16C75002D1233 /* MySettingViewController.m */,
 				73989C5B1FF1B4F9002D1233 /* MySettingViewController2.h */,
@@ -1732,6 +1740,8 @@
 		73B344241FF557AF001E68B4 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				FAABC3A520243BD200A38F20 /* ImageStreamRequest.h */,
+				FAABC3A620243BD300A38F20 /* ImageStreamRequest.m */,
 				736C27562018B0680080A059 /* RegUserRequest.h */,
 				736C27552018B0680080A059 /* RegUserRequest.m */,
 				736C27582018B9D40080A059 /* RegGetCodeRequest.h */,
@@ -2427,6 +2437,7 @@
 				738F79812003CC5500628C13 /* VideoEventModel.m in Sources */,
 				73459F93200219240084E199 /* PM25View.m in Sources */,
 				73B344141FF54A87001E68B4 /* FKLoginViewController.m in Sources */,
+				FAABC3AA2024587100A38F20 /* UserInfoViewController.m in Sources */,
 				73EB1D861FF9A020002E47EA /* PoemData.m in Sources */,
 				73B21EB31FE5AB200089CC70 /* TQGestureLockHintLabel.m in Sources */,
 				73B344131FF54A87001E68B4 /* FKLoginViewModel.m in Sources */,
@@ -2470,6 +2481,7 @@
 				734620B02017C15E00655751 /* XTextField.m in Sources */,
 				736734781FE470AF00BB3D24 /* TouchIDViewController.m in Sources */,
 				73B344271FF557C9001E68B4 /* FKLoginRequest.m in Sources */,
+				FAABC3A720243BD300A38F20 /* ImageStreamRequest.m in Sources */,
 				737EC02C1FFE6783007746B8 /* STTextView.m in Sources */,
 				736BA7F91FF81A5C00A713FF /* HomeViewController.m in Sources */,
 				73B3440D1FF54A87001E68B4 /* FKLoginButton.m in Sources */,

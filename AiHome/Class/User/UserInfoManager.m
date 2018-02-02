@@ -7,6 +7,7 @@
 //
 
 #import "UserInfoManager.h"
+#import "ImageStreamRequest.h"
 #import <objc/runtime.h>
 static UserInfoManager *userInfo;
 @implementation UserInfoManager
@@ -96,33 +97,49 @@ static UserInfoManager *userInfo;
 
 #pragma mark-配置数据
 + (void)configInfo:(NSDictionary *)infoDic{
-    
-    NSArray *allKeys = [infoDic allKeys];
     UserInfoManager *manager = [UserInfoManager shareUser];
+    //字典转模型
     [manager setValuesForKeysWithDictionary:infoDic];
-    
-//    for (NSString *key in allKeys) {
-//
-//        //首字母大写
-//        NSString *firstKey = [key substringToIndex:1];
-//        firstKey = [firstKey uppercaseString];
-//        NSString *lastKey = [key substringFromIndex:1];
-//
-//        //构造setter方法
-//        NSString *selectorStr = [NSString stringWithFormat:@"set%@%@:",firstKey,lastKey];
-//
-//        SEL setSeletor = NSSelectorFromString(selectorStr);
-//
-//        //调用setter方法
-//        NSString *value = [infoDic objectForKey:key];
-//
-//        UserInfoManager *manager = [UserInfoManager shareUser];
-//        [manager performSelector:setSeletor withObject:value];
-//    }
-    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    //将返回值中的null转为""，才可以存储
+    [infoDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if([key isEqualToString:@"headImage"] && ![obj isKindOfClass:[NSNull class]]){
+            NSArray *array = [userInfo.headImage componentsSeparatedByString:@"/"];
+            NSString * imageUrl = [array lastObject];
+            [dic setValue:imageUrl forKey:key];
+        }else{
+            [dic setValue:([obj isKindOfClass:[NSNull class]] ? @"" : obj) forKey:key];
+        }
+    }];
+    NSString *imageUrl = [dic valueForKey:@"headImage"];
+    //设置默认头像
+    manager.headImageData = UIImagePNGRepresentation([UIImage imageNamed:@"head"]);
+    //如果未加载过头像
+    NSData *tempData = [[NSUserDefaults standardUserDefaults] valueForKey:@"headData"];
+    if([tempData isKindOfClass:[NSNull class]] || tempData == nil){
+        if(![imageUrl isEqualToString:@""] && ![imageUrl isKindOfClass:[NSNull class]]){
+            ImageStreamRequest *api = [[ImageStreamRequest alloc] initWithImageUrl:imageUrl];
+            [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+                NSData *responseData = [request responseData];
+                NSInteger status = request.responseStatusCode;
+                if (200 == status) {
+                    manager.headImageData = [request responseData];
+                }
+                [[NSUserDefaults standardUserDefaults] setObject:manager.headImageData forKey:@"headData"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+                [[NSUserDefaults standardUserDefaults] setObject:manager.headImageData forKey:@"headData"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }];
+        }
+    }else{
+        manager.headImageData = tempData;
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:dic forKey:@"UserInfo"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key{
     if([key isEqualToString:@"id"])
     {
         UserInfoManager *manager = [UserInfoManager shareUser];

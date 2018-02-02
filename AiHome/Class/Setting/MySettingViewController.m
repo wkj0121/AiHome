@@ -39,10 +39,12 @@
     /**
      *  个人信息
      */
-    iCocosSettingItem *headItem = [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"head"] title:@"小当当" style:UITableViewCellStyleSubtitle type:iCocosSettingItemTypeImageWithArrow image:[UIImage imageNamed:@"QRCode"] desc:@"手机号:13370088888" detailLabelColor:[UIColor grayColor]];
+    UserInfoManager *userInfo = [UserInfoManager shareUser];
+    UIImage *headImage = [UIImage imageWithData:userInfo.headImageData];
+    iCocosSettingItem *headItem = [iCocosSettingItem itemWithImage:headImage title:([userInfo.nickName isEqualToString:@""] ? userInfo.userName : userInfo.nickName) style:UITableViewCellStyleSubtitle type:iCocosSettingItemTypeImageWithArrow image:[UIImage imageNamed:@"QRCode"] desc:[NSString stringWithFormat:@"手机号:%@",userInfo.telNum] detailLabelColor:[UIColor grayColor]];
     headItem.operation = ^{
+        
     };
-    
     //分组
     iCocosSettingGroup *group = [[iCocosSettingGroup alloc] init];
     group.items = @[headItem];
