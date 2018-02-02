@@ -43,7 +43,7 @@
     UIImage *headImage = [UIImage imageWithData:userInfo.headImageData];
     iCocosSettingItem *headItem = [iCocosSettingItem itemWithImage:headImage title:([userInfo.nickName isEqualToString:@""] ? userInfo.userName : userInfo.nickName) style:UITableViewCellStyleSubtitle type:iCocosSettingItemTypeImageWithArrow image:[UIImage imageNamed:@"QRCode"] desc:[NSString stringWithFormat:@"手机号:%@",userInfo.telNum] detailLabelColor:[UIColor grayColor]];
     headItem.operation = ^{
-        
+        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"UserInfoTableViewController"]] options:nil completionHandler:nil];
     };
     //分组
     iCocosSettingGroup *group = [[iCocosSettingGroup alloc] init];
