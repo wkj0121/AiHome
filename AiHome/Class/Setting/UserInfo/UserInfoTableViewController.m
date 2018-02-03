@@ -162,7 +162,7 @@
     }else if(indexPath.section == 0 && indexPath.item == 1){
         NSMutableArray *infos = self.allCellsArray[0];
         NormalInfo *info = infos[1];
-        [self changeText:info.value];
+        [self changeText:info.value withIndexPath:indexPath];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -221,7 +221,7 @@
     }
 }
 
-- (void)changeText:(NSString *)text
+- (void)changeText:(NSString *)text withIndexPath:(NSIndexPath *)indexPath
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"修改" message:@"请输入内容" preferredStyle:UIAlertControllerStyleAlert];
     //添加的输入框
@@ -233,7 +233,10 @@
     UIAlertAction *twoAc = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         //添加的带输入框的提示框
         UITextField *senceText = (UITextField *)alert.textFields.firstObject;
-        NSLog(@"%@",senceText.text);
+        NSMutableArray *infos = self.allCellsArray[indexPath.section];
+        NormalInfo *info = infos[indexPath.item];
+        info.value = senceText.text;
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
     }];
     [alert addAction:Action];
     [alert addAction:twoAc];
