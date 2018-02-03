@@ -29,14 +29,26 @@
     return _allCellsArray;
 }
 
+- (UITableView *)tableView
+{
+    if(_tableView == nil){
+        _tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.sectionFooterHeight = 20;
+        _tableView.sectionHeaderHeight = 0;
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        //设置头部高度
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 10)];
+    }
+    return _tableView;
+}
+
 - (void)loadView
 {
-    /**
-     添加TableView
-     
-     - returns: return value description
-     */
-    UITableView *tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStyleGrouped];
+    // 添加TableView
+    self.view = self.tableView; //此处会使界面加载两次
+    // 设置导航栏
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor]}];
     // 左侧返回按钮
     UIButton *leftBtn = [[UIButton alloc] init];
@@ -48,16 +60,6 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
     self.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     self.navigationItem.leftMargin = 5;
-    
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    self.view = tableView;
-    tableView.sectionFooterHeight = 20;
-    tableView.sectionHeaderHeight = 0;
-    tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    
-    //设置头部高度
-    tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 10)];
 }
 
 - (void)viewDidLoad {
@@ -65,7 +67,6 @@
     
     [self customNavItem];
     [self handleData];
-    
 }
 
 - (void)handleData
@@ -90,6 +91,7 @@
     [array addObject:deviceArray];
     [array addObject:settingArray];
     
+    [self.allCellsArray removeAllObjects];
     // 将要显示的数据转为model对象
     for (NSArray *regoins in array) {
         NSArray * persons = [[regoins.rac_sequence map:^id _Nullable(NSDictionary* value) {
@@ -135,7 +137,7 @@
         }
         cell.normalLabel.text = info.label;
         cell.headImageView.image = [UIImage imageWithData:info.data];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         return cell;
     }
     NormalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normal"];
@@ -144,14 +146,13 @@
     }
     cell.normalLabel.text = info.label;
     cell.normalData.text = info.value;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
