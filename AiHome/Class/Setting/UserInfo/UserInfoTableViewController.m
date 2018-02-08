@@ -210,9 +210,7 @@
             imagePickerController.delegate = self;
             imagePickerController.allowsEditing = YES;
             imagePickerController.sourceType = blockSourceType;
-            [self presentViewController:imagePickerController animated:YES completion:^{
-                
-            }];
+            [self presentViewController:imagePickerController animated:YES completion:nil];
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             NSLog(@"点击取消");
@@ -244,5 +242,50 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+// 选取图片成功调用
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    // 选择的图片信息存储于info字典中
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    // 照片地址
+    NSString *imageUrl = [[info objectForKey:UIImagePickerControllerImageURL] absoluteString];
+    NSLog(@"%@",imageUrl);
+    NSArray<NSString *> *array = [imageUrl componentsSeparatedByString:@"."];
+    NSLog(@"%@",array);
+    NSData *imageData = nil;
+    //选取照片格式
+    if([array.lastObject isEqual:@"png"]){
+        imageData = UIImagePNGRepresentation(image);
+    }else if([array.lastObject  isEqual:@"jpeg"]){
+        imageData = UIImageJPEGRepresentation(image, 1.0);
+    }else{
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        //背景半透明的效果
+        hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+        hud.bezelView.backgroundColor = COLOR_RGB(245, 245, 245);
+        hud.label.textColor = COLOR_RGB(226, 21, 20);
+        hud.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
+        hud.label.textAlignment = NSTextAlignmentCenter;
+        hud.label.text = @"格式暂不支持，请重新选择！";
+        hud.dimBackground = YES;// YES代表需要蒙版效果
+        [hud hideAnimated:YES afterDelay:1.f];
+    }
+    if(imageData != nil){
+        NSMutableArray *infos = self.allCellsArray[0];
+        NormalInfo *info = infos[0];
+        info.data = imageData;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    NSLog(@"%@", info);
+}
+
+// 取消图片选择调用此方法
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    // dismiss UIImagePickerController
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
