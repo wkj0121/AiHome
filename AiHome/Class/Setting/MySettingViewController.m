@@ -110,6 +110,10 @@
      */
     iCocosSettingItem *locationItem= [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"location"] title:@"住宅登记" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
     locationItem.operation = ^{
+        NSString *urlString = [WEBSettings_HouseRegisterURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        NSString *url = [NSString stringWithFormat:@"%@%@?urlString=%@", NavPushRouteURL,@"WebViewController",urlString];
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:nil completionHandler:nil];
     };
     
     /**

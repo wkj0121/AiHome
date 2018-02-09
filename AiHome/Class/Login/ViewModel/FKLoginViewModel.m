@@ -57,9 +57,12 @@
             FKLoginRequest *loginRequest = [[FKLoginRequest alloc] initWithUsr:self.userAccount pwd:self.password];
             return [[[loginRequest rac_requestSignal] doNext:^(id _Nullable x) {
                 NSDictionary* result = (NSDictionary*)x;
-                [[NSUserDefaults standardUserDefaults] setBool:([result objectForKey:@"code"] ? NO : YES) forKey:@"isLogin"];
-                //保存用户信息
-                [UserInfoManager configInfo:result];
+                BOOL bFlag = [result objectForKey:@"code"] ? NO : YES;
+                [[NSUserDefaults standardUserDefaults] setBool:bFlag forKey:@"isLogin"];
+                if (bFlag){
+                    //保存用户信息
+                    [UserInfoManager configInfo:result];
+                }
             }] materialize];
         }];
     }
