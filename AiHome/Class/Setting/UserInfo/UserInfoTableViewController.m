@@ -24,7 +24,7 @@
 - (NSMutableArray *)allCellsArray
 {
     if (_allCellsArray == nil) {
-        self.allCellsArray = [[NSMutableArray array]init];
+        _allCellsArray = [[NSMutableArray array]init];
     }
     return _allCellsArray;
 }

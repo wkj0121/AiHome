@@ -158,11 +158,15 @@
 {
     if ([self.passwordManager verifyPassword:securityCodeSting]) {
         [gestureLockView setNeedsDisplayGestureLockErrorState:NO];
-        if(_rootVC == nil){
-            [self.navigationController popViewControllerAnimated:YES];
-        }else{
-            [[UIApplication sharedApplication].keyWindow setRootViewController:_rootVC];
-        }
+        [SVProgressHUD fk_displaySuccessWithStatus:@"验证成功"];
+        // 2s后进入首页
+        [SVProgressHUD dismissWithDelay:2.0f completion:^{
+            if(_rootVC == nil){
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [[UIApplication sharedApplication].keyWindow setRootViewController:_rootVC];
+            }
+        }];
         [_hintLabel clearText];
         [self verifyInitialRestNumber];
     } else {

@@ -39,7 +39,11 @@ static bool isVaild = NO;
             if (success) {
                 NSLog(@"验证成功 刷新主界面");
                 isVaild = YES;
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"FKTouchIDSucceedNotificationKey" object:nil];
+                [SVProgressHUD fk_displaySuccessWithStatus:@"验证成功"];
+                // 2s后进入首页
+                [SVProgressHUD dismissWithDelay:2.0f completion:^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"FKTouchIDSucceedNotificationKey" object:nil];
+                }];
             }else{
                 NSLog(@"%@",error.localizedDescription);
                 switch (error.code) {

@@ -162,6 +162,7 @@
      */
     iCocosSettingItem *serviceItem = [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"service"] title:@"服务" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
     serviceItem.operation = ^{
+
     };
     
     //分组
@@ -178,6 +179,7 @@
      */
     iCocosSettingItem *settingItem = [iCocosSettingItem itemWithImage:[UIImage imageNamed:@"setting"] title:@"设置" style:UITableViewCellStyleValue1 type:iCocosSettingItemTypeArrow desc:nil];
     settingItem.operation = ^{
+        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"SystemSettingTableViewController"]] options:nil completionHandler:nil];
     };
     
     //分组
