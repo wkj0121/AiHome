@@ -12,17 +12,29 @@
 #import "TQGestureLockHintLabel.h"
 #import "TQSucceedViewController.h"
 #import "TQGestureLockToast.h"
+#import "TouchIDViewController.h"
 
 @interface TQViewController2 () <TQGestureLockViewDelegate>
 
+@property (nonatomic, strong) TouchIDViewController *touchIDViewControl;
+@property (nonatomic, strong) UIImageView *headerImageView;
+@property (nonatomic, strong) UIButton *btnSwitch;
 @property (nonatomic, strong) TQGestureLockView *lockView;
 @property (nonatomic, strong) TQGestureLockHintLabel *hintLabel;
 @property (nonatomic, strong) TQGesturesPasswordManager *passwordManager;
 @property (nonatomic, assign) NSInteger restVerifyNumber;
+@property (nonatomic, strong) UIViewController *rootVC;
 
 @end
 
 @implementation TQViewController2
+
+- (instancetype)initWithVC:(UIViewController *)vc
+{
+    self = [super init];
+    _rootVC = vc;
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -37,6 +49,56 @@
 {
     self.passwordManager = [TQGesturesPasswordManager manager];
     [self verifyInitialRestNumber];
+}
+
+- (TouchIDViewController *)touchIDViewControl {
+    if(_touchIDViewControl == nil) {
+        _touchIDViewControl = [[TouchIDViewController alloc] init];
+    }
+    return _touchIDViewControl;
+}
+
+- (UIImageView *)headerImageView {
+    if(_headerImageView == nil) {
+        _headerImageView = [[UIImageView alloc] init];
+        _headerImageView.backgroundColor = [UIColor clearColor];
+        // 设置图片
+        _headerImageView.image = [UIImage imageNamed:@"seekco.png"];
+        //  retina屏幕图片显示问题
+        [_headerImageView setContentScaleFactor:[[UIScreen mainScreen] scale]];
+        //  不规则图片显示
+        _headerImageView.contentMode =  UIViewContentModeScaleAspectFill;
+        _headerImageView.autoresizesSubviews = YES;
+        _headerImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    }
+    return _headerImageView;
+}
+
+- (UIButton *)btnSwitch {
+    if(_btnSwitch == nil) {
+        _btnSwitch = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
+        [_btnSwitch setTitle:@"其它登录方式" forState:UIControlStateNormal];
+        _btnSwitch.backgroundColor = [UIColor clearColor];
+        [_btnSwitch setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
+        [_btnSwitch setTitleColor:[UIColor colorWithHexString:@"666666"] forState:UIControlStateHighlighted];
+        _btnSwitch.titleLabel.textAlignment = NSTextAlignmentRight;
+        [[_btnSwitch rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"使用指纹登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSLog(@"指纹登录");
+                [self.touchIDViewControl.touchIDAuthenticate touchIDAuthenticate];
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"使用密码登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSLog(@"使用密码登录");
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                NSLog(@"点击取消");
+                return;
+            }]];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }];
+    }
+    return _btnSwitch;
 }
 
 - (void)subviewsInitialization
@@ -65,6 +127,23 @@
     
     _hintLabel = [[TQGestureLockHintLabel alloc] initWithFrame:rect2];
     [self.view addSubview:_hintLabel];
+    
+    // 顶部图标
+    [self.view addSubview:self.headerImageView];
+    //设置布局Masonry
+    [self.headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).offset(90);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(88, 88));
+    }];
+    
+    // 底部其它方式登录
+    [self.view addSubview:self.btnSwitch];
+    [self.btnSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-20);
+        make.size.mas_equalTo(CGSizeMake(150, 30));
+    }];
 }
 
 #pragma mark - TQGestureLockViewDelegate
@@ -79,8 +158,11 @@
 {
     if ([self.passwordManager verifyPassword:securityCodeSting]) {
         [gestureLockView setNeedsDisplayGestureLockErrorState:NO];
-        TQSucceedViewController *vc = [TQSucceedViewController new];
-        [self.navigationController pushViewController:vc animated:YES];
+        if(_rootVC == nil){
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [[UIApplication sharedApplication].keyWindow setRootViewController:_rootVC];
+        }
         [_hintLabel clearText];
         [self verifyInitialRestNumber];
     } else {

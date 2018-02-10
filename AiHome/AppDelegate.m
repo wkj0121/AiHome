@@ -20,6 +20,8 @@
 #import "PromotionPageViewController.h"
 #import "OnlineDataTool.h"
 //#import "PushImageManager.h"
+#import "TQGesturesPasswordManager.h"
+#import "TQViewController.h"
 
 //主页和登录页
 #import "ViewController.h"
@@ -27,6 +29,7 @@
 #import "FKLoginViewController.h"
 
 NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotificationKey";
+NSString *const FKTouchIDSucceedNotificationKey = @"FKTouchIDSucceedNotificationKey";
 
 @interface AppDelegate ()
 - (void)configIFlySetting;
@@ -50,6 +53,9 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
  登录控制器
  */
 @property (nonatomic, strong) FKLoginViewController *loginController;
+
+// 手势验证控制器
+@property (nonatomic, strong) TQViewController *tqController;
 
 @end
 
@@ -103,7 +109,8 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
 {
     
     // 默认的路由 跳转等等
-    if ([[url scheme] isEqualToString:FKDefaultRouteSchema]) {
+    NSString * _Nullable extractedExpr = [url scheme];
+    if ([extractedExpr isEqualToString:FKDefaultRouteSchema]) {
         
         return [[JLRoutes globalRoutes] routeURL:url];
     }
@@ -142,7 +149,10 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    // 登录通知监听
     [self regLoginStateChangedNotification];
+    // 指纹识别通知监听
+    [self regTouchIDSuccedNotification];
     //根据版本判断是否需要引导页
     NSString *versionkey = (__bridge NSString *)kCFBundleVersionKey;
     
@@ -190,10 +200,21 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:FKLoginStateChangedNotificationKey object:nil] subscribeNext:^(NSNotification * _Nullable noti) {
         BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
         if (isLogin) {//已登录
-            [self.window setRootViewController:self.tabbarController];
+            // 进入手势设置或者验证界面
+            [self.window setRootViewController:self.tqController];
             //加载用户数据
             NSDictionary *data1 = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserInfo"];
             [UserInfoManager configInfo:data1];
+            // 判断是否已设置手势密码
+            TQGesturesPasswordManager* tqManager = [TQGesturesPasswordManager manager];
+            NSString *tqPassword = [tqManager getEventuallyPassword];
+            NSLog(@"%@",tqPassword);
+            if(tqPassword == nil || [tqPassword isEqualToString:@""] || [tqPassword isKindOfClass:[NSNull class]]){// 未设置过手势密码
+                [self.tqController setType:0];
+            }else{// 设置过手势密码
+//                [self.window setRootViewController:self.tabbarController];
+                [self.tqController setType:1];
+            }
         } else {//未登录
             [self.window setRootViewController:self.loginController];
         }
@@ -201,6 +222,15 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
         anim.duration = 0.5;
         anim.type = @"fade";
         [[UIApplication sharedApplication].keyWindow.layer addAnimation:anim forKey:nil];
+    }];
+}
+
+- (void)regTouchIDSuccedNotification
+{
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:FKTouchIDSucceedNotificationKey object:nil] subscribeNext:^(NSNotification * _Nullable noti) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.window setRootViewController:self.tabbarController];
+            });
     }];
 }
 
@@ -241,6 +271,14 @@ NSString *const FKLoginStateChangedNotificationKey = @"FKLoginStateChangedNotifi
         _loginController = [[FKLoginViewController alloc] init];
     }
     return _loginController;
+}
+
+- (TQViewController *)tqController
+{
+    if (!_tqController) {
+        _tqController = [[TQViewController alloc] initWithVC:self.tabbarController];
+    }
+    return _tqController;
 }
 
 @end

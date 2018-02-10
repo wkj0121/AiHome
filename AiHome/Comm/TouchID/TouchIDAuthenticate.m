@@ -39,7 +39,7 @@ static bool isVaild = NO;
             if (success) {
                 NSLog(@"验证成功 刷新主界面");
                 isVaild = YES;
-                [self sendNotice];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"FKTouchIDSucceedNotificationKey" object:nil];
             }else{
                 NSLog(@"%@",error.localizedDescription);
                 switch (error.code) {

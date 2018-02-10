@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TouchIDAuthenticate.h"
 
 @interface TouchIDViewController : UIViewController
 
+@property (nonatomic, strong) TouchIDAuthenticate *touchIDAuthenticate;
 
 @end

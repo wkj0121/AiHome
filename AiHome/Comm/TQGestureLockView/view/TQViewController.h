@@ -10,4 +10,8 @@
 
 @interface TQViewController : UIViewController
 
+@property (nonatomic, assign) NSInteger type;
+
+- (instancetype)initWithVC:(UIViewController *)vc;
+
 @end

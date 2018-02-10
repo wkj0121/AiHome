@@ -20,10 +20,18 @@
 @property (nonatomic, strong) TQGestureLockPreview *preview;
 @property (nonatomic, strong) TQGestureLockHintLabel *hintLabel;
 @property (nonatomic, strong) TQGesturesPasswordManager *passwordManager;
+@property (nonatomic, strong) UIViewController *rootVC;
 
 @end
 
 @implementation TQViewController1
+
+- (instancetype)initWithVC:(UIViewController *)vc
+{
+    self = [super init];
+    _rootVC = vc;
+    return self;
+}
 
 - (UIBarButtonItem *)rightButtonItem
 {
@@ -142,7 +150,11 @@
             
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self.navigationController popViewControllerAnimated:YES];
+                if(_rootVC == nil){
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else{
+                    [[UIApplication sharedApplication].keyWindow setRootViewController:_rootVC];
+                }
             });
 
         } else {

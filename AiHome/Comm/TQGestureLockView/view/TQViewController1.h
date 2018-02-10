@@ -10,4 +10,6 @@
 
 @interface TQViewController1 : UIViewController
 
+- (instancetype)initWithVC:(UIViewController *)vc;
+
 @end

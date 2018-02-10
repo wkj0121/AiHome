@@ -10,27 +10,28 @@
 #import "TQViewController1.h"
 #import "TQViewController2.h"
 
-@interface TQViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface TQViewController ()
 
-@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *titles;
-@property (nonatomic, strong) NSMutableArray *classNames;;
+@property (nonatomic, strong) NSMutableArray *classNames;
+@property (nonatomic, strong) UIViewController *rootVC;
 
 @end
 
 @implementation TQViewController
 
+- (instancetype)initWithVC:(UIViewController *)vc
+{
+    self = [super init];
+    _rootVC = vc;
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self navBarInitialization];
-    
     [self dataInitialization];
-    
-    [self subviewsInitialization];
 }
-
 
 - (void)navBarInitialization
 {
@@ -54,46 +55,17 @@
     [_classNames addObject:className];
 }
 
-- (void)subviewsInitialization
+- (void)setType:(NSInteger)type
 {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.delaysContentTouches = NO;
-        _tableView.rowHeight = 70;
-        _tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-        _tableView.tableFooterView = [UIView new];
-    }
-    [self.view addSubview:_tableView];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.titles.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    cell.textLabel.text = self.titles[indexPath.row];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *className = _classNames[indexPath.row];
+    _type = type;
+    NSString *className = _classNames[type];
     Class class = NSClassFromString(className);
     if (class) {
-        UIViewController *vc = [[class alloc] init];
+        UIViewController *vc = [[class alloc] initWithVC:_rootVC];
         vc.view.backgroundColor = [UIColor whiteColor];
-        vc.navigationItem.title = _titles[indexPath.row];
-        [self.navigationController pushViewController:vc animated:YES];
+        vc.navigationItem.title = _titles[type];
+        [self presentViewController:vc animated:YES completion:nil];
     }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

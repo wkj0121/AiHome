@@ -7,12 +7,8 @@
 //
 
 #import "TouchIDViewController.h"
-#import "IndexViewController.h"
-#import "TouchIDAuthenticate.h"
 
 @interface TouchIDViewController ()
-
-@property (nonatomic, strong) TouchIDAuthenticate *touchIDAuthenticate;
 
 @end
 
@@ -26,15 +22,22 @@
 //    //评估指纹验证
 //    [self.touchIDAuthenticate.evaluateAuthenticate];
     //指纹验证
-    [self.touchIDAuthenticate touchIDAuthenticate];
+//    [self.touchIDAuthenticate touchIDAuthenticate];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(vaildTouchID:) name:@"eventTouchID" object:self.touchIDAuthenticate];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(vaildTouchID:) name:@"eventTouchID" object:self.touchIDAuthenticate];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (TouchIDAuthenticate *)touchIDAuthenticate {
+    if(_touchIDAuthenticate == nil){
+        _touchIDAuthenticate = [[TouchIDAuthenticate alloc] init];
+    }
+    return _touchIDAuthenticate;
 }
 
 - (void)commonInitialization
 {
-    self.touchIDAuthenticate = [[TouchIDAuthenticate alloc] init];
+//    self.touchIDAuthenticate = [[TouchIDAuthenticate alloc] init];
 //    TouchIDAuthenticate *touchIDAuthenticate = [TouchIDAuthenticate new];
 }
 
@@ -44,9 +47,6 @@
     BOOL isVaild = [num boolValue];
     if(isVaild){
         dispatch_async(dispatch_get_main_queue(), ^{
-            IndexViewController *indexView=[[IndexViewController alloc]init];
-            UIWindow *window = [UIApplication sharedApplication].keyWindow;
-            window.rootViewController=indexView;
         });
     }
 }
