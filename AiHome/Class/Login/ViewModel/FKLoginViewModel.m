@@ -59,6 +59,7 @@
                 NSDictionary* result = (NSDictionary*)x;
                 BOOL bFlag = [result objectForKey:@"code"] ? NO : YES;
                 [[NSUserDefaults standardUserDefaults] setBool:bFlag forKey:@"isLogin"];
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isUsedPwd"];
                 if (bFlag){
                     //保存用户信息
                     [UserInfoManager configInfo:result];

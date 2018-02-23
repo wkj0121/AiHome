@@ -166,7 +166,7 @@
         [self changeText:info.value withIndexPath:indexPath];
     }else if(indexPath.section == 2 && indexPath.item == 1){
         //调整到密码验证页面
-        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"VerifyViewController"]] options:nil completionHandler:nil];
+        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"TQViewController2"]] options:nil completionHandler:nil];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

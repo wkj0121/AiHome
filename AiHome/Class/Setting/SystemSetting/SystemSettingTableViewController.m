@@ -8,6 +8,8 @@
 
 #import "SystemSettingTableViewController.h"
 #import "TextTableViewCell.h"
+#import "FKLoginViewController.h"
+#import "AppDelegate.h"
 
 @interface SystemSettingTableViewController ()
 
@@ -138,8 +140,16 @@
 //            }
 //            NSLog(@"%@",vc);
 //        }
+//        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"FKLoginStateChangedNotificationKey" object:nil];
+        
+//        FKLoginViewController *loginVC = [[FKLoginViewController alloc] init];
+//        AppDelegate *myDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        myDelegate.window.rootViewController = loginVC;
+        
+//        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPresentRouteURL,@"FKLoginViewController"]] options:nil completionHandler:nil];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"FKLoginStateChangedNotificationKey" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:FKLoginStateChangedNotificationKey object:nil];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

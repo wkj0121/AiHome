@@ -29,6 +29,7 @@
 - (instancetype)initWithVC:(UIViewController *)vc
 {
     self = [super init];
+
     _rootVC = vc;
     return self;
 }
@@ -57,6 +58,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
     
     [self commonInitialization];
     

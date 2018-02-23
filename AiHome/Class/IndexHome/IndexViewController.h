@@ -10,5 +10,6 @@
 
 @interface IndexViewController : UITabBarController
 
+-(void)setupTabBar;
 
 @end

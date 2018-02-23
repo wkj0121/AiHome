@@ -349,6 +349,8 @@
 		73EE01CA200B560500B12C01 /* RegedDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EE01C9200B560500B12C01 /* RegedDevice.m */; };
 		73EE01CD200BACFB00B12C01 /* DeviceListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EE01CC200BACFB00B12C01 /* DeviceListModel.m */; };
 		73EE01D5200BB19A00B12C01 /* Brand.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EE01D4200BB19A00B12C01 /* Brand.m */; };
+		FA9DFF4D202FE2C500B905F5 /* SystemSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9DFF4A202FE2C400B905F5 /* SystemSettingTableViewController.m */; };
+		FA9DFF4E202FE2C500B905F5 /* TextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9DFF4C202FE2C500B905F5 /* TextTableViewCell.m */; };
 		FAABC3A720243BD300A38F20 /* ImageStreamRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FAABC3A620243BD300A38F20 /* ImageStreamRequest.m */; };
 		FAABC3B220246EB100A38F20 /* NormalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FAABC3AE20246EB000A38F20 /* NormalInfo.m */; };
 		FAABC3B320246EB100A38F20 /* HeadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAABC3AF20246EB000A38F20 /* HeadTableViewCell.m */; };
@@ -850,6 +852,10 @@
 		73EE01D3200BB19A00B12C01 /* Brand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Brand.h; sourceTree = "<group>"; };
 		73EE01D4200BB19A00B12C01 /* Brand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Brand.m; sourceTree = "<group>"; };
 		CEF262DDACD6FAB09D92D48E /* Pods_AiHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AiHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA9DFF49202FE2C400B905F5 /* SystemSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemSettingTableViewController.h; path = AiHome/Class/Setting/SystemSetting/SystemSettingTableViewController.h; sourceTree = SOURCE_ROOT; };
+		FA9DFF4A202FE2C400B905F5 /* SystemSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemSettingTableViewController.m; path = AiHome/Class/Setting/SystemSetting/SystemSettingTableViewController.m; sourceTree = SOURCE_ROOT; };
+		FA9DFF4B202FE2C400B905F5 /* TextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextTableViewCell.h; path = AiHome/Class/Setting/SystemSetting/TextTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		FA9DFF4C202FE2C500B905F5 /* TextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextTableViewCell.m; path = AiHome/Class/Setting/SystemSetting/TextTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		FAABC3A520243BD200A38F20 /* ImageStreamRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageStreamRequest.h; sourceTree = "<group>"; };
 		FAABC3A620243BD300A38F20 /* ImageStreamRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageStreamRequest.m; sourceTree = "<group>"; };
 		FAABC3AE20246EB000A38F20 /* NormalInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalInfo.m; sourceTree = "<group>"; };
@@ -1563,6 +1569,7 @@
 		73989C3A1FF16C1D002D1233 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				FA9DFF48202FE27D00B905F5 /* SystemSetting */,
 				FAABC3AD20246E1900A38F20 /* UserInfo */,
 				73989C3B1FF16C75002D1233 /* MySettingViewController.h */,
 				73989C3C1FF16C75002D1233 /* MySettingViewController.m */,
@@ -2056,6 +2063,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FA9DFF48202FE27D00B905F5 /* SystemSetting */ = {
+			isa = PBXGroup;
+			children = (
+				FA9DFF49202FE2C400B905F5 /* SystemSettingTableViewController.h */,
+				FA9DFF4A202FE2C400B905F5 /* SystemSettingTableViewController.m */,
+				FA9DFF4B202FE2C400B905F5 /* TextTableViewCell.h */,
+				FA9DFF4C202FE2C500B905F5 /* TextTableViewCell.m */,
+			);
+			name = SystemSetting;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		FAABC3AD20246E1900A38F20 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -2454,6 +2473,7 @@
 				FAABC3B320246EB100A38F20 /* HeadTableViewCell.m in Sources */,
 				73EE01C72009F7D500B12C01 /* RegDeviceTableViewController.m in Sources */,
 				738F799A20050F9100628C13 /* VideoNavView.m in Sources */,
+				FA9DFF4D202FE2C500B905F5 /* SystemSettingTableViewController.m in Sources */,
 				738F79812003CC5500628C13 /* VideoEventModel.m in Sources */,
 				73459F93200219240084E199 /* PM25View.m in Sources */,
 				73B344141FF54A87001E68B4 /* FKLoginViewController.m in Sources */,
@@ -2496,6 +2516,7 @@
 				73EB1D881FF9A020002E47EA /* YSCVolumeQueue.m in Sources */,
 				736C275A2018B9D40080A059 /* RegGetCodeRequest.m in Sources */,
 				73EE01C42009F74700B12C01 /* DeviceListTableViewCell.m in Sources */,
+				FA9DFF4E202FE2C500B905F5 /* TextTableViewCell.m in Sources */,
 				73EB1D891FF9A020002E47EA /* VoiceView.m in Sources */,
 				734620B02017C15E00655751 /* XTextField.m in Sources */,
 				736734781FE470AF00BB3D24 /* TouchIDViewController.m in Sources */,

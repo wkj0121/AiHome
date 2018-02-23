@@ -40,6 +40,8 @@
 {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     [self commonInitialization];
     
     [self subviewsInitialization];
@@ -162,7 +164,8 @@
         // 2s后进入首页
         [SVProgressHUD dismissWithDelay:2.0f completion:^{
             if(_rootVC == nil){
-                [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:NO];
+                [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"TQViewController1"]] options:nil completionHandler:nil];
             }else{
                 [[UIApplication sharedApplication].keyWindow setRootViewController:_rootVC];
             }

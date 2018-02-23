@@ -42,7 +42,7 @@ NSString *const FKTouchIDSucceedNotificationKey = @"FKTouchIDSucceedNotification
 /**
  tabbar控制器
  */
-@property (nonatomic, strong) UITabBarController *tabbarController;
+@property (nonatomic, strong) IndexViewController *tabbarController;
 
 ///**
 // 主视图控制器
@@ -199,22 +199,30 @@ NSString *const FKTouchIDSucceedNotificationKey = @"FKTouchIDSucceedNotification
     //注册登录状态通知，根据登录状态设置根视图进入登录页还是直接进主页
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:FKLoginStateChangedNotificationKey object:nil] subscribeNext:^(NSNotification * _Nullable noti) {
         BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
+        BOOL isUsedPwd = [[NSUserDefaults standardUserDefaults] boolForKey:@"isUsedPwd"];
         if (isLogin) {//已登录
-            // 进入手势设置或者验证界面
-            [self.window setRootViewController:self.tqController];
             //加载用户数据
             NSDictionary *data1 = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserInfo"];
             [UserInfoManager configInfo:data1];
             // 判断是否已设置手势密码
             TQGesturesPasswordManager* tqManager = [TQGesturesPasswordManager manager];
             NSString *tqPassword = [tqManager getEventuallyPassword];
-            NSLog(@"%@",tqPassword);
+            NSLog(@"----%@----",tqPassword);
             if(tqPassword == nil || [tqPassword isEqualToString:@""] || [tqPassword isKindOfClass:[NSNull class]]){// 未设置过手势密码
+                // 进入手势设置或者验证界面
+                [self.window setRootViewController:self.tqController];
                 [self.tqController setType:0];
             }else{// 设置过手势密码
-//                [self.window setRootViewController:self.tabbarController];
-                [self.tqController setType:1];
+                if(!isUsedPwd){
+                    // 进入手势设置或者验证界面
+                    [self.window setRootViewController:self.tqController];
+                    [self.tqController setType:1];
+                }else{// 如果是输入密码登录的则不需要验证手势
+                    [self.window setRootViewController:self.tabbarController];
+                    [self.tabbarController setupTabBar];
+                }
             }
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isUsedPwd"];
         } else {//未登录
             [self.window setRootViewController:self.loginController];
         }
@@ -248,7 +256,7 @@ NSString *const FKTouchIDSucceedNotificationKey = @"FKTouchIDSucceedNotification
 }
 
 #pragma mark - Getter
-- (UITabBarController *)tabbarController
+- (IndexViewController *)tabbarController
 {
     if (!_tabbarController) {
 

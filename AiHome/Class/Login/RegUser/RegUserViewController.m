@@ -26,6 +26,7 @@
     //设置背景图标
     [self setupIcon];
     //添加视频导航功能视图
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.regUserView];
     [self.regUserView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view.mas_top).offset(220);
