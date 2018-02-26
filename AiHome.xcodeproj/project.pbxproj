@@ -356,6 +356,10 @@
 		FAABC3B320246EB100A38F20 /* HeadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAABC3AF20246EB000A38F20 /* HeadTableViewCell.m */; };
 		FAABC3B62024710C00A38F20 /* UserInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAABC3B42024710C00A38F20 /* UserInfoTableViewController.m */; };
 		FAABC3B92024884900A38F20 /* NormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAABC3B82024884900A38F20 /* NormalTableViewCell.m */; };
+		FACD5906204140FE00C97067 /* SaveUserInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FACD5904204140FE00C97067 /* SaveUserInfoRequest.m */; };
+		FACD5909204162D700C97067 /* UpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACD5908204162D700C97067 /* UpdatePasswordViewController.m */; };
+		FAD9CDA92043B136005C87B3 /* FKPwdInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD9CDA82043B136005C87B3 /* FKPwdInputView.m */; };
+		FAD9CDAC2043E137005C87B3 /* UpdatePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD9CDAA2043E137005C87B3 /* UpdatePasswordRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -866,6 +870,14 @@
 		FAABC3B52024710C00A38F20 /* UserInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoTableViewController.h; sourceTree = "<group>"; };
 		FAABC3B72024884900A38F20 /* NormalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalTableViewCell.h; sourceTree = "<group>"; };
 		FAABC3B82024884900A38F20 /* NormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalTableViewCell.m; sourceTree = "<group>"; };
+		FACD5904204140FE00C97067 /* SaveUserInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveUserInfoRequest.m; sourceTree = "<group>"; };
+		FACD5905204140FE00C97067 /* SaveUserInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveUserInfoRequest.h; sourceTree = "<group>"; };
+		FACD5907204162D700C97067 /* UpdatePasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdatePasswordViewController.h; sourceTree = "<group>"; };
+		FACD5908204162D700C97067 /* UpdatePasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordViewController.m; sourceTree = "<group>"; };
+		FAD9CDA72043B136005C87B3 /* FKPwdInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FKPwdInputView.h; sourceTree = "<group>"; };
+		FAD9CDA82043B136005C87B3 /* FKPwdInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FKPwdInputView.m; sourceTree = "<group>"; };
+		FAD9CDAA2043E137005C87B3 /* UpdatePasswordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordRequest.m; sourceTree = "<group>"; };
+		FAD9CDAB2043E137005C87B3 /* UpdatePasswordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePasswordRequest.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1721,6 +1733,8 @@
 				73B344041FF54A87001E68B4 /* FKLoginPwdInputTableViewCell.xib */,
 				73B343FE1FF54A87001E68B4 /* FKLoginInputFooterView.h */,
 				73B344021FF54A87001E68B4 /* FKLoginInputFooterView.m */,
+				FAD9CDA72043B136005C87B3 /* FKPwdInputView.h */,
+				FAD9CDA82043B136005C87B3 /* FKPwdInputView.m */,
 			);
 			name = View;
 			path = ../../../../../AiHome/AiHome/AiHome/Class/Login/View;
@@ -1750,6 +1764,10 @@
 		73B344241FF557AF001E68B4 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				FAD9CDAB2043E137005C87B3 /* UpdatePasswordRequest.h */,
+				FAD9CDAA2043E137005C87B3 /* UpdatePasswordRequest.m */,
+				FACD5905204140FE00C97067 /* SaveUserInfoRequest.h */,
+				FACD5904204140FE00C97067 /* SaveUserInfoRequest.m */,
 				FAABC3A520243BD200A38F20 /* ImageStreamRequest.h */,
 				FAABC3A620243BD300A38F20 /* ImageStreamRequest.m */,
 				736C27562018B0680080A059 /* RegUserRequest.h */,
@@ -2086,6 +2104,8 @@
 				FAABC3AE20246EB000A38F20 /* NormalInfo.m */,
 				FAABC3B120246EB100A38F20 /* HeadTableViewCell.h */,
 				FAABC3AF20246EB000A38F20 /* HeadTableViewCell.m */,
+				FACD5907204162D700C97067 /* UpdatePasswordViewController.h */,
+				FACD5908204162D700C97067 /* UpdatePasswordViewController.m */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -2491,6 +2511,7 @@
 				738F799720046EC800628C13 /* MessageView.m in Sources */,
 				733FF24C1FF530D600451314 /* UIViewController+NonBase.m in Sources */,
 				73B3440E1FF54A87001E68B4 /* FKLoginPwdInputTableViewCell.m in Sources */,
+				FACD5906204140FE00C97067 /* SaveUserInfoRequest.m in Sources */,
 				73B21EC21FE5AD0B0089CC70 /* TQGestureLockPreview.m in Sources */,
 				736BA8011FF84B9D00A713FF /* FXPageControl.m in Sources */,
 				738C10421FE01E830053C731 /* AppDelegate.m in Sources */,
@@ -2508,6 +2529,7 @@
 				73B21E8A1FE5A85F0089CC70 /* CALayer+TQAnimated.m in Sources */,
 				73A435491FFFCA3900937B70 /* InteractionView.m in Sources */,
 				73EE01CA200B560500B12C01 /* RegedDevice.m in Sources */,
+				FAD9CDAC2043E137005C87B3 /* UpdatePasswordRequest.m in Sources */,
 				73EB1DAC1FFA8BDF002E47EA /* DisrIdentifyObject.m in Sources */,
 				738E284A1FED7C0200BA096F /* QHCollectionViewNine.m in Sources */,
 				733FF2321FF5309A00451314 /* FKBaseRequestIntercepter.m in Sources */,
@@ -2523,6 +2545,7 @@
 				73B344271FF557C9001E68B4 /* FKLoginRequest.m in Sources */,
 				FAABC3A720243BD300A38F20 /* ImageStreamRequest.m in Sources */,
 				737EC02C1FFE6783007746B8 /* STTextView.m in Sources */,
+				FACD5909204162D700C97067 /* UpdatePasswordViewController.m in Sources */,
 				736BA7F91FF81A5C00A713FF /* HomeViewController.m in Sources */,
 				73B3440D1FF54A87001E68B4 /* FKLoginButton.m in Sources */,
 				733FF2331FF5309A00451314 /* FKBaseRequest+Rac.m in Sources */,
@@ -2550,6 +2573,7 @@
 				73989C341FF16B11002D1233 /* iCocosSettingGroup.m in Sources */,
 				731A06E71FEEEFD0002E84D8 /* LCGridElement.m in Sources */,
 				73979E72201CBD230019C5DF /* UserInfoManager.m in Sources */,
+				FAD9CDA92043B136005C87B3 /* FKPwdInputView.m in Sources */,
 				733FF24A1FF530D600451314 /* UIView+NonBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2692,7 +2716,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J4PLU5SSV5;
+				DEVELOPMENT_TEAM = 9L5YQ63RZW;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2725,7 +2749,7 @@
 					"-l\"stdc++.6.0.9\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.htdatacloud.AiHome;
+				PRODUCT_BUNDLE_IDENTIFIER = org.htdata.AiHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2753,7 +2777,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J4PLU5SSV5;
+				DEVELOPMENT_TEAM = 9L5YQ63RZW;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2785,7 +2809,7 @@
 					"-l\"stdc++.6.0.9\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.htdatacloud.AiHome;
+				PRODUCT_BUNDLE_IDENTIFIER = org.htdata.AiHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;

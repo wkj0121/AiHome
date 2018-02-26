@@ -207,7 +207,6 @@ NSString *const FKTouchIDSucceedNotificationKey = @"FKTouchIDSucceedNotification
             // 判断是否已设置手势密码
             TQGesturesPasswordManager* tqManager = [TQGesturesPasswordManager manager];
             NSString *tqPassword = [tqManager getEventuallyPassword];
-            NSLog(@"----%@----",tqPassword);
             if(tqPassword == nil || [tqPassword isEqualToString:@""] || [tqPassword isKindOfClass:[NSNull class]]){// 未设置过手势密码
                 // 进入手势设置或者验证界面
                 [self.window setRootViewController:self.tqController];

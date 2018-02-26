@@ -10,6 +10,7 @@
 #import "NormalInfo.h"
 #import "NormalTableViewCell.h"
 #import "HeadTableViewCell.h"
+#import "SaveUserInfoRequest.h"
 
 @interface UserInfoTableViewController ()
 // cell数组
@@ -74,8 +75,8 @@
     UserInfoManager *userInfo = [UserInfoManager shareUser];
     NSMutableArray *headArray = [NSMutableArray array];
     [headArray addObject:@{@"label": @"头像", @"data": userInfo.headImageData, @"type": @100}];
-    [headArray addObject:@{@"label": @"昵称", @"value": @"偷得浮生半日闲", @"type": @101}];
-    [headArray addObject:@{@"label": @"手机号", @"value": @"18013556187", @"type": @101}];
+    [headArray addObject:@{@"label": @"昵称", @"value": userInfo.nickName, @"type": @101}];
+    [headArray addObject:@{@"label": @"手机号", @"value": userInfo.telNum, @"type": @101}];
     [headArray addObject:@{@"label": @"分享AiHome", @"data": UIImagePNGRepresentation([UIImage imageNamed:@"QRCode"]), @"type": @100}];
     [headArray addObject:@{@"label": @"更多", @"value": @"", @"type": @101}];
     
@@ -164,6 +165,8 @@
         NSMutableArray *infos = self.allCellsArray[0];
         NormalInfo *info = infos[1];
         [self changeText:info.value withIndexPath:indexPath];
+    }else if(indexPath.section == 2 && indexPath.item == 0){
+        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"UpdatePasswordViewController"]] options:nil completionHandler:nil];
     }else if(indexPath.section == 2 && indexPath.item == 1){
         //调整到密码验证页面
         [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"TQViewController2"]] options:nil completionHandler:nil];
@@ -226,19 +229,43 @@
 - (void)changeText:(NSString *)text withIndexPath:(NSIndexPath *)indexPath
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"修改" message:@"请输入内容" preferredStyle:UIAlertControllerStyleAlert];
-    //添加的输入框
+    // 添加的输入框
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.text = text;
     }];
     UIAlertAction *Action = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }];
     UIAlertAction *twoAc = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        //添加的带输入框的提示框
+        // 添加的带输入框的提示框
         UITextField *senceText = (UITextField *)alert.textFields.firstObject;
-        NSMutableArray *infos = self.allCellsArray[indexPath.section];
-        NormalInfo *info = infos[indexPath.item];
-        info.value = senceText.text;
-        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+        // 获取用户信息
+        UserInfoManager *userInfo = [UserInfoManager shareUser];
+        // 上传数据
+        NSDictionary *dic = @{@"id": userInfo.uuid,@"telNum": userInfo.telNum, @"nickName": senceText.text};
+        SaveUserInfoRequest *api = [[SaveUserInfoRequest alloc] initWithUserInfo:dic];
+        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+            NSInteger status = request.responseStatusCode;
+            if (200 == status && [request statusCodeValidator]) {
+                [SVProgressHUD fk_displaySuccessWithStatus:@"修改成功"];
+                // 修改表格内容
+                NSMutableArray *infos = self.allCellsArray[indexPath.section];
+                NormalInfo *info = infos[indexPath.item];
+                info.value = senceText.text;
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+                // 保存修改信息
+                userInfo.nickName = senceText.text;
+                // 修改缓存数据
+                NSDictionary *userDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserInfo"];
+                NSMutableDictionary *mUserDic = [[NSMutableDictionary alloc] initWithDictionary:userDic];
+                [mUserDic setValue:senceText.text forKey:@"nickName"];
+                [[NSUserDefaults standardUserDefaults] setObject:mUserDic forKey:@"UserInfo"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            } else {
+                [SVProgressHUD fk_displayErrorWithStatus:@"修改失败"];
+            }
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            [SVProgressHUD fk_displayErrorWithStatus:@"修改失败"];
+        }];
     }];
     [alert addAction:Action];
     [alert addAction:twoAc];

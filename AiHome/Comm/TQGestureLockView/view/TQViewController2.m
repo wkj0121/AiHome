@@ -14,6 +14,8 @@
 #import "TQGestureLockToast.h"
 #import "TouchIDViewController.h"
 
+FOUNDATION_EXTERN NSString *const FKLoginStateChangedNotificationKey;
+
 @interface TQViewController2 () <TQGestureLockViewDelegate>
 
 @property (nonatomic, strong) TouchIDViewController *touchIDViewControl;
@@ -92,6 +94,8 @@
             }]];
             [alertController addAction:[UIAlertAction actionWithTitle:@"使用密码登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 NSLog(@"使用密码登录");
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLogin"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:FKLoginStateChangedNotificationKey object:nil];
             }]];
             [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 NSLog(@"点击取消");
@@ -131,21 +135,22 @@
     [self.view addSubview:_hintLabel];
     
     // 顶部图标
-    [self.view addSubview:self.headerImageView];
-    //设置布局Masonry
-    [self.headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(90);
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(88, 88));
-    }];
-    
-    // 底部其它方式登录
-    [self.view addSubview:self.btnSwitch];
-    [self.btnSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-20);
-        make.size.mas_equalTo(CGSizeMake(150, 30));
-    }];
+    if(_rootVC != nil){
+        [self.view addSubview:self.headerImageView];
+        //设置布局Masonry
+        [self.headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_top).offset(90);
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.size.mas_equalTo(CGSizeMake(88, 88));
+        }];
+        // 底部其它方式登录
+        [self.view addSubview:self.btnSwitch];
+        [self.btnSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.bottom.equalTo(self.view.mas_bottom).offset(-20);
+            make.size.mas_equalTo(CGSizeMake(150, 30));
+        }];
+    }
 }
 
 #pragma mark - TQGestureLockViewDelegate

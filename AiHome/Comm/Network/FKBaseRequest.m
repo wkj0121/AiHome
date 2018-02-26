@@ -9,9 +9,9 @@
 #import "FKBaseRequest.h"
 
 // 获取服务器响应状态码 key
-NSString *const FK_BaseRequest_StatusCodeKey = @"statusCode";
+NSString *const FK_BaseRequest_StatusCodeKey = @"code";
 // 服务器响应数据成功状态码 value
-NSString *const FK_BaseRequest_DataValueKey = @"0000";
+NSString *const FK_BaseRequest_DataValueKey = @"200";
 // 获取服务器响应状态信息 key
 NSString *const FK_BaseRequest_StatusMsgKey = @"statusMsg";
 // 获取服务器响应数据 key
@@ -89,7 +89,6 @@ NSString *const FK_BaseRequest_DataKey = @"data";;
 - (id)responseJSONObject
 {
     NSDictionary *dict = [super responseJSONObject];
-    
     id data = [dict objectForKey:@"data"];
     if(!data){
         data = dict;
