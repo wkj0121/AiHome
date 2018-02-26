@@ -33,6 +33,24 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    UITableView *tableView = (UITableView *)self.view;
+    if(tableView.numberOfSections <= 0)
+        return;
+    UserInfoManager *userInfo = [UserInfoManager shareUser];
+    UIImage *headImage = [UIImage imageWithData:userInfo.headImageData];
+    iCocosSettingItem *headItem = [iCocosSettingItem itemWithImage:headImage title:([userInfo.nickName isEqualToString:@""] ? userInfo.userName : userInfo.nickName) style:UITableViewCellStyleSubtitle type:iCocosSettingItemTypeImageWithArrow image:[UIImage imageNamed:@"QRCode"] desc:[NSString stringWithFormat:@"手机号:%@",userInfo.telNum] detailLabelColor:[UIColor grayColor]];
+    headItem.operation = ^{
+        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"UserInfoTableViewController"]] options:nil completionHandler:nil];
+    };
+    //分组
+    iCocosSettingGroup *group = [[iCocosSettingGroup alloc] init];
+    group.items = @[headItem];
+    [_allGroups replaceObjectAtIndex:0 withObject:group];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+}
+
 #pragma mark 添加第0组的模型数据
 - (void)add0SectionItems
 {

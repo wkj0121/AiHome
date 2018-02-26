@@ -107,6 +107,10 @@ static UserInfoManager *userInfo;
             NSArray *array = [userInfo.headImage componentsSeparatedByString:@"/"];
             NSString * imageUrl = [array lastObject];
             [dic setValue:imageUrl forKey:key];
+        }else if([key isEqualToString:@"birthday"] && ![obj isKindOfClass:[NSNull class]]){
+            NSInteger timestamp = [[infoDic valueForKey:@"birthday"] integerValue];
+            NSDate *birthDate = [NSDate dateWithTimeIntervalSince1970:timestamp/1000];
+            manager.birthday = birthDate;
         }else{
             [dic setValue:([obj isKindOfClass:[NSNull class]] ? @"" : obj) forKey:key];
         }

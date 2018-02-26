@@ -360,6 +360,8 @@
 		FACD5909204162D700C97067 /* UpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACD5908204162D700C97067 /* UpdatePasswordViewController.m */; };
 		FAD9CDA92043B136005C87B3 /* FKPwdInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD9CDA82043B136005C87B3 /* FKPwdInputView.m */; };
 		FAD9CDAC2043E137005C87B3 /* UpdatePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD9CDAA2043E137005C87B3 /* UpdatePasswordRequest.m */; };
+		FAD9CDAF2043EEE6005C87B3 /* UploadImageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD9CDAD2043EEE5005C87B3 /* UploadImageRequest.m */; };
+		FAD9CDB2204400EB005C87B3 /* UpdateMoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD9CDB1204400EB005C87B3 /* UpdateMoreTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -878,6 +880,10 @@
 		FAD9CDA82043B136005C87B3 /* FKPwdInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FKPwdInputView.m; sourceTree = "<group>"; };
 		FAD9CDAA2043E137005C87B3 /* UpdatePasswordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordRequest.m; sourceTree = "<group>"; };
 		FAD9CDAB2043E137005C87B3 /* UpdatePasswordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePasswordRequest.h; sourceTree = "<group>"; };
+		FAD9CDAD2043EEE5005C87B3 /* UploadImageRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageRequest.m; sourceTree = "<group>"; };
+		FAD9CDAE2043EEE5005C87B3 /* UploadImageRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImageRequest.h; sourceTree = "<group>"; };
+		FAD9CDB0204400EB005C87B3 /* UpdateMoreTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateMoreTableViewController.h; sourceTree = "<group>"; };
+		FAD9CDB1204400EB005C87B3 /* UpdateMoreTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateMoreTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1764,6 +1770,8 @@
 		73B344241FF557AF001E68B4 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				FAD9CDAE2043EEE5005C87B3 /* UploadImageRequest.h */,
+				FAD9CDAD2043EEE5005C87B3 /* UploadImageRequest.m */,
 				FAD9CDAB2043E137005C87B3 /* UpdatePasswordRequest.h */,
 				FAD9CDAA2043E137005C87B3 /* UpdatePasswordRequest.m */,
 				FACD5905204140FE00C97067 /* SaveUserInfoRequest.h */,
@@ -2106,6 +2114,8 @@
 				FAABC3AF20246EB000A38F20 /* HeadTableViewCell.m */,
 				FACD5907204162D700C97067 /* UpdatePasswordViewController.h */,
 				FACD5908204162D700C97067 /* UpdatePasswordViewController.m */,
+				FAD9CDB0204400EB005C87B3 /* UpdateMoreTableViewController.h */,
+				FAD9CDB1204400EB005C87B3 /* UpdateMoreTableViewController.m */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -2460,6 +2470,7 @@
 				73CC2FAF1FFFF77C00C4D5C8 /* RegionTableViewController.m in Sources */,
 				73979E77201CC5710019C5DF /* WebRouterConstant.m in Sources */,
 				73EB1DE91FFB1772002E47EA /* UIScrollView+UITouch.m in Sources */,
+				FAD9CDB2204400EB005C87B3 /* UpdateMoreTableViewController.m in Sources */,
 				73B21EB41FE5AB200089CC70 /* TQViewController1.m in Sources */,
 				73EE01CD200BACFB00B12C01 /* DeviceListModel.m in Sources */,
 				738F79802003CC5500628C13 /* VideoEventTableViewCell.m in Sources */,
@@ -2486,6 +2497,7 @@
 				FAABC3B62024710C00A38F20 /* UserInfoTableViewController.m in Sources */,
 				731A06E81FEEEFD0002E84D8 /* LCGridView.m in Sources */,
 				73BAF129201798CC00474624 /* RegUserView.m in Sources */,
+				FAD9CDAF2043EEE6005C87B3 /* UploadImageRequest.m in Sources */,
 				73B344111FF54A87001E68B4 /* FKLoginAccountInputTableViewCell.m in Sources */,
 				73B21EC31FE5AD0B0089CC70 /* TQGestureLockView.m in Sources */,
 				73EB1DAB1FFA8BDF002E47EA /* DIATConfig.m in Sources */,

@@ -11,6 +11,7 @@
 #import "NormalTableViewCell.h"
 #import "HeadTableViewCell.h"
 #import "SaveUserInfoRequest.h"
+#import "UploadImageRequest.h"
 
 @interface UserInfoTableViewController ()
 // cell数组
@@ -159,15 +160,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%ld,%ld",indexPath.section,indexPath.item);
-    if(indexPath.section == 0 && indexPath.item == 0){
+    if(indexPath.section == 0 && indexPath.item == 0){// 修改头像
         [self changeIcon];
-    }else if(indexPath.section == 0 && indexPath.item == 1){
+    }else if(indexPath.section == 0 && indexPath.item == 1){// 修改昵称
         NSMutableArray *infos = self.allCellsArray[0];
         NormalInfo *info = infos[1];
         [self changeText:info.value withIndexPath:indexPath];
-    }else if(indexPath.section == 2 && indexPath.item == 0){
+    }else if(indexPath.section == 0 && indexPath.item == 4){// 更多
+        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"UpdateMoreTableViewController"]] options:nil completionHandler:nil];
+    }else if(indexPath.section == 2 && indexPath.item == 0){// 修改密码
         [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"UpdatePasswordViewController"]] options:nil completionHandler:nil];
-    }else if(indexPath.section == 2 && indexPath.item == 1){
+    }else if(indexPath.section == 2 && indexPath.item == 1){// 修改手势密码
         //调整到密码验证页面
         [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"TQViewController2"]] options:nil completionHandler:nil];
     }
@@ -283,10 +286,11 @@
     NSArray<NSString *> *array = [imageUrl componentsSeparatedByString:@"."];
     NSLog(@"%@",array);
     NSData *imageData = nil;
+    NSString *imageType = array.lastObject;
     //选取照片格式
-    if([array.lastObject isEqual:@"png"]){
+    if([imageType isEqual:@"png"]){
         imageData = UIImagePNGRepresentation(image);
-    }else if([array.lastObject  isEqual:@"jpeg"]){
+    }else if([imageType  isEqual:@"jpeg"]){
         imageData = UIImageJPEGRepresentation(image, 1.0);
     }else{
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -301,12 +305,31 @@
         hud.dimBackground = YES;// YES代表需要蒙版效果
         [hud hideAnimated:YES afterDelay:1.f];
     }
-    if(imageData != nil){
-        NSMutableArray *infos = self.allCellsArray[0];
-        NormalInfo *info = infos[0];
-        info.data = imageData;
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+    if(imageData != nil && imageType != nil && ![imageType isEqualToString:@""]){
+        // 获取用户信息
+        UserInfoManager *userInfo = [UserInfoManager shareUser];
+        UploadImageRequest *api = [[UploadImageRequest alloc] initWithImageInfo:imageData name:userInfo.telNum type:imageType];
+        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+            NSInteger status = request.responseStatusCode;
+            if (200 == status && [request statusCodeValidator]) {
+                [SVProgressHUD fk_displaySuccessWithStatus:@"修改成功"];
+                // 修改表格中显示的头像
+                NSMutableArray *infos = self.allCellsArray[0];
+                NormalInfo *info = infos[0];
+                info.data = imageData;
+                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
+                // 设置用户头像
+                userInfo.headImageData = imageData;
+                // 保存头像数据
+                [[NSUserDefaults standardUserDefaults] setObject:imageData forKey:@"headData"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            } else {
+                [SVProgressHUD fk_displayErrorWithStatus:@"修改失败"];
+            }
+        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+            [SVProgressHUD fk_displayErrorWithStatus:@"修改失败"];
+        }];
     }
     NSLog(@"%@", info);
 }
