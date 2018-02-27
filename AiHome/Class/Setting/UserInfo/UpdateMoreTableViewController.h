@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UpdateMoreTableViewController : UITableViewController
+#import "MoreTableViewCell.h"
+
+@interface UpdateMoreTableViewController : UITableViewController <MoreTableViewCellDelegate>
 
 @end

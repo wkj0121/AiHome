@@ -111,6 +111,7 @@ static UserInfoManager *userInfo;
             NSInteger timestamp = [[infoDic valueForKey:@"birthday"] integerValue];
             NSDate *birthDate = [NSDate dateWithTimeIntervalSince1970:timestamp/1000];
             manager.birthday = birthDate;
+            [dic setValue:obj forKey:key];
         }else{
             [dic setValue:([obj isKindOfClass:[NSNull class]] ? @"" : obj) forKey:key];
         }

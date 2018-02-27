@@ -18,6 +18,8 @@
 
 @property (nonatomic, assign) NSInteger type; // 类型
 
+@property (nonatomic, assign) BOOL bVisible; // 是否显示
+
 - (id)initWithDict:(NSDictionary *)dict;
 
 + (id)infoWithDict:(NSDictionary *)dict;

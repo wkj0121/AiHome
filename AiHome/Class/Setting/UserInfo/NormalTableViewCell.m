@@ -28,7 +28,7 @@
 - (void)initLayout
 {
     // normalLabel
-    self.normalLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, (CGRectGetHeight(self.contentView.frame)-40)/2, 100, 40)];
+    self.normalLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, (CGRectGetHeight(self.contentView.frame)-40)/2, 50, 40)];
     [self.contentView addSubview:self.normalLabel];
     [self.normalLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
@@ -37,10 +37,12 @@
     
     // headImageView
     self.normalData = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    self.normalData.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:self.normalData];
     [self.normalData mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
         make.right.mas_equalTo(self.contentView.mas_right).offset(-10);
+        make.width.mas_equalTo(self.contentView.frame.size.width);
     }];
 }
 

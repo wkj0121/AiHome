@@ -287,10 +287,11 @@
     NSLog(@"%@",array);
     NSData *imageData = nil;
     NSString *imageType = array.lastObject;
+    imageType = [imageType lowercaseString];
     //选取照片格式
     if([imageType isEqual:@"png"]){
         imageData = UIImagePNGRepresentation(image);
-    }else if([imageType  isEqual:@"jpeg"]){
+    }else if([imageType  isEqual:@"jpeg"] || [imageType  isEqual:@"jpg"]){
         imageData = UIImageJPEGRepresentation(image, 1.0);
     }else{
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
