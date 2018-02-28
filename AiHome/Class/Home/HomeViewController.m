@@ -13,6 +13,7 @@
 #import "XScrollView.h"
 #import "InteractionViewController.h"
 #import "RegionTableViewController.h"
+#import "HomeListRequest.h"
 
 @interface HomeViewController()<UIScrollViewDelegate> //实现滚动视图协议
 
@@ -32,6 +33,14 @@
     [self customNavItem];
     // 1.添加UIScrollView
     [self setupScrollView];
+    // 设置默认Region
+    [self configRegion:^void (NSArray *array){
+        if(array.count > 0){
+            NSDictionary * dic = array[0];
+            [[NSUserDefaults standardUserDefaults] setValue:[dic valueForKey:@"id"] forKey:@"regionid"];
+//            [[NSUserDefaults standardUserDefaults] setValue:[[NSNumber alloc] initWithInt:[dic valueForKey:@"id"]] forKey:@"regionid"];
+        }
+    }];
 }
 
 /**
@@ -59,7 +68,29 @@
     [[leftBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         //        NSLog(@" leftBtn clicked :)");
 //        RegionTableViewController *regionVC = [[RegionTableViewController alloc] init];
-        [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"RegionTableViewController"]] options:nil completionHandler:nil];
+        // 加载Region数据
+        [self configRegion:^void (NSArray *array){
+            [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"regions"];
+            [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"RegionTableViewController"]] options:nil completionHandler:nil];
+        }];
+        
+//        __block NSMutableArray *array = [NSMutableArray array];
+//        UserInfoManager *info = [UserInfoManager shareUser];
+//        HomeListRequest *api = [[HomeListRequest alloc] initWithUserID:[info.uuid stringValue]];
+//        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+//            NSInteger status = request.responseStatusCode;
+//            if (200 == status && [request statusCodeValidator]) {
+//                array = [request responseJSONObject];
+//            } else {
+//                [SVProgressHUD fk_displayErrorWithStatus:@"加载数据失败"];
+//            }
+//            [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"regions"];
+//            [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"RegionTableViewController"]] options:nil completionHandler:nil];
+//        } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+//            [SVProgressHUD fk_displayErrorWithStatus:@"加载数据失败"];
+//            [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"regions"];
+//            [[UIApplication sharedApplication]  openURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", NavPushRouteURL,@"RegionTableViewController"]] options:nil completionHandler:nil];
+//        }];
     }];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
     self.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
@@ -152,6 +183,22 @@
     [self.view addSubview:self.pageControl];
     //添加分页控制事件用来分页
     //    [self.pageControl addTarget:self action:@selector(pageControlChanged:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)configRegion:(RegionArrayBlock)block {
+    // 加载Region数据
+    __block NSMutableArray *array = [NSMutableArray array];
+    UserInfoManager *info = [UserInfoManager shareUser];
+    HomeListRequest *api = [[HomeListRequest alloc] initWithUserID:[info.uuid stringValue]];
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSInteger status = request.responseStatusCode;
+        if (200 == status && [request statusCodeValidator]) {
+            array = [request responseJSONObject];
+        }
+        block(array);
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        block(array);
+    }];
 }
 
 // 隐藏状态栏

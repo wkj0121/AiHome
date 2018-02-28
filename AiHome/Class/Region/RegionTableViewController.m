@@ -9,6 +9,7 @@
 #import "RegionTableViewController.h"
 #import "Region.h"
 #import "RegionTableViewCell.h"
+#import "HomeListRequest.h"
 
 @interface RegionTableViewController ()
 // 声明一个大数组存放所有区域
@@ -54,30 +55,22 @@
 //    self.view.backgroundColor = COLOR_RED;
     [self customNavItem];
     [self handleData];
-    
 }
 
-- (void)handleData
-{
-//    // 读取plist文件
-//    NSMutableArray *array =[NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Regions" ofType:@"plist"]];
-    NSMutableArray *array = [NSMutableArray array];
-//    NSDictionary *dic = @{@"regName":@"上海的家",@"msgNum":@"21",@"regCheckFlag":@NO};
-    [array addObject:@{@"regName":@"上海的家",@"msgNum":@"21",@"regCheckFlag":@NO}];
-    [array addObject:@{@"regName":@"南京的家",@"msgNum":@"65",@"regCheckFlag":@YES}];
-    [array addObject:@{@"regName":@"杭州的家",@"msgNum":@"31",@"regCheckFlag":@NO}];
-    [array addObject:@{@"regName":@"温州的家",@"msgNum":@"12",@"regCheckFlag":@NO}];
-    [array addObject:@{@"regName":@"外国的家",@"msgNum":@"11",@"regCheckFlag":@NO}];
-    
-    // 将要显示的数据转为model对象
-    for (NSDictionary *regoinDict in array) {
+- (void)handleData{
+    NSMutableArray *mArray = [NSMutableArray array];
+    NSArray *array = [[NSUserDefaults standardUserDefaults] valueForKey:@"regions"];
+    NSNumber *regionid = [[NSUserDefaults standardUserDefaults] valueForKey:@"regionid"];
+    [array.rac_sequence.signal subscribeNext:^(NSDictionary *dic) {
+        BOOL bFlag = [regionid isEqualToValue:[dic valueForKey:@"id"]];
+        NSDictionary *tempDic = @{@"regName":[dic valueForKey:@"name"],@"regionID":[dic valueForKey:@"id"],@"msgNum":@"21",@"regCheckFlag":bFlag?@YES:@NO};
+        [mArray addObject:tempDic];
         Region *region = [[Region alloc] init];
         // 使用KVC赋值
-        [region setValuesForKeysWithDictionary:regoinDict];
+        [region setValuesForKeysWithDictionary:tempDic];
         // 将联系人model存放在大数组中
         [self.allRegionsArray addObject:region];
-    }
-    
+    }];
     self.checkBtnsArray = [NSMutableArray array];//初始化check Button
 }
 
@@ -139,6 +132,7 @@
     cell.regionLabel.text = region.regName;
     cell.messageBadge.text = region.msgNum;
     [cell.regionRedioBtn setSelected : region.regCheckFlag];
+    [cell.regionRedioBtn addTarget:self action:@selector(onRadioButtonValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.checkBtnsArray addObject:cell.regionRedioBtn];
     [self.checkBtnsArray[0] setGroupButtons:self.checkBtnsArray]; // Setting buttons into the group
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -155,6 +149,21 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+}
+
+-(void) onRadioButtonValueChanged:(RadioButton*)sender
+{
+    // Lets handle ValueChanged event only for selected button, and ignore for deselected
+    if(sender.selected) {
+        for(int i=0;i<self.checkBtnsArray.count;i++){
+            if(sender == self.checkBtnsArray[i]){
+                Region *region = self.allRegionsArray[i];
+                [[NSUserDefaults standardUserDefaults] setValue:region.regionID forKey:@"regionid"];
+                break;
+            }
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end

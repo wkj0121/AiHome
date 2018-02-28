@@ -59,7 +59,7 @@
     [self.contentView addSubview:self.messageBadge];
     [self.messageBadge mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView.mas_centerY);
-        make.left.mas_equalTo(self.regionLabel.mas_right).offset(15);
+        make.right.mas_equalTo(self.contentView.mas_right).offset(-70);
         make.width.equalTo(@40);
         make.height.equalTo(@20);
     }];
@@ -68,7 +68,7 @@
     self.regionRedioBtn = [[RadioButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.contentView.frame), CGRectGetMinY(self.regionLabel.frame), 30, 30)];
     [self.regionRedioBtn setImage:[UIImage imageNamed:@"radioButton-unchecked"] forState:UIControlStateNormal];
     [self.regionRedioBtn setImage:[UIImage imageNamed:@"radioButton-checked"] forState:UIControlStateSelected];
-    [self.regionRedioBtn addTarget:self action:@selector(onRadioButtonValueChanged:) forControlEvents:UIControlEventValueChanged];
+//    [self.regionRedioBtn addTarget:self action:@selector(onRadioButtonValueChanged:) forControlEvents:UIControlEventValueChanged];
     //    self.phoneLabel.backgroundColor = [UIColor greenColor];
     [self.contentView addSubview:self.regionRedioBtn];
     [self.regionRedioBtn mas_makeConstraints:^(MASConstraintMaker *make) {

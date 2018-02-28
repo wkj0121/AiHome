@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^RegionArrayBlock) (NSArray *array);
+
 @interface HomeViewController : UIViewController
 
 @end

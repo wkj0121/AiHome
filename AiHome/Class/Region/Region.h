@@ -10,6 +10,7 @@
 
 @interface Region : NSObject
 @property (nonatomic, copy) NSString *regName; //区域名称
+@property (nonatomic, copy) NSNumber *regionID;//区域ID
 @property (nonatomic, copy) NSString *msgNum;  //消息数量
 @property (nonatomic, assign) BOOL regCheckFlag;//是否选中
 

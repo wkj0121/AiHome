@@ -351,6 +351,7 @@
 		73EE01D5200BB19A00B12C01 /* Brand.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EE01D4200BB19A00B12C01 /* Brand.m */; };
 		FA587AB82044F60000A8AB71 /* MoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA587AB62044F60000A8AB71 /* MoreTableViewCell.m */; };
 		FA587AB92044F60000A8AB71 /* MoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA587AB72044F60000A8AB71 /* MoreTableViewCell.xib */; };
+		FA719B1D20467F1700F05380 /* HomeListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FA719B1B20467F1600F05380 /* HomeListRequest.m */; };
 		FA9DFF4D202FE2C500B905F5 /* SystemSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9DFF4A202FE2C400B905F5 /* SystemSettingTableViewController.m */; };
 		FA9DFF4E202FE2C500B905F5 /* TextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9DFF4C202FE2C500B905F5 /* TextTableViewCell.m */; };
 		FAABC3A720243BD300A38F20 /* ImageStreamRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FAABC3A620243BD300A38F20 /* ImageStreamRequest.m */; };
@@ -865,6 +866,8 @@
 		FA587AB72044F60000A8AB71 /* MoreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreTableViewCell.xib; sourceTree = "<group>"; };
 		FA719B192046462700F05380 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		FA719B1A2046462700F05380 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		FA719B1B20467F1600F05380 /* HomeListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeListRequest.m; sourceTree = "<group>"; };
+		FA719B1C20467F1600F05380 /* HomeListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeListRequest.h; sourceTree = "<group>"; };
 		FA9DFF49202FE2C400B905F5 /* SystemSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemSettingTableViewController.h; path = AiHome/Class/Setting/SystemSetting/SystemSettingTableViewController.h; sourceTree = SOURCE_ROOT; };
 		FA9DFF4A202FE2C400B905F5 /* SystemSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SystemSettingTableViewController.m; path = AiHome/Class/Setting/SystemSetting/SystemSettingTableViewController.m; sourceTree = SOURCE_ROOT; };
 		FA9DFF4B202FE2C400B905F5 /* TextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextTableViewCell.h; path = AiHome/Class/Setting/SystemSetting/TextTableViewCell.h; sourceTree = SOURCE_ROOT; };
@@ -1777,6 +1780,8 @@
 		73B344241FF557AF001E68B4 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				FA719B1C20467F1600F05380 /* HomeListRequest.h */,
+				FA719B1B20467F1600F05380 /* HomeListRequest.m */,
 				FAD9CDAE2043EEE5005C87B3 /* UploadImageRequest.h */,
 				FAD9CDAD2043EEE5005C87B3 /* UploadImageRequest.m */,
 				FAD9CDAB2043E137005C87B3 /* UpdatePasswordRequest.h */,
@@ -2482,6 +2487,7 @@
 				73979E77201CC5710019C5DF /* WebRouterConstant.m in Sources */,
 				73EB1DE91FFB1772002E47EA /* UIScrollView+UITouch.m in Sources */,
 				FAD9CDB2204400EB005C87B3 /* UpdateMoreTableViewController.m in Sources */,
+				FA719B1D20467F1700F05380 /* HomeListRequest.m in Sources */,
 				73B21EB41FE5AB200089CC70 /* TQViewController1.m in Sources */,
 				73EE01CD200BACFB00B12C01 /* DeviceListModel.m in Sources */,
 				738F79802003CC5500628C13 /* VideoEventTableViewCell.m in Sources */,

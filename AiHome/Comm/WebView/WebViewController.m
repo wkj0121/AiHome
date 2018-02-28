@@ -35,7 +35,7 @@
     // 开始右滑返回手势
     self.webView.allowsBackForwardNavigationGestures = YES;
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    // 加载页面
     if (self.urlString.length) {
         NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:self.urlString]];
         [self.webView loadRequest:request];
@@ -65,10 +65,27 @@
         [userContentController addScriptMessageHandler:self name:@"SetItem"];
         [userContentController addScriptMessageHandler:self name:@"GetItem"];
         config.userContentController = userContentController;
-        WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) configuration:config];
-        self.webView = webView;
+        // 用户信息
+        NSDictionary *userDic = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserInfo"];
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userDic options:NSJSONWritingPrettyPrinted error:&error];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        // 获取区域id
+        NSNumber *regionid = [[NSUserDefaults standardUserDefaults] valueForKey:@"regionid"];
+        if (jsonString) {
+            NSString *jsString = [NSString stringWithFormat:@"localStorage.setItem('%@','%@');localStorage.setItem('%@',%@);",@"userjson", jsonString,@"homeid",[regionid stringValue]];
+            jsString = [self removeWhiteSpaceString:jsString];
+            WKUserScript *userScript = [[WKUserScript alloc] initWithSource:jsString injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO];
+            [config.userContentController addUserScript:userScript];
+        }
+        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) configuration:config];
     }
     return _webView;
+}
+
+- (void)addScriptMessageHandler:(id <WKScriptMessageHandler>)scriptMessageHandler name:(NSString *)name
+{
+    NSLog(@"%@",name);
 }
 
 #pragma mark - WKScriptMessageHandler
@@ -88,15 +105,13 @@
     }else if ([message.name isEqualToString:@"SetItem"]){
         // 设置localStorage
         NSString *jsString = [NSString stringWithFormat:@"localStorage.setItem('%@', '%@')",[message.body objectForKey:@"key"], [message.body objectForKey:@"value"]];
-        // 移除localStorage
-        // NSString *jsString = @"localStorage.removeItem('userContent')";
-        // 获取localStorage
-        // NSString *jsString = @"localStorage.getItem('userContent')";
         [self.webView evaluateJavaScript:jsString completionHandler:nil];
-        
     }else if ([message.name isEqualToString:@"GetItem"]){
-         NSString *jsString = [NSString stringWithFormat:@"localStorage.getItem('%@')",[message.body objectForKey:@"key"]];
-        [self.webView evaluateJavaScript:jsString completionHandler:nil];
+        NSLog(@"%@",message.body);
+        NSString *jsString = [NSString stringWithFormat:@"localStorage.getItem('%@')",message.body];
+        [self.webView evaluateJavaScript:jsString completionHandler:^(id _Nullable info, NSError * _Nullable error) {
+            NSLog(@"-----%@-----",info);
+        }];
     }
 }
 
@@ -106,22 +121,37 @@
 /*
  *响应JS里的alert提醒
  */
-/*
- function asyncAlert(alertStr) {
- setTimeout(function() {
- alert(alertStr);
- }, 1);
- }
- */
-- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提醒" message:message preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         completionHandler();
-    }]];
+    }])];
+    [self presentViewController:alertController animated:YES completion:nil];
     
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(NO);
+    }])];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(YES);
+    }])];
     [self presentViewController:alertController animated:YES completion:nil];
 }
+
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * _Nullable))completionHandler{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:prompt message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.text = defaultText;
+    }];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"完成" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(alertController.textFields[0].text?:@"");
+    }])];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 
 #pragma mark
 #pragma mark - Show Message
@@ -149,25 +179,8 @@
 
 //// 页面加载完成之后调用
 //- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
-////- (void)webViewDidFinishLoad:(UIWebView *)webView
 //{
-//    JSContext *context = [self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
-//    //定义好JS要调用的方法, share就是调用的share方法名
-//    context[@"window.Android.back"] = ^() {
-//        NSLog(@"+++++++Begin Log+++++++");
-//        NSArray *args = [JSContext currentArguments];
 //
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"方式二" message:@"这是OC原生的弹出窗" delegate:self cancelButtonTitle:@"收到" otherButtonTitles:nil];
-//            [alertView show];
-//        });
-//
-//        for (JSValue *jsVal in args) {
-//            NSLog(@"%@", jsVal.toString);
-//        }
-//
-//        NSLog(@"-------End Log-------");
-//    };
 //}
 
 - (void)fk_initialDefaultsForController
@@ -207,6 +220,15 @@
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"openURL"];
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"SetItem"];
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"GetItem"];
+}
+
+- (NSString *)removeWhiteSpaceString:(NSString *)newString {
+    //去除掉首尾的空白字符和换行字符
+    newString = [newString stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    newString = [newString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    newString = [newString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];  //去除掉首尾的空白字符和换行字符使用
+    newString = [newString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return newString;
 }
 
 @end
