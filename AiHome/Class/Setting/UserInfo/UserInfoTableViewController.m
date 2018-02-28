@@ -12,6 +12,7 @@
 #import "HeadTableViewCell.h"
 #import "SaveUserInfoRequest.h"
 #import "UploadImageRequest.h"
+#import <Photos/Photos.h>
 
 @interface UserInfoTableViewController ()
 // cell数组
@@ -280,32 +281,75 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     // 选择的图片信息存储于info字典中
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    // 照片地址
-    NSString *imageUrl = [[info objectForKey:UIImagePickerControllerImageURL] absoluteString];
-    NSLog(@"%@",imageUrl);
-    NSArray<NSString *> *array = [imageUrl componentsSeparatedByString:@"."];
-    NSLog(@"%@",array);
-    NSData *imageData = nil;
-    NSString *imageType = array.lastObject;
-    imageType = [imageType lowercaseString];
-    //选取照片格式
-    if([imageType isEqual:@"png"]){
-        imageData = UIImagePNGRepresentation(image);
-    }else if([imageType  isEqual:@"jpeg"] || [imageType  isEqual:@"jpg"]){
-        imageData = UIImageJPEGRepresentation(image, 1.0);
+    __block NSString *localUrl = nil;
+    __block NSData *imageData = nil;
+    NSString *imageType = @"jpeg";
+    if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
+        // 保存采集照片
+        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+            PHAssetChangeRequest *req = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
+            localUrl = req.placeholderForCreatedAsset.localIdentifier;
+        } completionHandler:^(BOOL success, NSError * _Nullable error) {
+            if(success) {
+                //成功后取相册中的图片对象
+                __block PHAsset *imageAsset = nil;
+                PHFetchResult *result = [PHAsset fetchAssetsWithLocalIdentifiers:@[localUrl] options:nil];
+                [result enumerateObjectsUsingBlock:^(PHAsset * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    imageAsset = obj;
+                    *stop = YES;
+                }];
+                if (imageAsset) {
+                    //加载图片数据
+                    [[PHImageManager defaultManager] requestImageDataForAsset:imageAsset options:nil resultHandler:^(NSData * _Nullable imgData, NSString * _Nullable dataUTI,UIImageOrientation orientation, NSDictionary * _Nullable info) {
+                        imageData = imgData;
+                        [self uploadPhotoImage:imageData imageType:imageType];
+                    }];
+                }
+            }else{
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.mode = MBProgressHUDModeText;
+                //背景半透明的效果
+                hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+                hud.bezelView.backgroundColor = COLOR_RGB(245, 245, 245);
+                hud.label.textColor = COLOR_RGB(226, 21, 20);
+                hud.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
+                hud.label.textAlignment = NSTextAlignmentCenter;
+                hud.label.text = @"加载照片失败！";
+                hud.dimBackground = YES;// YES代表需要蒙版效果
+                [hud hideAnimated:YES afterDelay:1.f];
+                return;
+            }
+        }];
     }else{
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        //背景半透明的效果
-        hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
-        hud.bezelView.backgroundColor = COLOR_RGB(245, 245, 245);
-        hud.label.textColor = COLOR_RGB(226, 21, 20);
-        hud.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
-        hud.label.textAlignment = NSTextAlignmentCenter;
-        hud.label.text = @"格式暂不支持，请重新选择！";
-        hud.dimBackground = YES;// YES代表需要蒙版效果
-        [hud hideAnimated:YES afterDelay:1.f];
+        // 照片地址
+        NSString *imageUrl = [[info objectForKey:UIImagePickerControllerImageURL] absoluteString];
+        NSArray<NSString *> *array = [imageUrl componentsSeparatedByString:@"."];
+        NSString *imageType = array.lastObject;
+        imageType = [imageType lowercaseString];
+        //选取照片格式
+        if([imageType isEqual:@"png"]){
+            imageData = UIImagePNGRepresentation(image);
+        }else if([imageType  isEqual:@"jpeg"] || [imageType  isEqual:@"jpg"]){
+            imageData = UIImageJPEGRepresentation(image, 1.0);
+        }else{
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            //背景半透明的效果
+            hud.bezelView.style = MBProgressHUDBackgroundStyleBlur;
+            hud.bezelView.backgroundColor = COLOR_RGB(245, 245, 245);
+            hud.label.textColor = COLOR_RGB(226, 21, 20);
+            hud.label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightHeavy];
+            hud.label.textAlignment = NSTextAlignmentCenter;
+            hud.label.text = @"格式暂不支持，请重新选择！";
+            hud.dimBackground = YES;// YES代表需要蒙版效果
+            [hud hideAnimated:YES afterDelay:1.f];
+            return;
+        }
+        [self uploadPhotoImage:imageData imageType:imageType];
     }
+}
+
+- (void)uploadPhotoImage:(NSData *)imageData imageType:(NSString *)imageType {
     if(imageData != nil && imageType != nil && ![imageType isEqualToString:@""]){
         // 获取用户信息
         UserInfoManager *userInfo = [UserInfoManager shareUser];
@@ -332,7 +376,6 @@
             [SVProgressHUD fk_displayErrorWithStatus:@"修改失败"];
         }];
     }
-    NSLog(@"%@", info);
 }
 
 // 取消图片选择调用此方法
